@@ -39,14 +39,12 @@ if (isProd && PAYLOAD_SECRET.length < 32) {
 }
 
 // Origins allowed to call the CMS API with credentials (CORS + CSRF).
+// Strictly dynamically read from environment variables (NEXT_PUBLIC_SERVER_URL, ALLOWED_ORIGINS).
 const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3005'
 const allowedOrigins = Array.from(
   new Set(
     [
       serverURL,
-      'https://web.app.mhd.com.vn',
-      'http://web.app.mhd.com.vn',
-      'http://localhost:3005',
       ...(process.env.ALLOWED_ORIGINS || '').split(','),
     ]
       .map((o) => o.trim().replace(/\/$/, ''))
