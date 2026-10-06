@@ -1,9 +1,19 @@
 import { getPayload } from 'payload'
+import { pushDevSchema } from '@payloadcms/drizzle'
 import config from '../payload.config'
 
 async function seed() {
   console.log('--- Starting Seed Process for MHD Payload CMS (VI & EN) ---')
   const payload = await getPayload({ config })
+
+  // Synchronize database schema and create tables if they do not exist
+  try {
+    console.log('Pushed schema to PostgreSQL database...')
+    await pushDevSchema(payload.db as any)
+    console.log('Schema synchronized successfully!')
+  } catch (e: any) {
+    console.log('DB push notice:', e?.message || e)
+  }
 
   // 1. Create or ensure Admin User
   const existingUsers = await payload.find({
