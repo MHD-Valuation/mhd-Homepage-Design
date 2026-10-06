@@ -5,7 +5,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import PartnersSection from '@/components/PartnersSection'
 
-import { getCachedAboutData } from '@/lib/cachedQueries'
+import { getCachedAboutData, getCachedGlobal } from '@/lib/cachedQueries'
 
 interface PageProps {
   searchParams?: Promise<{ locale?: string }>
@@ -26,14 +26,22 @@ export default async function AboutPage({ searchParams }: PageProps) {
 
   let teamList: any[] = []
   let partnersList: any[] = []
+  let footerData: any = null
 
   try {
-    const cachedData = await getCachedAboutData(locale as 'vi' | 'en')
+    const [cachedData, footerGlobal] = await Promise.all([
+      getCachedAboutData(locale as 'vi' | 'en'),
+      getCachedGlobal('footer', locale as 'vi' | 'en'),
+    ])
     teamList = cachedData.teamList
     partnersList = cachedData.partnersList
+    footerData = footerGlobal
   } catch (error) {
     console.error('Cached fetch error on AboutPage:', error)
   }
+
+  const contactPhone = footerData?.phone || '1900 000 000'
+  const contactEmail = footerData?.email || 'info@mhd.com.vn'
 
   const defaultAppraisers = [
     { initials: 'VD', name: 'Phạm Văn D', role: 'Bất động sản', license: 'Thẻ TĐV-01012' },
@@ -1471,7 +1479,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
                     {isEn ? 'Direct Contact' : 'Đầu mối phụ trách'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.92rem', color: '#fff', marginTop: '.2rem' }}>
-                    info@mhd.com.vn · 1900 000 000
+                    {contactEmail} · {contactPhone}
                   </span>
                 </span>
               </div>

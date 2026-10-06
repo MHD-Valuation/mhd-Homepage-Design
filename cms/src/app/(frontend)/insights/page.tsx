@@ -28,11 +28,15 @@ export async function generateMetadata({ searchParams }: InsightsPageProps) {
   }
 }
 
+import { getCachedPostsList } from '@/lib/cachedQueries'
+
 export default async function InsightsPage({ searchParams }: InsightsPageProps) {
   const resolvedParams = searchParams ? await searchParams : {}
   const cookieStore = await cookies()
   const localeCookie = cookieStore.get('mhd_locale')?.value
   const currentLocale = (resolvedParams.locale || localeCookie) === 'en' ? 'en' : 'vi'
 
-  return <InsightsFilterClient currentLocale={currentLocale} />
+  const cmsPosts = await getCachedPostsList(currentLocale as 'vi' | 'en')
+
+  return <InsightsFilterClient currentLocale={currentLocale} initialPosts={cmsPosts} />
 }

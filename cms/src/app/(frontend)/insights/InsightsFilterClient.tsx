@@ -26,7 +26,7 @@ const TAG_LABELS_EN: Record<string, string> = {
   'Thẩm định giá': 'Valuation',
 }
 
-export default function InsightsFilterClient({ currentLocale = 'vi' }: Props) {
+export default function InsightsFilterClient({ currentLocale = 'vi', initialPosts }: Props) {
   const isEn = currentLocale === 'en'
   const categoriesList = getInsightCategories(currentLocale)
   const [selectedCat, setSelectedCat] = useState<string | null>(null)
@@ -53,7 +53,23 @@ export default function InsightsFilterClient({ currentLocale = 'vi' }: Props) {
     return () => window.removeEventListener('hashchange', handleHash)
   }, [])
 
-  const allPosts = INSIGHT_POSTS
+  // Merge CMS posts with default posts
+  const formattedCmsPosts: InsightPost[] = (initialPosts || []).map((doc: any) => ({
+    slug: doc.slug,
+    cat: typeof doc.category === 'object' && doc.category ? doc.category.slug : 'thi-truong',
+    img: doc.coverImage?.url || doc.featuredImage?.url || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+    date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN') : '01/09/2026',
+    author: doc.author || (isEn ? 'MHD Research' : 'Phòng Nghiên cứu thị trường'),
+    tags: doc.tags && Array.isArray(doc.tags) && doc.tags.length > 0 ? doc.tags : [isEn ? 'Valuation' : 'Thẩm định giá'],
+    title: doc.title,
+    excerpt: doc.summary,
+    readTime: doc.readingTime || (isEn ? '4 min read' : '4 phút đọc'),
+    body: [['p', doc.summary]],
+  }))
+
+  const allPosts = formattedCmsPosts.length > 0
+    ? [...formattedCmsPosts, ...INSIGHT_POSTS.filter((p) => !formattedCmsPosts.some((cp) => cp.slug === p.slug))]
+    : INSIGHT_POSTS
 
   // Calculate tag counts
   const tagCounts: Record<string, number> = {}

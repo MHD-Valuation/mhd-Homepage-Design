@@ -1064,15 +1064,6 @@ export default function Header({
                       <Link href={cleanNavHref(itemServices.ctaCard?.buttonHref || '/contact#yeu-cau')} data-cta-dark="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: 'var(--c-accent,#d94f0a)', color: '#fff', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s cubic-bezier(.16,1,.3,1)' }}>
                         {itemServices.ctaCard?.buttonLabel ? itemServices.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Get quotation' : 'Nhận báo giá')} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                       </Link>
-                      <a href="tel:1900000000" style={{ display: 'flex', alignItems: 'center', gap: '.7rem', marginTop: '1.1rem', paddingTop: '1.1rem', borderTop: '1px solid rgba(255,255,255,.12)', color: '#fff' }}>
-                        <span style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'rgba(var(--c-accent-rgb,217,79,10),.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0956a" strokeWidth="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" /></svg>
-                        </span>
-                        <span>
-                          <span style={{ display: 'block', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--c-faint,#9a9fa6)' }}>{isEn ? 'Consultation Hotline' : 'HOTLINE TƯ VẤN'}</span>
-                          <span style={{ display: 'block', fontWeight: 700, fontSize: '1rem' }}>1900 000 000</span>
-                        </span>
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -1369,15 +1360,6 @@ export default function Header({
                         {itemContact.ctaCard?.buttonLabel ? itemContact.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Submit request' : 'Gửi yêu cầu')}{' '}
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                       </Link>
-                      <a href="tel:1900000000" style={{ display: 'flex', alignItems: 'center', gap: '.7rem', marginTop: '1.1rem', paddingTop: '1.1rem', borderTop: '1px solid rgba(255,255,255,.12)', color: '#fff' }}>
-                        <span style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'rgba(var(--c-accent-rgb,217,79,10),.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0956a" strokeWidth="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" /></svg>
-                        </span>
-                        <span>
-                          <span style={{ display: 'block', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--c-faint,#9a9fa6)' }}>{isEn ? 'Consultation Hotline' : 'Hotline tư vấn'}</span>
-                          <span style={{ display: 'block', fontWeight: 700, fontSize: '1rem' }}>1900 000 000</span>
-                        </span>
-                      </a>
                     </div>
                   </div>
                 </div>

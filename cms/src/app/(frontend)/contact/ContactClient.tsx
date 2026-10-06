@@ -4,6 +4,11 @@ import React, { useState } from 'react'
 
 interface Props {
   currentLocale?: string
+  contactInfo?: {
+    phone?: string
+    email?: string
+    address?: string
+  }
 }
 
 function formatFileSize(bytes: number) {
@@ -12,8 +17,11 @@ function formatFileSize(bytes: number) {
   return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
 }
 
-export default function ContactClient({ currentLocale = 'vi' }: Props) {
+export default function ContactClient({ currentLocale = 'vi', contactInfo }: Props) {
   const isEn = currentLocale === 'en'
+  const displayPhone = contactInfo?.phone || '1900 000 000'
+  const displayEmail = contactInfo?.email || 'info@mhd.com.vn'
+  const displayAddress = contactInfo?.address || (isEn ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')
 
   const [formType, setFormType] = useState<'tham-dinh' | 'bao-gia'>('tham-dinh')
   const [fullName, setFullName] = useState('')
@@ -268,7 +276,7 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
             }}
           >
             <a
-              href="tel:1900000000"
+              href={`tel:${displayPhone.replace(/\s+/g, '')}`}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -306,13 +314,13 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
                   {isEn ? 'Consulting Hotline' : 'Hotline tư vấn'}
                 </span>
                 <span style={{ display: 'block', fontWeight: 700, fontSize: '.98rem', marginTop: '.15rem', whiteSpace: 'nowrap' }}>
-                  1900 000 000
+                  {displayPhone}
                 </span>
               </span>
             </a>
 
             <a
-              href="mailto:info@mhd.com.vn"
+              href={`mailto:${displayEmail}`}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -1121,7 +1129,7 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
                     {isEn ? 'Phone' : 'Điện thoại'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.95rem', fontWeight: 600, marginTop: '.15rem', lineHeight: 1.5 }}>
-                    1900 000 000
+                    {displayPhone}
                   </span>
                 </span>
               </div>
@@ -1138,7 +1146,7 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
                     Email
                   </span>
                   <span style={{ display: 'block', fontSize: '.95rem', fontWeight: 600, marginTop: '.15rem', lineHeight: 1.5 }}>
-                    info@mhd.com.vn
+                    {displayEmail}
                   </span>
                 </span>
               </div>
@@ -1244,7 +1252,7 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
                 {isEn ? 'Speak directly with our valuation specialists.' : 'Trao đổi trực tiếp với đội ngũ MHD.'}
               </div>
               <a
-                href="tel:1900000000"
+                href={`tel:${displayPhone.replace(/\s+/g, '')}`}
                 style={{
                   position: 'relative',
                   display: 'inline-flex',
@@ -1261,7 +1269,7 @@ export default function ContactClient({ currentLocale = 'vi' }: Props) {
                     <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
                   </svg>
                 </span>
-                1900 000 000
+                {displayPhone}
               </a>
             </div>
           </div>

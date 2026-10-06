@@ -100,8 +100,6 @@ export default async function FrontendLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://pplx-res.cloudinary.com" />
-        <link rel="dns-prefetch" href="https://pplx-res.cloudinary.com" />
       </head>
       <body className={beVietnamPro.className}>
         <Header data={headerData} currentLocale={currentLocale} />

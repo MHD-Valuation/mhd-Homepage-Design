@@ -62,7 +62,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'ba-phuong-phap-tdg-doanh-nghiep',
     cat: 'kien-thuc',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2077fe3b06f028c4e065ba98ce099959f9f13806.jpg',
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
     date: '01/09/2026',
     author: 'Nhóm Thẩm định Doanh nghiệp',
     tags: ['Doanh nghiệp', 'Chuẩn mực thẩm định giá', 'M&A'],
@@ -83,7 +83,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'cap-nhat-thong-tu-36-2024',
     cat: 'chinh-sach',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     date: '28/08/2026',
     author: 'Ban Kiểm soát chất lượng',
     tags: ['Doanh nghiệp', 'Chuẩn mực thẩm định giá'],
@@ -138,7 +138,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'case-study-day-chuyen-thanh-ly',
     cat: 'case-study',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2077fe3b06f028c4e065ba98ce099959f9f13806.jpg',
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
     date: '08/08/2026',
     author: 'Phòng Thẩm định Động sản',
     tags: ['Máy móc thiết bị', 'Doanh nghiệp'],
@@ -157,7 +157,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'bao-cao-can-ho-ha-noi-q2',
     cat: 'bao-cao',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     date: '30/07/2026',
     author: 'Phòng Nghiên cứu thị trường',
     tags: ['Bất động sản', 'Hà Nội'],
@@ -243,7 +243,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'co-so-gia-tri-thi-truong',
     cat: 'kien-thuc',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     date: '24/06/2026',
     author: 'Ban Kiểm soát chất lượng',
     tags: ['Chuẩn mực thẩm định giá'],
@@ -262,7 +262,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'thong-tu-30-2024-chuan-muc-chung',
     cat: 'chinh-sach',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     date: '12/06/2026',
     author: 'Ban Kiểm soát chất lượng',
     tags: ['Chuẩn mực thẩm định giá'],
@@ -331,7 +331,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'dat-nen-vung-ven-ha-noi',
     cat: 'thi-truong',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     date: '26/08/2026',
     author: 'Phòng Nghiên cứu thị trường',
     tags: ['Bất động sản', 'Hà Nội'],
@@ -347,7 +347,7 @@ export const INSIGHT_POSTS: InsightPost[] = [
   {
     slug: 'gia-xe-co-gioi-da-qua-su-dung',
     cat: 'thi-truong',
-    img: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2077fe3b06f028c4e065ba98ce099959f9f13806.jpg',
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
     date: '12/08/2026',
     author: 'Phòng Thẩm định Động sản',
     tags: ['Máy móc thiết bị', 'Vay vốn'],

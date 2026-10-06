@@ -162,6 +162,35 @@ export async function getCachedProjectsData(locale: 'vi' | 'en') {
   )()
 }
 /**
+ * Cached Posts list getter.
+ * Revalidated via revalidateTag('posts') or timed (10 mins).
+ */
+export async function getCachedPostsList(locale: 'vi' | 'en') {
+  return unstable_cache(
+    async () => {
+      try {
+        const payload = await getPayload({ config })
+        const res = await payload.find({
+          collection: 'posts',
+          locale,
+          limit: 100,
+          sort: '-publishedAt',
+        }).catch(() => ({ docs: [] }))
+
+        return res.docs || []
+      } catch (err) {
+        return []
+      }
+    },
+    [`posts-list-${locale}`],
+    {
+      revalidate: 600,
+      tags: ['posts', `posts-${locale}`],
+    }
+  )()
+}
+
+/**
  * Cached Partners list getter.
  * Revalidated via revalidateTag('partners') or timed (10 mins).
  */

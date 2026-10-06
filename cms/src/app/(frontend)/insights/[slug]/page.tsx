@@ -16,14 +16,6 @@ interface ArticlePageProps {
 
 export async function generateMetadata({ params, searchParams }: ArticlePageProps) {
   const { slug } = await params
-  const defaultPost = INSIGHT_POSTS.find((p) => p.slug === slug)
-  if (defaultPost) {
-    return {
-      title: `${defaultPost.title} — MHD Insight`,
-      description: defaultPost.excerpt,
-    }
-  }
-
   const resolvedParams = searchParams ? await searchParams : {}
   const cookieStore = await cookies()
   const localeCookie = cookieStore.get('mhd_locale')?.value
@@ -34,6 +26,14 @@ export async function generateMetadata({ params, searchParams }: ArticlePageProp
     return {
       title: `${p.title} — MHD Insight`,
       description: p.summary,
+    }
+  }
+
+  const defaultPost = INSIGHT_POSTS.find((p) => p.slug === slug)
+  if (defaultPost) {
+    return {
+      title: `${defaultPost.title} — MHD Insight`,
+      description: defaultPost.excerpt,
     }
   }
 
@@ -48,26 +48,27 @@ export default async function InsightArticlePage({ params, searchParams }: Artic
   const currentLocale = (resolvedParams.locale || localeCookie) === 'en' ? 'en' : 'vi'
   const isEn = currentLocale === 'en'
 
-  // Look in default insights first
-  const defaultPost = INSIGHT_POSTS.find((p) => p.slug === slug)
-  let post: any = defaultPost || null
+  // Check CMS database first so user edits in Payload take precedence
+  const doc: any = await getCachedInsightArticle(slug, currentLocale as 'vi' | 'en')
+  let post: any = null
 
-  if (!post) {
-    const doc: any = await getCachedInsightArticle(slug, currentLocale as 'vi' | 'en')
-    if (doc) {
-      post = {
-        slug: doc.slug,
-        cat: typeof doc.category === 'object' && doc.category ? (doc.category as any).slug : 'thi-truong',
-        img: doc.featuredImage?.url || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-        date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN') : '01/09/2026',
-        author: doc.author || 'MHD Valuation',
-        tags: doc.tags || ['Thẩm định giá'],
-        title: doc.title,
-        excerpt: doc.summary,
-        readTime: doc.readingTime || (isEn ? '4 min read' : '4 phút đọc'),
-        body: [['p', doc.summary]],
-      }
+  if (doc) {
+    post = {
+      slug: doc.slug,
+      cat: typeof doc.category === 'object' && doc.category ? (doc.category as any).slug : 'thi-truong',
+      img: doc.coverImage?.url || doc.featuredImage?.url || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+      date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN') : '01/09/2026',
+      author: doc.author || (isEn ? 'MHD Research' : 'Phòng Nghiên cứu thị trường'),
+      tags: doc.tags && Array.isArray(doc.tags) && doc.tags.length > 0 ? doc.tags : [isEn ? 'Valuation' : 'Thẩm định giá'],
+      title: doc.title,
+      excerpt: doc.summary,
+      readTime: doc.readingTime || (isEn ? '4 min read' : '4 phút đọc'),
+      body: [['p', doc.summary]],
     }
+  } else {
+    // Fallback to default post if not yet published in CMS
+    const defaultPost = INSIGHT_POSTS.find((p) => p.slug === slug)
+    post = defaultPost || null
   }
 
   if (!post) {
