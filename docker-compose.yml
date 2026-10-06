@@ -1,0 +1,44 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3005
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_URI: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/mhd_payload
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      PRIVATE_UPLOAD_DIR: private-uploads
+      ENABLE_DEMO_CERTIFICATES: ${ENABLE_DEMO_CERTIFICATES:-false}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - mhd_uploads:/app/public/media
+      - mhd_private_uploads:/app/private-uploads
+    labels:
+      - "coolify.managed=true"
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: mhd_payload
+    volumes:
+      - mhd_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mhd_payload"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mhd_postgres_data:
+  mhd_uploads:
+  mhd_private_uploads:
