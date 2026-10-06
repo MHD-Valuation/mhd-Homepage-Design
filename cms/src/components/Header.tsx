@@ -1376,8 +1376,8 @@ export default function Header({
                       {data?.licenseNotice || (isEn ? 'Certified for valuation business services · Code 000/GCN-BTC' : 'Được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá · Mã số 000/GCN-BTC')}
                     </span>
                   </span>
-                  <a href={`tel:${(data?.phone || '1900 000 000').replace(/\s+/g, '')}`} style={{ fontWeight: 700, color: 'var(--c-ink,#16181c)' }}>
-                    Hotline: {data?.phone || '1900 000 000'}
+                  <a href={`tel:${(data?.phone || '028 3515 3516').replace(/\s+/g, '')}`} style={{ fontWeight: 700, color: 'var(--c-ink,#16181c)' }}>
+                    Hotline: {data?.phone || '028 3515 3516'}
                   </a>
                 </div>
               </div>

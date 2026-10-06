@@ -157,7 +157,7 @@ export default function Footer({ data, currentLocale = 'vi' }: FooterProps) {
                   {isEn ? 'Contact' : 'Liên hệ'}
                 </h5>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '.65rem', fontSize: '.9rem', listStyle: 'none', padding: 0 }}>
-                  <li><a href={`tel:${data?.phone?.replace(/\s/g, '') || '1900000000'}`}>Hotline: {data?.phone || '1900 000 000'}</a></li>
+                  <li><a href={`tel:${data?.phone?.replace(/\s/g, '') || '02835153516'}`}>Hotline: {data?.phone || '028 3515 3516'}</a></li>
                   <li><a href={`mailto:${data?.email || 'info@mhd.com.vn'}`}>{data?.email || 'info@mhd.com.vn'}</a></li>
                   <li><a href="/contact#van-phong">{data?.address || (isEn ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')}</a></li>
                 </ul>

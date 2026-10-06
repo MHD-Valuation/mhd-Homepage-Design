@@ -40,7 +40,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     getCachedGlobal('site-settings', currentLocale as 'vi' | 'en'),
   ])
 
-  const phone = (footerData as any)?.phone || (siteSettings as any)?.hotline || '1900 000 000'
+  const phone = (footerData as any)?.phone || (siteSettings as any)?.hotline || '028 3515 3516'
   const email = (footerData as any)?.email || 'info@mhd.com.vn'
   const address = (footerData as any)?.address || (currentLocale === 'en' ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')
 

@@ -221,10 +221,10 @@ async function seed() {
       ],
       ctaCard: {
         tag: 'Hotline 24/7',
-        title: '028 3823 8888',
+        title: '028 3515 3516',
         description: 'Tư vấn trực tiếp với thẩm định viên trưởng bộ phận.',
         buttonLabel: 'Gọi ngay',
-        buttonHref: 'tel:02838238888',
+        buttonHref: 'tel:02835153516',
       },
     },
   ]
@@ -408,10 +408,10 @@ async function seed() {
       ],
       ctaCard: {
         tag: 'Hotline 24/7',
-        title: '028 3823 8888',
+        title: '028 3515 3516',
         description: 'Direct consultation with lead certified valuers.',
         buttonLabel: 'Call Now',
-        buttonHref: 'tel:02838238888',
+        buttonHref: 'tel:02835153516',
       },
     },
   ]
@@ -421,6 +421,7 @@ async function seed() {
     locale: 'vi',
     data: {
       navItems: headerNavVi as any,
+      phone: '028 3515 3516',
       verifyButton: {
         show: true,
         label: 'Tra cứu chứng thư',
@@ -430,7 +431,7 @@ async function seed() {
         label: 'Yêu cầu thẩm định',
         href: '/contact',
       },
-    },
+    } as any,
   })
 
   await payload.updateGlobal({
@@ -438,6 +439,7 @@ async function seed() {
     locale: 'en',
     data: {
       navItems: headerNavEn as any,
+      phone: '028 3515 3516',
       verifyButton: {
         show: true,
         label: 'Verify Certificate',
@@ -447,7 +449,7 @@ async function seed() {
         label: 'Request Valuation',
         href: '/contact',
       },
-    },
+    } as any,
   })
 
   // 3. Seed Globals: Footer (VI & EN)
@@ -477,7 +479,7 @@ async function seed() {
     {
       title: 'Liên hệ',
       links: [
-        { label: 'Hotline: 028 3823 8888', href: 'tel:02838238888' },
+        { label: 'Hotline: 028 3515 3516', href: 'tel:02835153516' },
         { label: 'contact@mhd.com.vn', href: 'mailto:contact@mhd.com.vn' },
         { label: 'TP. Hồ Chí Minh, Việt Nam', href: '/contact/van-phong' },
       ],
@@ -509,8 +511,8 @@ async function seed() {
     {
       title: 'Contact',
       links: [
-        { label: 'Hotline: 028 3823 8888', href: 'tel:02838238888' },
-        { label: 'contact@mhd.com.vn', href: 'mailto:contact@mhd.com.vn' },
+        { label: 'Hotline: 028 3515 3516', href: 'tel:02835153516' },
+        { label: 'info@mhd.com.vn', href: 'mailto:info@mhd.com.vn' },
         { label: 'Ho Chi Minh City, Vietnam', href: '/contact/van-phong' },
       ],
     },
@@ -524,7 +526,7 @@ async function seed() {
       tagline: 'Giá trị tài sản, giá trị cốt lõi.',
       qualificationNotice: 'Doanh nghiệp được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá theo quy định pháp luật.',
       address: 'TP. Hồ Chí Minh, Việt Nam',
-      phone: '028 3823 8888',
+      phone: '028 3515 3516',
       email: 'contact@mhd.com.vn',
       workingHours: 'Thứ Hai – Thứ Sáu: 8:00 – 17:30',
       columns: footerColumnsVi as any,
@@ -541,12 +543,46 @@ async function seed() {
       tagline: 'Asset Value, Core Value.',
       qualificationNotice: 'Qualified enterprise licensed to practice professional valuation services under Vietnamese law.',
       address: 'Ho Chi Minh City, Vietnam',
-      phone: '028 3823 8888',
+      phone: '028 3515 3516',
       email: 'contact@mhd.com.vn',
       workingHours: 'Monday – Friday: 8:00 – 17:30',
       columns: footerColumnsEn as any,
       licenseText: 'Certificate of eligibility for valuation business services No. 000/GCN-BTC',
       copyright: '© 2026 MHD Valuation Co., Ltd. All rights reserved.',
+    },
+  })
+
+  // 3.1 Seed Globals: Site Settings (VI & EN)
+  console.log('Seeding SiteSettings Global (VI & EN)...')
+  await payload.updateGlobal({
+    slug: 'site-settings',
+    locale: 'vi',
+    data: {
+      siteName: 'MHD Valuation - Thẩm định giá chuyên nghiệp',
+      defaultSeoDescription: 'MHD cung cấp dịch vụ thẩm định giá doanh nghiệp, bất động sản, động sản và tài sản vô hình tuân thủ Chuẩn mực thẩm định giá Việt Nam.',
+      hotline: '028 3515 3516',
+      zaloNumber: '3920702626611603828',
+      zaloUrl: 'https://zalo.me/3920702626611603828',
+      workingHours: '8:00 – 17:30, thứ Hai – thứ Bảy',
+      quickContactTitle: 'LIÊN HỆ MHD',
+      phoneTitle: 'Gọi Hotline',
+      zaloTitle: 'Chat Zalo',
+    },
+  })
+
+  await payload.updateGlobal({
+    slug: 'site-settings',
+    locale: 'en',
+    data: {
+      siteName: 'MHD Valuation - Professional Valuation Services',
+      defaultSeoDescription: 'MHD provides professional independent valuation services in Vietnam.',
+      hotline: '028 3515 3516',
+      zaloNumber: '3920702626611603828',
+      zaloUrl: 'https://zalo.me/3920702626611603828',
+      workingHours: '8:00 – 17:30, Monday – Saturday',
+      quickContactTitle: 'CONTACT MHD',
+      phoneTitle: 'Call Hotline',
+      zaloTitle: 'Chat Zalo',
     },
   })
 

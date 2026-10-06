@@ -49,7 +49,7 @@ export const Footer: GlobalConfig = {
       name: 'phone',
       type: 'text',
       label: 'Số điện thoại',
-      defaultValue: '028 3823 8888',
+      defaultValue: '028 3515 3516',
     },
     {
       name: 'email',

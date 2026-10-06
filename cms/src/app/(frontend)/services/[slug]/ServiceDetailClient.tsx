@@ -371,7 +371,7 @@ export default function ServiceDetailClient({ service: rawService, allServices, 
 
             {/* Hotline & Process Link */}
             <div style={{ display: 'flex', gap: '1.4rem', alignItems: 'center', flexWrap: 'wrap' }}>
-              <a href="tel:1900000000" style={{ display: 'inline-flex', alignItems: 'center', gap: '.7rem', color: 'var(--c-ink,#16181c)' }}>
+              <a href="tel:02835153516" style={{ display: 'inline-flex', alignItems: 'center', gap: '.7rem', color: 'var(--c-ink,#16181c)' }}>
                 <span style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--c-ink,#16181c)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
                     <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
@@ -379,7 +379,7 @@ export default function ServiceDetailClient({ service: rawService, allServices, 
                 </span>
                 <span>
                   <span style={{ display: 'block', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--c-faint,#8a8f96)' }}>Hotline tư vấn</span>
-                  <span style={{ display: 'block', fontSize: '1.15rem', fontWeight: 700 }}>1900 000 000</span>
+                  <span style={{ display: 'block', fontSize: '1.15rem', fontWeight: 700 }}>028 3515 3516</span>
                 </span>
               </a>
 
@@ -1182,13 +1182,13 @@ export default function ServiceDetailClient({ service: rawService, allServices, 
               <p style={{ fontSize: '.95rem', color: 'var(--c-muted,#5f656d)', margin: '1rem 0 1.6rem', maxWidth: '40ch', textWrap: 'pretty' }}>
                 {isEn ? 'Need tailored advice? Contact MHD team directly.' : 'Chưa có câu trả lời phù hợp? Liên hệ trực tiếp đội ngũ MHD.'}
               </p>
-              <a href="tel:1900000000" style={{ display: 'inline-flex', alignItems: 'center', gap: '.6rem', fontWeight: 700, fontSize: '1.1rem', color: 'var(--c-ink,#16181c)' }}>
+              <a href="tel:02835153516" style={{ display: 'inline-flex', alignItems: 'center', gap: '.6rem', fontWeight: 700, fontSize: '1.1rem', color: 'var(--c-ink,#16181c)' }}>
                 <span style={{ color: 'var(--c-accent,#d94f0a)' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
                     <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
                   </svg>
                 </span>
-                1900 000 000
+                028 3515 3516
               </a>
             </div>
 
@@ -1335,7 +1335,7 @@ export default function ServiceDetailClient({ service: rawService, allServices, 
               </button>
 
               <a
-                href="tel:1900000000"
+                href="tel:02835153516"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -1354,7 +1354,7 @@ export default function ServiceDetailClient({ service: rawService, allServices, 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
                   <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
                 </svg>
-                1900 000 000
+                028 3515 3516
               </a>
             </div>
           </div>

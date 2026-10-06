@@ -19,7 +19,7 @@ function formatFileSize(bytes: number) {
 
 export default function ContactClient({ currentLocale = 'vi', contactInfo }: Props) {
   const isEn = currentLocale === 'en'
-  const displayPhone = contactInfo?.phone || '1900 000 000'
+  const displayPhone = contactInfo?.phone || '028 3515 3516'
   const displayEmail = contactInfo?.email || 'info@mhd.com.vn'
   const displayAddress = contactInfo?.address || (isEn ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')
 
@@ -110,15 +110,15 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
             data?.error ||
             data?.errors?.[0]?.message ||
             (isEn
-              ? 'An error occurred while submitting. Please call 1900 000 000.'
-              : 'Có lỗi xảy ra khi gửi yêu cầu. Vui lòng liên hệ hotline 1900 000 000.'),
+              ? `An error occurred while submitting. Please call ${displayPhone}.`
+              : `Có lỗi xảy ra khi gửi yêu cầu. Vui lòng liên hệ hotline ${displayPhone}.`),
         })
       }
     } catch {
       setErrors({
         general: isEn
-          ? 'Network connection error. Please try again or call 1900 000 000.'
-          : 'Lỗi kết nối mạng. Vui lòng thử lại hoặc gọi hotline 1900 000 000.',
+          ? `Network connection error. Please try again or call ${displayPhone}.`
+          : `Lỗi kết nối mạng. Vui lòng thử lại hoặc gọi hotline ${displayPhone}.`,
       })
     } finally {
       setLoading(false)
@@ -1176,7 +1176,7 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
                   </svg>
                 </a>
                 <a
-                  href="tel:1900000000"
+                  href={`tel:${displayPhone.replace(/\s+/g, '')}`}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',

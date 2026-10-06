@@ -6,9 +6,10 @@ const SAMPLES = ['MHD-2025-0891', 'MHD-2026-001234', 'MHD-2026-000987', 'MHD-202
 
 interface LookupClientProps {
   currentLocale?: string
+  hotline?: string
 }
 
-export default function LookupClient({ currentLocale = 'vi' }: LookupClientProps) {
+export default function LookupClient({ currentLocale = 'vi', hotline = '028 3515 3516' }: LookupClientProps) {
   const isEn = currentLocale === 'en'
 
   const [num, setNum] = useState('')
@@ -198,7 +199,7 @@ export default function LookupClient({ currentLocale = 'vi' }: LookupClientProps
             <p style={{ fontSize: '.86rem', color: 'var(--c-muted, #5f656d)', lineHeight: 1.55 }}>
               {isEn ? (
                 <>
-                  Please check the certificate number. If information still mismatches, contact MHD via hotline 1900 000 000 or email{' '}
+                  Please check the certificate number. If information still mismatches, contact MHD via hotline {hotline} or email{' '}
                   <a href="mailto:phapche@mhd.com.vn" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
                     phapche@mhd.com.vn
                   </a>{' '}
@@ -206,7 +207,7 @@ export default function LookupClient({ currentLocale = 'vi' }: LookupClientProps
                 </>
               ) : (
                 <>
-                  Kiểm tra lại số chứng thư. Nếu thông tin vẫn không khớp, liên hệ MHD qua hotline 1900 000 000 hoặc email{' '}
+                  Kiểm tra lại số chứng thư. Nếu thông tin vẫn không khớp, liên hệ MHD qua hotline {hotline} hoặc email{' '}
                   <a href="mailto:phapche@mhd.com.vn" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
                     phapche@mhd.com.vn
                   </a>{' '}

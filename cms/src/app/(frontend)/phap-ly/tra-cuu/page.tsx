@@ -23,12 +23,21 @@ export async function generateMetadata({ searchParams }: LookupPageProps) {
   }
 }
 
+import { getCachedGlobal } from '@/lib/cachedQueries'
+
 export default async function CertificateLookupPage({ searchParams }: LookupPageProps) {
   const cookieStore = await cookies()
   const localeCookie = cookieStore.get('mhd_locale')?.value
   const resolvedParams = searchParams ? await searchParams : {}
   const locale = (resolvedParams?.locale || localeCookie) === 'en' ? 'en' : 'vi'
   const isEn = locale === 'en'
+
+  const [footerData, siteSettings] = await Promise.all([
+    getCachedGlobal('footer', locale as 'vi' | 'en'),
+    getCachedGlobal('site-settings', locale as 'vi' | 'en'),
+  ])
+
+  const hotline = (footerData as any)?.phone || (siteSettings as any)?.hotline || '028 3515 3516'
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--c-page, #f6f5f2)', color: 'var(--c-ink, #16181c)' }}>
@@ -134,7 +143,7 @@ export default async function CertificateLookupPage({ searchParams }: LookupPage
           </p>
 
           {/* Interactive lookup tool */}
-          <LookupClient currentLocale={locale} />
+          <LookupClient currentLocale={locale} hotline={hotline} />
         </div>
       </section>
 
@@ -192,8 +201,8 @@ export default async function CertificateLookupPage({ searchParams }: LookupPage
                     : 'Liên hệ bộ phận Pháp chế để được xác minh trong ngày làm việc.'}
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem', fontSize: '.92rem', fontWeight: 700 }}>
-                  <a href="tel:1900000000" style={{ color: 'var(--c-ink, #16181c)' }}>
-                    Hotline: 1900 000 000
+                  <a href={`tel:${hotline.replace(/\s+/g, '')}`} style={{ color: 'var(--c-ink, #16181c)' }}>
+                    Hotline: {hotline}
                   </a>
                   <a href="mailto:phapche@mhd.com.vn" style={{ color: 'var(--c-ink, #16181c)' }}>
                     phapche@mhd.com.vn

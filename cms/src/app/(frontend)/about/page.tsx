@@ -40,7 +40,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
     console.error('Cached fetch error on AboutPage:', error)
   }
 
-  const contactPhone = footerData?.phone || '1900 000 000'
+  const contactPhone = footerData?.phone || '028 3515 3516'
   const contactEmail = footerData?.email || 'info@mhd.com.vn'
 
   const defaultAppraisers = [
@@ -1418,7 +1418,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
                   {isEn ? 'Submit Valuation Request' : 'Gửi yêu cầu thẩm định'}
                 </a>
                 <a
-                  href="tel:1900000000"
+                  href={`tel:${contactPhone.replace(/\s+/g, '')}`}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1433,7 +1433,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
                     textDecoration: 'none',
                   }}
                 >
-                  Hotline 1900 000 000
+                  Hotline {contactPhone}
                 </a>
               </div>
             </div>

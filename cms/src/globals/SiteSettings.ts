@@ -55,7 +55,7 @@ export const SiteSettings: GlobalConfig = {
       name: 'hotline',
       type: 'text',
       label: 'Số Hotline liên hệ nhanh',
-      defaultValue: '1900 000 000',
+      defaultValue: '028 3515 3516',
     },
     {
       name: 'zaloNumber',

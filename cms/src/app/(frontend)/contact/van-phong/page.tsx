@@ -42,7 +42,7 @@ export default async function OfficeNetworkPage({ searchParams }: PageProps) {
       address: isEn
         ? 'Tầng 8, Tòa nhà MHD Building, Quận 1, TP. Hồ Chí Minh'
         : 'Tầng 8, Tòa nhà MHD Building, Quận 1, TP. Hồ Chí Minh',
-      phone: '(028) 3822 xxxx — Hotline 1900 000 000',
+      phone: 'Hotline: 028 3515 3516',
       email: 'hcm@mhdvaluation.vn',
       hours: isEn ? 'Mon - Fri: 08:00 - 17:30 | Sat: 08:00 - 12:00' : 'Thứ 2 - Thứ 6: 08:00 - 17:30 | Thứ 7: 08:00 - 12:00',
       coverage: isEn ? 'Southern Key Economic Zone & Central Highland' : 'Khu vực Đông Nam Bộ & Tây Nguyên',

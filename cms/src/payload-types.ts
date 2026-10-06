@@ -1304,6 +1304,8 @@ export interface Header {
     label?: string | null;
     href?: string | null;
   };
+  phone?: string | null;
+  licenseNotice?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1408,6 +1410,8 @@ export interface HeaderSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  phone?: T;
+  licenseNotice?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -106,7 +106,7 @@ export default async function FrontendLayout({
         {children}
         <Footer data={footerData} currentLocale={currentLocale} />
         <QuickContactWidget
-          hotline={(siteSettings as any)?.hotline || '1900 000 000'}
+          hotline={(siteSettings as any)?.hotline || '028 3515 3516'}
           zaloNumber={(siteSettings as any)?.zaloNumber || '3920702626611603828'}
           zaloUrl={(siteSettings as any)?.zaloUrl || 'https://zalo.me/3920702626611603828'}
           workingHours={(siteSettings as any)?.workingHours}

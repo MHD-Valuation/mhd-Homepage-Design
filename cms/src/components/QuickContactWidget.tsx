@@ -19,7 +19,7 @@ interface QuickContactWidgetProps {
 }
 
 export default function QuickContactWidget({
-  hotline = '1900 000 000',
+  hotline = '028 3515 3516',
   zaloNumber = '3920702626611603828',
   zaloUrl = 'https://zalo.me/3920702626611603828',
   workingHours,

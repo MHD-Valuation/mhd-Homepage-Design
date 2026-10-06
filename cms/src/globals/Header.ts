@@ -178,5 +178,18 @@ export const Header: GlobalConfig = {
         },
       ],
     },
+    {
+      name: 'phone',
+      type: 'text',
+      label: 'Số Hotline trên Header',
+      defaultValue: '028 3515 3516',
+    },
+    {
+      name: 'licenseNotice',
+      type: 'text',
+      label: 'Thông báo pháp lý / Mã số GCN (Dưới chân Mega Menu)',
+      localized: true,
+      defaultValue: 'Được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá · Mã số 000/GCN-BTC',
+    },
   ],
 }

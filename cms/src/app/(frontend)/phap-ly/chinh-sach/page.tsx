@@ -238,8 +238,8 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
                       phapche@mhd.com.vn
                     </a>{' '}
                     or hotline{' '}
-                    <a href="tel:1900000000" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
-                      1900 000 000
+                    <a href="tel:02835153516" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
+                      028 3515 3516
                     </a>.
                   </>
                 ) : (
@@ -249,8 +249,8 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
                       phapche@mhd.com.vn
                     </a>{' '}
                     hoặc hotline{' '}
-                    <a href="tel:1900000000" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
-                      1900 000 000
+                    <a href="tel:02835153516" style={{ color: 'var(--c-accent, #d94f0a)', fontWeight: 600 }}>
+                      028 3515 3516
                     </a>.
                   </>
                 )}
