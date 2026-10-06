@@ -11,6 +11,8 @@ export const Footer: GlobalConfig = {
       () => {
         revalidateCacheTag('globals')
         revalidateCacheTag('global-footer')
+        revalidateCacheTag('global-footer-vi')
+        revalidateCacheTag('global-footer-en')
       },
     ],
   },

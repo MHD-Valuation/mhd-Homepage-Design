@@ -11,6 +11,8 @@ export const Header: GlobalConfig = {
       () => {
         revalidateCacheTag('globals')
         revalidateCacheTag('global-header')
+        revalidateCacheTag('global-header-vi')
+        revalidateCacheTag('global-header-en')
       },
     ],
   },

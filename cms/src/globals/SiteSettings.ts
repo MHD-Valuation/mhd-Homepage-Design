@@ -11,6 +11,8 @@ export const SiteSettings: GlobalConfig = {
       () => {
         revalidateCacheTag('globals')
         revalidateCacheTag('global-site-settings')
+        revalidateCacheTag('global-site-settings-vi')
+        revalidateCacheTag('global-site-settings-en')
       },
     ],
   },
