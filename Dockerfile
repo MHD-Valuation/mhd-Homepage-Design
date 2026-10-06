@@ -6,8 +6,8 @@ RUN apk add --no-cache libc6-compat
 # 1. Install dependencies
 FROM base AS deps
 WORKDIR /app
-COPY cms/package.json cms/package-lock.json ./
-RUN npm ci
+COPY cms/package.json ./
+RUN npm install --legacy-peer-deps
 
 # 2. Build the application
 FROM base AS builder
