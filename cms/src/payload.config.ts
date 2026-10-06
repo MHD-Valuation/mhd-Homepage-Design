@@ -42,7 +42,13 @@ if (isProd && PAYLOAD_SECRET.length < 32) {
 const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3005'
 const allowedOrigins = Array.from(
   new Set(
-    [serverURL, ...(process.env.ALLOWED_ORIGINS || '').split(',')]
+    [
+      serverURL,
+      'https://web.app.mhd.com.vn',
+      'http://web.app.mhd.com.vn',
+      'http://localhost:3005',
+      ...(process.env.ALLOWED_ORIGINS || '').split(','),
+    ]
       .map((o) => o.trim().replace(/\/$/, ''))
       .filter(Boolean),
   ),
