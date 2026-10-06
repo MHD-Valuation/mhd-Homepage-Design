@@ -92,19 +92,19 @@ export default function WhyUs({ data, teamMembers, currentLocale = 'vi' }: WhyUs
       name: isEn ? 'Nguyen Van A' : 'Nguyễn Văn A',
       cardId: 'Thẻ TĐV-00123',
       specialty: isEn ? 'Enterprise Valuation' : 'Thẩm định giá doanh nghiệp',
-      avatar: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/881875bfacabc36b995e0222bed5681bbc7b8b54.jpg',
+      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
     },
     {
       name: isEn ? 'Tran Thi B' : 'Trần Thị B',
       cardId: 'Thẻ TĐV-00456',
       specialty: isEn ? 'Real Estate Valuation' : 'Thẩm định giá bất động sản',
-      avatar: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b739f3f18faa0510846354809748a7b644474f2f.jpg',
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
     },
     {
       name: isEn ? 'Le Van C' : 'Lê Văn C',
       cardId: 'Thẻ TĐV-00789',
       specialty: isEn ? 'Machinery & Equipment' : 'Thẩm định động sản & máy thiết bị',
-      avatar: 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/422120dcf3a58ded1e8b0315e9410882420308b3.jpg',
+      avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
     },
   ]
 
@@ -114,7 +114,7 @@ export default function WhyUs({ data, teamMembers, currentLocale = 'vi' }: WhyUs
           name: m.name,
           cardId: m.cardId || 'Thẻ TĐV-00123',
           specialty: m.position || (isEn ? 'Certified Appraiser' : 'Thẩm định viên'),
-          avatar: m.avatar?.url || 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/881875bfacabc36b995e0222bed5681bbc7b8b54.jpg',
+          avatar: m.avatar?.url || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
         }))
       : defaultAppraisers
 

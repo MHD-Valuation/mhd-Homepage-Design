@@ -68,7 +68,7 @@ export default function InsightsSection({ data, posts = [], currentLocale = 'vi'
   const featImage =
     featured.coverImage?.url ||
     featured.featuredImage?.url ||
-    'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/750d41126cdef82d4fee8d367df3f8b46f1bb8ad.jpg'
+    'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80'
   const featUrl = featured.slug ? `/insights/${featured.slug}` : '/insights'
 
   // Sub article 1
@@ -80,7 +80,7 @@ export default function InsightsSection({ data, posts = [], currentLocale = 'vi'
   const sub1Image =
     sub1.coverImage?.url ||
     sub1.featuredImage?.url ||
-    'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2077fe3b06f028c4e065ba98ce099959f9f13806.jpg'
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
   const sub1Url = sub1.slug ? `/insights/${sub1.slug}` : '/insights'
 
   // Sub article 2
@@ -92,7 +92,7 @@ export default function InsightsSection({ data, posts = [], currentLocale = 'vi'
   const sub2Image =
     sub2.coverImage?.url ||
     sub2.featuredImage?.url ||
-    'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg'
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80'
   const sub2Url = sub2.slug ? `/insights/${sub2.slug}` : '/insights'
 
   return (

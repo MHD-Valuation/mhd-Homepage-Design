@@ -1127,7 +1127,7 @@ export default function Header({
                     >
                       <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
                         <img
-                          src={itemProjects.ctaCard?.image?.url || 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2077fe3b06f028c4e065ba98ce099959f9f13806.jpg'}
+                          src={itemProjects.ctaCard?.image?.url || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'}
                           alt={itemProjects.ctaCard?.title || (isEn ? 'Featured Case Study' : 'Hồ sơ chuyên đề')}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -1219,7 +1219,7 @@ export default function Header({
                     >
                       <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
                         <img
-                          src={itemInsight.ctaCard?.image?.url || 'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/64fd47e6ee64b69ba0dc9f8e8fa185a03992b0df.jpg'}
+                          src={itemInsight.ctaCard?.image?.url || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80'}
                           alt={itemInsight.ctaCard?.title || (isEn ? 'Market News' : 'Tin thị trường')}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}

@@ -32,7 +32,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Chief Financial Officer',
           company: 'Manufacturing Corporation',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/422120dcf3a58ded1e8b0315e9410882420308b3.jpg',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         },
         {
           quote:
@@ -40,7 +40,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Head of Credit Appraisal',
           company: 'Commercial Bank',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/881875bfacabc36b995e0222bed5681bbc7b8b54.jpg',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
         },
         {
           quote:
@@ -48,7 +48,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Chief Executive Officer',
           company: 'Technology Group',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b739f3f18faa0510846354809748a7b644474f2f.jpg',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
         },
       ]
     : [
@@ -58,7 +58,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Giám đốc Tài chính',
           company: 'Doanh nghiệp sản xuất',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/422120dcf3a58ded1e8b0315e9410882420308b3.jpg',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         },
         {
           quote:
@@ -66,7 +66,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Trưởng phòng Thẩm định tín dụng',
           company: 'Ngân hàng thương mại',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/881875bfacabc36b995e0222bed5681bbc7b8b54.jpg',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
         },
         {
           quote:
@@ -74,7 +74,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           role: 'Tổng Giám đốc',
           company: 'Công ty công nghệ',
           avatar:
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b739f3f18faa0510846354809748a7b644474f2f.jpg',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
         },
       ]
 
@@ -87,7 +87,7 @@ export default function TestimonialsAndCta({ data, testimonialsData, currentLoca
           company: item.companyType || (isEn ? 'Enterprise' : 'Doanh nghiệp'),
           avatar:
             item.avatar?.url ||
-            'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/422120dcf3a58ded1e8b0315e9410882420308b3.jpg',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         }))
       : defaultReviews
 
