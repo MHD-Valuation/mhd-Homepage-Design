@@ -31,6 +31,7 @@ ENV NODE_ENV=production
 ENV PORT=3005
 ENV HOSTNAME="0.0.0.0"
 
+RUN apk add --no-cache curl
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -47,5 +48,8 @@ RUN mkdir -p /app/private-uploads /app/media && chown -R nextjs:nodejs /app
 USER nextjs
 
 EXPOSE 3005
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD curl -f http://127.0.0.1:3005/api/health || exit 1
 
 CMD ["npm", "run", "start:prod"]
