@@ -19,7 +19,8 @@ export default function InsightsSection({ data, posts = [], currentLocale = 'vi'
       ? 'Periodic analysis by industry, region, and asset class based on actual valuation data from MHD. Client data is strictly confidential.'
       : 'Nội dung được tổng hợp theo ngành, khu vực và loại tài sản từ nguồn thông tin phù hợp. Dữ liệu khách hàng được bảo mật theo quy định.')
 
-  const viewAllText = data?.viewAllText || (isEn ? 'View all articles →' : 'Xem tất cả bài viết →')
+  const rawViewAllText = data?.viewAllText || (isEn ? 'View all articles' : 'Xem tất cả bài viết')
+  const viewAllText = rawViewAllText.replace(/[→\->\s]+$/, '').trim()
   const viewAllUrl = cleanNavHref(data?.viewAllUrl || '/insights')
 
   const defaultCategoryChips = isEn
