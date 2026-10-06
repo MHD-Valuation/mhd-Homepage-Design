@@ -1,0 +1,10 @@
+:root {
+  --color-primary: #d94f0a;
+  --theme-elevation-150: #14161a;
+}
+
+[data-theme='dark'] {
+  --theme-bg: #111317;
+  --theme-elevation-50: #16181d;
+  --theme-elevation-100: #1d2026;
+}

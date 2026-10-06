@@ -1,0 +1,11 @@
+{
+  "name": "mhd-homepage-design",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix cms run dev",
+    "dev:cms": "npm --prefix cms run dev",
+    "start": "npm --prefix cms run start",
+    "build": "npm --prefix cms run build",
+    "seed": "npm --prefix cms run seed"
+  }
+}

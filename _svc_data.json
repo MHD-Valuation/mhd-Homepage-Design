@@ -1,0 +1,616 @@
+[
+    {
+        "slug": "Dich-vu-Doanh-nghiep",
+        "menu": "Thẩm định giá trị DN",
+        "title": "Thẩm định giá trị doanh nghiệp",
+        "noun": "giá trị doanh nghiệp",
+        "sub": "Xác định giá trị doanh nghiệp và phần vốn phục vụ M&amp;A, cổ phần hoá, tái cấu trúc vốn và chuyển nhượng cổ phần.",
+        "hl": [
+            "Thực hiện theo Thông tư 36/2024/TT-BTC",
+            "Kết hợp cách tiếp cận thị trường, thu nhập và tài sản",
+            "Báo cáo nêu rõ giả thiết và điều kiện hạn chế"
+        ],
+        "purposes": [
+            [
+                "M&amp;A, mua bán sáp nhập",
+                "Xác định giá trị làm cơ sở đàm phán giao dịch."
+            ],
+            [
+                "Cổ phần hoá, thoái vốn",
+                "Phục vụ phương án cổ phần hoá và chuyển nhượng vốn nhà nước."
+            ],
+            [
+                "Góp vốn, chuyển nhượng phần vốn",
+                "Xác định giá trị phần vốn góp hoặc cổ phần chuyển nhượng."
+            ],
+            [
+                "Tái cấu trúc, phát hành cổ phần",
+                "Cơ sở cho phương án tăng vốn, hoán đổi hoặc phát hành."
+            ],
+            [
+                "Báo cáo tài chính",
+                "Phục vụ ghi nhận, đánh giá lại khoản đầu tư."
+            ],
+            [
+                "Phân chia tài sản, tranh chấp",
+                "Cơ sở giá trị độc lập cho các bên liên quan."
+            ]
+        ],
+        "scope": [
+            "Công ty cổ phần, công ty TNHH",
+            "Doanh nghiệp có vốn nhà nước",
+            "Phần vốn góp, cổ phần chưa niêm yết",
+            "Doanh nghiệp khởi nghiệp, công nghệ",
+            "Tập đoàn, công ty mẹ – con"
+        ],
+        "methods": [
+            [
+                "Cách tiếp cận từ thị trường",
+                "So sánh với doanh nghiệp và giao dịch tương tự thông qua các tỷ số như P/E, P/B, EV/EBITDA."
+            ],
+            [
+                "Cách tiếp cận từ thu nhập",
+                "Chiết khấu dòng tiền tự do hoặc dòng cổ tức dự kiến về thời điểm thẩm định giá."
+            ],
+            [
+                "Cách tiếp cận từ tài sản",
+                "Xác định giá trị theo tài sản thuần sau khi đánh giá lại từng khoản mục tài sản và nợ."
+            ]
+        ],
+        "step3": "Phân tích báo cáo tài chính, ngành và thị trường; áp dụng ít nhất hai cách tiếp cận phù hợp.",
+        "docs": [
+            "Giấy chứng nhận đăng ký doanh nghiệp, điều lệ",
+            "Báo cáo tài chính 3–5 năm gần nhất (đã kiểm toán nếu có)",
+            "Kế hoạch kinh doanh, dự báo tài chính",
+            "Danh mục tài sản cố định và hợp đồng lớn",
+            "Cơ cấu vốn, danh sách cổ đông",
+            "Thông tin khoản vay, bảo lãnh, nghĩa vụ tiềm tàng"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Thông tư 31/2024/TT-BTC – Thu thập và phân tích thông tin",
+            "Thông tư 36/2024/TT-BTC – Thẩm định giá doanh nghiệp"
+        ],
+        "cases": [
+            [
+                "Doanh nghiệp sản xuất",
+                "Tái cấu trúc vốn",
+                "Phân tích báo cáo tài chính 5 năm, áp dụng cách tiếp cận thu nhập và tài sản."
+            ],
+            [
+                "Công ty công nghệ",
+                "Gọi vốn nhà đầu tư",
+                "Dự báo dòng tiền, so sánh giao dịch doanh nghiệp cùng ngành trong khu vực."
+            ]
+        ],
+        "faq": [
+            [
+                "Thẩm định giá doanh nghiệp mất bao lâu?",
+                "Thời gian phụ thuộc quy mô doanh nghiệp, số lượng công ty con và mức độ đầy đủ của hồ sơ tài chính. Tiến độ dự kiến được ghi trong báo giá."
+            ],
+            [
+                "Doanh nghiệp chưa có báo cáo kiểm toán có thẩm định được không?",
+                "Có thể thực hiện trên cơ sở báo cáo tài chính do doanh nghiệp lập. Báo cáo thẩm định giá sẽ nêu rõ giả thiết và giới hạn liên quan đến nguồn số liệu."
+            ],
+            [
+                "Kết quả có dùng cho giao dịch M&amp;A được không?",
+                "Chứng thư và báo cáo thẩm định giá có thể dùng làm cơ sở tham khảo cho đàm phán, trong phạm vi mục đích được ghi trên chứng thư."
+            ],
+            [
+                "Thông tin doanh nghiệp có được bảo mật không?",
+                "MHD bảo mật thông tin khách hàng theo quy tắc đạo đức nghề nghiệp và thoả thuận bảo mật ký kèm hợp đồng dịch vụ (nếu có)."
+            ]
+        ]
+    },
+    {
+        "slug": "Dich-vu-Bat-dong-san",
+        "menu": "Thẩm định giá bất động sản",
+        "title": "Thẩm định giá bất động sản",
+        "noun": "bất động sản",
+        "sub": "Thẩm định giá đất, nhà, công trình và dự án phục vụ vay vốn, chuyển nhượng, góp vốn và báo cáo tài chính.",
+        "hl": [
+            "Khảo sát hiện trạng tài sản trực tiếp",
+            "Đối chiếu giao dịch thị trường khu vực",
+            "Chứng thư có mã QR để đối chiếu thông tin"
+        ],
+        "purposes": [
+            [
+                "Vay vốn, thế chấp",
+                "Cơ sở giá trị tài sản bảo đảm cho ngân hàng và tổ chức tín dụng."
+            ],
+            [
+                "Mua bán, chuyển nhượng",
+                "Tham khảo giá trị trước khi giao dịch."
+            ],
+            [
+                "Góp vốn bằng bất động sản",
+                "Xác định giá trị quyền sử dụng đất, công trình góp vốn."
+            ],
+            [
+                "Báo cáo tài chính",
+                "Đánh giá lại bất động sản đầu tư, tài sản cố định."
+            ],
+            [
+                "Tính thuế, lệ phí",
+                "Cơ sở xác định nghĩa vụ tài chính liên quan."
+            ],
+            [
+                "Phân chia tài sản, tranh chấp",
+                "Giá trị độc lập phục vụ thoả thuận hoặc tố tụng."
+            ]
+        ],
+        "scope": [
+            "Nhà phố, biệt thự, căn hộ chung cư",
+            "Đất ở, đất nông nghiệp, đất sản xuất kinh doanh",
+            "Nhà xưởng, kho bãi, đất khu công nghiệp",
+            "Khách sạn, văn phòng, trung tâm thương mại",
+            "Dự án bất động sản đang triển khai"
+        ],
+        "methods": [
+            [
+                "Cách tiếp cận từ thị trường",
+                "Đối chiếu giao dịch, chào bán tài sản tương tự và điều chỉnh theo vị trí, pháp lý, diện tích, hiện trạng."
+            ],
+            [
+                "Cách tiếp cận từ thu nhập",
+                "Vốn hoá hoặc chiết khấu dòng tiền cho bất động sản tạo thu nhập như cho thuê, khách sạn."
+            ],
+            [
+                "Cách tiếp cận từ chi phí",
+                "Áp dụng cho công trình xây dựng, kết hợp phương pháp thặng dư với đất có tiềm năng phát triển."
+            ]
+        ],
+        "step3": "Khảo sát vị trí, hiện trạng, pháp lý; thu thập giao dịch so sánh trong khu vực.",
+        "docs": [
+            "Giấy chứng nhận quyền sử dụng đất, quyền sở hữu nhà",
+            "Giấy phép xây dựng, bản vẽ hoàn công (nếu có)",
+            "Hợp đồng mua bán, cho thuê (nếu có)",
+            "Giấy tờ tuỳ thân hoặc đăng ký doanh nghiệp của chủ sở hữu",
+            "Hình ảnh hiện trạng tài sản",
+            "Thông tin quy hoạch liên quan (nếu có)"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Luật Đất đai 2024",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Thông tư 31/2024/TT-BTC – Thu thập và phân tích thông tin"
+        ],
+        "cases": [
+            [
+                "Nhà phố trung tâm TP.HCM",
+                "Vay vốn ngân hàng",
+                "Khảo sát hiện trạng, đối chiếu 6 giao dịch so sánh trong bán kính 1 km."
+            ],
+            [
+                "Khách sạn nghỉ dưỡng",
+                "Tài sản bảo đảm",
+                "Phân tích thu nhập vận hành, kết hợp cách tiếp cận chi phí cho công trình."
+            ]
+        ],
+        "faq": [
+            [
+                "Thời gian thẩm định một bất động sản là bao lâu?",
+                "Với nhà đất thông thường có hồ sơ đầy đủ, thời gian thường ngắn hơn so với dự án hoặc tài sản thương mại. Tiến độ cụ thể được ghi trong báo giá."
+            ],
+            [
+                "Có bắt buộc khảo sát thực tế không?",
+                "Có. Thẩm định viên khảo sát hiện trạng, vị trí và các yếu tố ảnh hưởng đến giá trị theo quy định của chuẩn mực."
+            ],
+            [
+                "Chứng thư có được ngân hàng chấp nhận không?",
+                "Việc chấp nhận do từng ngân hàng quyết định theo quy chế nội bộ. MHD cung cấp hồ sơ pháp lý để ngân hàng thẩm tra khi cần."
+            ],
+            [
+                "Tài sản chưa có giấy chứng nhận có thẩm định được không?",
+                "Tuỳ mục đích thẩm định. Báo cáo sẽ nêu rõ tình trạng pháp lý và giả thiết áp dụng."
+            ]
+        ]
+    },
+    {
+        "slug": "Dich-vu-May-thiet-bi",
+        "menu": "Động sản & máy thiết bị",
+        "title": "Thẩm định giá động sản & máy thiết bị",
+        "noun": "máy thiết bị",
+        "sub": "Thẩm định giá dây chuyền sản xuất, máy móc, thiết bị và phương tiện vận tải phục vụ vay vốn, mua bán, thanh lý và góp vốn.",
+        "hl": [
+            "Khảo sát tình trạng kỹ thuật tại nơi lắp đặt",
+            "Đối chiếu giá thiết bị trong và ngoài nước",
+            "Áp dụng cho tài sản đơn lẻ hoặc cả dây chuyền"
+        ],
+        "purposes": [
+            [
+                "Vay vốn, thế chấp",
+                "Cơ sở giá trị tài sản bảo đảm là máy móc, phương tiện."
+            ],
+            [
+                "Mua bán, nhập khẩu",
+                "Tham khảo giá trị trước khi mua hoặc nhập khẩu thiết bị."
+            ],
+            [
+                "Thanh lý, xử lý tài sản",
+                "Xác định giá khởi điểm đấu giá, thanh lý tài sản."
+            ],
+            [
+                "Góp vốn bằng tài sản",
+                "Xác định giá trị máy móc, dây chuyền góp vốn."
+            ],
+            [
+                "Bảo hiểm tài sản",
+                "Cơ sở xác định số tiền bảo hiểm phù hợp."
+            ],
+            [
+                "Đánh giá lại tài sản",
+                "Phục vụ báo cáo tài chính, cổ phần hoá."
+            ]
+        ],
+        "scope": [
+            "Dây chuyền, nhà máy sản xuất",
+            "Máy móc công nghiệp, máy xây dựng",
+            "Phương tiện vận tải: ô tô, tàu thuyền, xe chuyên dùng",
+            "Thiết bị y tế, công nghệ, văn phòng",
+            "Hàng hoá, vật tư, nguyên liệu tồn kho"
+        ],
+        "methods": [
+            [
+                "Cách tiếp cận từ thị trường",
+                "Đối chiếu giá chào bán, giao dịch của thiết bị cùng loại, cùng thông số kỹ thuật."
+            ],
+            [
+                "Cách tiếp cận từ chi phí",
+                "Xác định chi phí tái tạo hoặc thay thế, trừ hao mòn hữu hình, lỗi thời chức năng và kinh tế."
+            ],
+            [
+                "Cách tiếp cận từ thu nhập",
+                "Áp dụng cho thiết bị hoặc dây chuyền tạo dòng tiền độc lập."
+            ]
+        ],
+        "step3": "Khảo sát tình trạng kỹ thuật, công suất, năm sản xuất; tra cứu giá thiết bị tương đương.",
+        "docs": [
+            "Hoá đơn, hợp đồng mua bán, tờ khai hải quan",
+            "Catalogue, thông số kỹ thuật",
+            "Giấy đăng ký, đăng kiểm (với phương tiện)",
+            "Biên bản nghiệm thu, lịch sử bảo trì",
+            "Danh mục tài sản và vị trí lắp đặt"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Thông tư 31/2024/TT-BTC – Thu thập và phân tích thông tin",
+            "Chuẩn mực thẩm định giá Việt Nam về các cách tiếp cận"
+        ],
+        "cases": [
+            [
+                "Dây chuyền sản xuất bột mì",
+                "Tài sản bảo đảm",
+                "Khảo sát tại nhà máy, thu thập hồ sơ kỹ thuật, đối chiếu giá thiết bị nhập khẩu."
+            ],
+            [
+                "Đội xe vận tải 40 chiếc",
+                "Thanh lý tài sản",
+                "Kiểm tra đăng kiểm, tình trạng từng xe, đối chiếu giao dịch thị trường xe cũ."
+            ]
+        ],
+        "faq": [
+            [
+                "Có cần tháo dỡ thiết bị để khảo sát không?",
+                "Không. Thẩm định viên khảo sát tại vị trí lắp đặt, ghi nhận tình trạng vận hành và hồ sơ kỹ thuật đi kèm."
+            ],
+            [
+                "Thiết bị nhập khẩu không còn sản xuất thì xác định giá thế nào?",
+                "MHD sử dụng thiết bị thay thế có tính năng tương đương và điều chỉnh theo công suất, công nghệ, tình trạng."
+            ],
+            [
+                "Có thẩm định một lúc nhiều tài sản được không?",
+                "Có. Với danh mục lớn, MHD lập phạm vi công việc và tiến độ theo từng nhóm tài sản."
+            ],
+            [
+                "Kết quả có dùng để đấu giá thanh lý không?",
+                "Có thể làm cơ sở xác định giá khởi điểm trong phạm vi mục đích được ghi trên chứng thư."
+            ]
+        ]
+    },
+    {
+        "slug": "Dich-vu-Thuong-hieu",
+        "menu": "Thương hiệu &amp; tài sản vô hình",
+        "title": "Thẩm định giá thương hiệu &amp; tài sản vô hình",
+        "noun": "tài sản vô hình",
+        "sub": "Thẩm định giá thương hiệu, sáng chế, quyền sở hữu trí tuệ và tài sản vô hình phục vụ góp vốn, chuyển nhượng, M&amp;A và báo cáo tài chính.",
+        "hl": [
+            "Phân tích đóng góp của tài sản vào dòng tiền",
+            "Đối chiếu tỷ lệ phí bản quyền tham chiếu",
+            "Báo cáo nêu rõ nguồn thông tin và giả thiết"
+        ],
+        "purposes": [
+            [
+                "Góp vốn bằng tài sản trí tuệ",
+                "Xác định giá trị thương hiệu, sáng chế góp vốn."
+            ],
+            [
+                "Chuyển nhượng, nhượng quyền",
+                "Cơ sở cho hợp đồng chuyển nhượng, li-xăng, franchise."
+            ],
+            [
+                "M&amp;A, phân bổ giá mua",
+                "Tách giá trị tài sản vô hình trong giao dịch."
+            ],
+            [
+                "Báo cáo tài chính",
+                "Ghi nhận, đánh giá lại tài sản vô hình."
+            ],
+            [
+                "Vay vốn",
+                "Cơ sở giá trị khi dùng tài sản trí tuệ bảo đảm khoản vay."
+            ],
+            [
+                "Tranh chấp, xử lý vi phạm",
+                "Xác định thiệt hại, giá trị quyền bị xâm phạm."
+            ]
+        ],
+        "scope": [
+            "Thương hiệu, nhãn hiệu",
+            "Sáng chế, giải pháp hữu ích, kiểu dáng công nghiệp",
+            "Quyền tác giả, phần mềm",
+            "Danh sách khách hàng, hợp đồng có giá trị",
+            "Quyền khai thác, quyền thuê dài hạn"
+        ],
+        "methods": [
+            [
+                "Cách tiếp cận từ thu nhập",
+                "Phương pháp miễn tiền bản quyền, thu nhập vượt trội hoặc chênh lệch lợi nhuận do tài sản mang lại."
+            ],
+            [
+                "Cách tiếp cận từ thị trường",
+                "Đối chiếu giao dịch chuyển nhượng và tỷ lệ phí bản quyền của tài sản tương tự."
+            ],
+            [
+                "Cách tiếp cận từ chi phí",
+                "Xác định chi phí tạo lập hoặc thay thế tài sản vô hình tương đương."
+            ]
+        ],
+        "step3": "Phân tích doanh thu gắn với tài sản, vị thế thị trường, thời hạn bảo hộ.",
+        "docs": [
+            "Văn bằng bảo hộ, giấy chứng nhận đăng ký nhãn hiệu",
+            "Báo cáo tài chính, doanh thu gắn với tài sản",
+            "Hợp đồng li-xăng, nhượng quyền (nếu có)",
+            "Chi phí đầu tư phát triển, marketing",
+            "Thông tin thị trường, đối thủ cạnh tranh"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Luật Sở hữu trí tuệ",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Chuẩn mực thẩm định giá Việt Nam về tài sản vô hình"
+        ],
+        "cases": [
+            [
+                "Thương hiệu hàng tiêu dùng",
+                "Góp vốn liên doanh",
+                "Phân tích doanh thu 5 năm, áp dụng phương pháp miễn tiền bản quyền."
+            ],
+            [
+                "Phần mềm quản trị doanh nghiệp",
+                "Chuyển nhượng quyền sở hữu",
+                "Đối chiếu chi phí phát triển và thu nhập từ hợp đồng khách hàng."
+            ]
+        ],
+        "faq": [
+            [
+                "Thương hiệu chưa đăng ký bảo hộ có thẩm định được không?",
+                "Có thể thực hiện, nhưng tình trạng pháp lý ảnh hưởng đến giá trị và sẽ được nêu rõ trong báo cáo."
+            ],
+            [
+                "Giá trị thương hiệu có ghi nhận vào báo cáo tài chính được không?",
+                "Việc ghi nhận phụ thuộc chuẩn mực kế toán áp dụng. Kết quả thẩm định giá là một căn cứ tham khảo."
+            ],
+            [
+                "Cần bao nhiêu năm số liệu doanh thu?",
+                "Thông thường 3–5 năm gần nhất, kèm kế hoạch kinh doanh cho giai đoạn dự báo."
+            ],
+            [
+                "Có thẩm định sáng chế đang chờ cấp bằng không?",
+                "Có, với giả thiết về khả năng được cấp bằng được nêu rõ trong báo cáo."
+            ]
+        ]
+    },
+    {
+        "slug": "Dich-vu-Du-an-dau-tu",
+        "menu": "Thẩm định dự án đầu tư",
+        "title": "Thẩm định dự án đầu tư",
+        "noun": "dự án đầu tư",
+        "sub": "Phân tích hiệu quả và tính khả thi tài chính của dự án đầu tư theo phạm vi công việc đã thoả thuận.",
+        "hl": [
+            "Phân tích dòng tiền, NPV, IRR và thời gian hoàn vốn",
+            "Kiểm tra độ nhạy theo nhiều kịch bản",
+            "Rà soát pháp lý và giả thiết đầu vào"
+        ],
+        "purposes": [
+            [
+                "Vay vốn dự án",
+                "Hồ sơ phân tích tài chính gửi tổ chức tín dụng."
+            ],
+            [
+                "Chuyển nhượng dự án",
+                "Xác định giá trị dự án hoặc quyền phát triển."
+            ],
+            [
+                "Hợp tác đầu tư",
+                "Cơ sở đàm phán tỷ lệ góp vốn, phân chia lợi ích."
+            ],
+            [
+                "Dự án dở dang",
+                "Đánh giá lại dự án đang triển khai."
+            ],
+            [
+                "Phê duyệt nội bộ",
+                "Ý kiến độc lập cho hội đồng quản trị, nhà đầu tư."
+            ],
+            [
+                "Quyết toán, điều chỉnh",
+                "Đánh giá lại hiệu quả khi thay đổi tổng mức đầu tư."
+            ]
+        ],
+        "scope": [
+            "Dự án bất động sản, khu đô thị",
+            "Dự án công nghiệp, nhà máy",
+            "Dự án năng lượng, hạ tầng",
+            "Dự án nông nghiệp, du lịch, dịch vụ"
+        ],
+        "methods": [
+            [
+                "Chiết khấu dòng tiền",
+                "Tính NPV, IRR, thời gian hoàn vốn trên cơ sở dòng tiền dự án và chi phí vốn phù hợp."
+            ],
+            [
+                "Phân tích độ nhạy và kịch bản",
+                "Kiểm tra tác động của giá bán, chi phí, tiến độ và lãi suất đến hiệu quả dự án."
+            ],
+            [
+                "Phương pháp thặng dư",
+                "Áp dụng cho dự án bất động sản: giá trị phát triển trừ chi phí và lợi nhuận nhà đầu tư."
+            ]
+        ],
+        "step3": "Rà soát pháp lý, tổng mức đầu tư, giả thiết doanh thu – chi phí; lập mô hình tài chính.",
+        "docs": [
+            "Quyết định chủ trương đầu tư, giấy chứng nhận đăng ký đầu tư",
+            "Báo cáo nghiên cứu khả thi",
+            "Tổng mức đầu tư, dự toán chi tiết",
+            "Kế hoạch doanh thu, chi phí, phương án vốn vay",
+            "Hồ sơ pháp lý đất đai, quy hoạch"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Luật Đầu tư",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Thông tư 31/2024/TT-BTC – Thu thập và phân tích thông tin"
+        ],
+        "cases": [
+            [
+                "Khu đô thị tại [tỉnh/thành]",
+                "Hợp tác đầu tư",
+                "Lập mô hình dòng tiền 10 năm, phân tích 3 kịch bản giá bán."
+            ],
+            [
+                "Dự án năng lượng tái tạo",
+                "Hồ sơ vay vốn",
+                "Rà soát tổng mức đầu tư, phân tích độ nhạy theo sản lượng và giá bán điện."
+            ]
+        ],
+        "faq": [
+            [
+                "Thẩm định dự án khác thẩm định giá bất động sản thế nào?",
+                "Thẩm định dự án tập trung vào hiệu quả và tính khả thi tài chính của toàn bộ dòng tiền đầu tư, không chỉ giá trị tài sản tại một thời điểm."
+            ],
+            [
+                "Kết quả có bảo đảm dự án khả thi không?",
+                "Không. Kết quả phản ánh phân tích trên các giả thiết được nêu rõ; hiệu quả thực tế phụ thuộc quá trình triển khai."
+            ],
+            [
+                "Cần những số liệu gì để bắt đầu?",
+                "Tối thiểu gồm tổng mức đầu tư, tiến độ, phương án doanh thu và cơ cấu vốn. MHD gửi danh mục chi tiết sau khi tiếp nhận."
+            ],
+            [
+                "Có thực hiện cho dự án đang triển khai không?",
+                "Có. MHD đánh giá lại trên cơ sở chi phí đã thực hiện và kế hoạch còn lại."
+            ]
+        ]
+    },
+    {
+        "slug": "Dich-vu-Chung-minh-tai-chinh",
+        "menu": "Chứng minh tài chính",
+        "title": "Thẩm định giá chứng minh tài chính",
+        "noun": "tài sản chứng minh tài chính",
+        "sub": "Thẩm định giá tài sản phục vụ hồ sơ chứng minh tài chính khi du học, định cư, du lịch hoặc công tác nước ngoài.",
+        "hl": [
+            "Chứng thư tiếng Việt kèm bản tiếng Anh",
+            "Hỗ trợ tài sản của người bảo lãnh",
+            "Hướng dẫn hồ sơ theo yêu cầu từng quốc gia"
+        ],
+        "purposes": [
+            [
+                "Du học",
+                "Chứng minh năng lực tài chính của du học sinh hoặc người bảo lãnh."
+            ],
+            [
+                "Định cư",
+                "Bổ sung hồ sơ tài sản cho chương trình định cư."
+            ],
+            [
+                "Du lịch, thăm thân",
+                "Chứng minh tài sản khi xin thị thực du lịch."
+            ],
+            [
+                "Bảo lãnh người thân",
+                "Tài sản của cha mẹ, người thân bảo lãnh."
+            ],
+            [
+                "Công tác, lao động",
+                "Hồ sơ tài chính khi đi công tác, làm việc nước ngoài."
+            ]
+        ],
+        "scope": [
+            "Nhà, đất, căn hộ",
+            "Ô tô và phương tiện có đăng ký",
+            "Phần vốn góp, cổ phần",
+            "Tài sản khác có giấy tờ sở hữu"
+        ],
+        "methods": [
+            [
+                "Cách tiếp cận từ thị trường",
+                "Đối chiếu giao dịch tài sản tương tự tại khu vực để xác định giá trị thị trường."
+            ],
+            [
+                "Cách tiếp cận từ chi phí",
+                "Áp dụng cho công trình xây dựng trên đất và phương tiện."
+            ],
+            [
+                "Chứng thư song ngữ",
+                "Chứng thư tiếng Việt kèm bản tiếng Anh theo yêu cầu hồ sơ nộp cơ quan nước ngoài."
+            ]
+        ],
+        "step3": "Khảo sát tài sản, đối chiếu giao dịch thị trường; chuẩn bị bản tiếng Anh theo yêu cầu.",
+        "docs": [
+            "Giấy chứng nhận quyền sở hữu tài sản",
+            "CCCD hoặc hộ chiếu của chủ sở hữu",
+            "Giấy tờ chứng minh quan hệ (khi dùng tài sản người bảo lãnh)",
+            "Giấy đăng ký xe (với ô tô)",
+            "Yêu cầu hồ sơ của trường hoặc cơ quan lãnh sự (nếu có)"
+        ],
+        "legal": [
+            "Luật Giá 2023 (số 16/2023/QH15)",
+            "Thông tư 30/2024/TT-BTC – Chuẩn mực chung",
+            "Thông tư 31/2024/TT-BTC – Thu thập và phân tích thông tin",
+            "Chuẩn mực thẩm định giá Việt Nam về các cách tiếp cận"
+        ],
+        "cases": [
+            [
+                "Căn hộ tại TP.HCM",
+                "Hồ sơ du học Úc",
+                "Khảo sát căn hộ, lập chứng thư tiếng Việt kèm bản tiếng Anh."
+            ],
+            [
+                "Nhà phố và ô tô",
+                "Hồ sơ định cư Canada",
+                "Thẩm định đồng thời hai tài sản của người bảo lãnh."
+            ]
+        ],
+        "faq": [
+            [
+                "Chứng thư có bảo đảm hồ sơ visa được duyệt không?",
+                "Không. Chứng thư là tài liệu chứng minh giá trị tài sản; quyết định xét duyệt thuộc cơ quan lãnh sự hoặc cơ sở đào tạo."
+            ],
+            [
+                "Có bản tiếng Anh không?",
+                "Có. MHD cung cấp chứng thư tiếng Việt kèm bản tiếng Anh theo yêu cầu."
+            ],
+            [
+                "Tài sản đứng tên cha mẹ có dùng được không?",
+                "Có, kèm giấy tờ chứng minh quan hệ. Yêu cầu cụ thể tuỳ quy định của từng quốc gia."
+            ],
+            [
+                "Chứng thư có hiệu lực trong bao lâu?",
+                "Thời hạn hiệu lực được ghi trên chứng thư. Nên kiểm tra yêu cầu về thời gian của cơ quan tiếp nhận hồ sơ."
+            ]
+        ]
+    }
+]

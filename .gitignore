@@ -1,0 +1,32 @@
+# Dependencies & build outputs
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets — never commit passwords, keys, or tokens
+.env
+.env.*
+.env.local
+.env.production
+!.env.example
+
+# User uploads and media storage
+cms/private-uploads/
+cms/public/uploads/
+cms/media/
+uploads/
+
+# Local cache & temporary files
+.claude/
+_archive/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,22 @@
+# Dependencies & build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# User-submitted data (personal information)
+private-uploads/
+public/uploads/
+media/
+
+# Logs & OS noise
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
