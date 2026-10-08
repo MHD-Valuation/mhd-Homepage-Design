@@ -14,13 +14,30 @@ async function seed() {
       await pool.query(`
         DO $$ 
         BEGIN 
+          -- 1. team
           IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'team') THEN
             IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'team' AND column_name = 'category') THEN
               ALTER TABLE "team" ADD COLUMN "category" text DEFAULT 'valuer';
             END IF;
           END IF;
+
+          -- 2. site_settings
+          IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'site_settings') THEN
+            ALTER TABLE "site_settings" ADD COLUMN IF NOT EXISTS "office_phone" text;
+            ALTER TABLE "site_settings" ADD COLUMN IF NOT EXISTS "office_email" text;
+            ALTER TABLE "site_settings" ADD COLUMN IF NOT EXISTS "office_map_url" text;
+          END IF;
+
+          -- 3. site_settings_locales
+          IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'site_settings_locales') THEN
+            ALTER TABLE "site_settings_locales" ADD COLUMN IF NOT EXISTS "office_company" text;
+            ALTER TABLE "site_settings_locales" ADD COLUMN IF NOT EXISTS "office_address" text;
+            ALTER TABLE "site_settings_locales" ADD COLUMN IF NOT EXISTS "office_hours_weekday" text;
+            ALTER TABLE "site_settings_locales" ADD COLUMN IF NOT EXISTS "office_hours_weekend" text;
+          END IF;
         END $$;
       `)
+      console.log('Ensured all table columns exist successfully!')
     }
 
     if (process.env.NODE_ENV !== 'production' && process.stdin.isTTY) {
@@ -1364,5 +1381,9 @@ async function seed() {
 
 seed().catch((err) => {
   console.error('Seed Error:', err)
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Continuing to start Next.js server in production...')
+    process.exit(0)
+  }
   process.exit(1)
 })
