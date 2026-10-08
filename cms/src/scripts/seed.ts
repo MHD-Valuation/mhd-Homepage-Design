@@ -8,11 +8,30 @@ async function seed() {
 
   // Synchronize database schema and create tables if they do not exist
   try {
-    console.log('Pushed schema to PostgreSQL database...')
-    await pushDevSchema(payload.db as any)
-    console.log('Schema synchronized successfully!')
+    // Ensure critical column alterations run safely without blocking interactive prompts in Docker/headless
+    const pool = (payload.db as any)?.pool
+    if (pool?.query) {
+      await pool.query(`
+        DO $$ 
+        BEGIN 
+          IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'team') THEN
+            IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'team' AND column_name = 'category') THEN
+              ALTER TABLE "team" ADD COLUMN "category" text DEFAULT 'valuer';
+            END IF;
+          END IF;
+        END $$;
+      `)
+    }
+
+    if (process.env.NODE_ENV !== 'production' && process.stdin.isTTY) {
+      console.log('Pushed schema to PostgreSQL database...')
+      await pushDevSchema(payload.db as any)
+      console.log('Schema synchronized successfully!')
+    } else {
+      console.log('Running in non-interactive/production mode, skipped interactive Drizzle push.')
+    }
   } catch (e: any) {
-    console.log('DB push notice:', e?.message || e)
+    console.log('DB schema sync notice:', e?.message || e)
   }
 
   // 1. Create or ensure Admin User
