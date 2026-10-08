@@ -837,31 +837,23 @@ async function seed() {
       avatarFilename: 'tham-dinh-vien-truong-bo-phan-kiem-soat-phan-nguyen-uyen-ha.png',
       bio: '– Thẩm định viên về giá của Bộ Tài Chính\n– Thạc sĩ chuyên ngành quản lý đất đai\n– Định giá viên Bất động sản của Sở Xây dựng',
     },
-    {
-      name: 'Nguyễn Văn A',
-      positionVi: 'Thẩm định giá doanh nghiệp',
-      positionEn: 'Business Valuation Specialist',
-      category: 'valuer',
-      experienceYears: 10,
-      order: 6,
-    },
-    {
-      name: 'Trần Thị B',
-      positionVi: 'Thẩm định giá bất động sản',
-      positionEn: 'Real Estate Valuation Specialist',
-      category: 'valuer',
-      experienceYears: 10,
-      order: 7,
-    },
-    {
-      name: 'Lê Văn C',
-      positionVi: 'Thẩm định động sản & máy thiết bị',
-      positionEn: 'Machinery & Equipment Appraiser',
-      category: 'valuer',
-      experienceYears: 10,
-      order: 8,
-    },
   ]
+
+  // Clean up legacy mock team members if they exist
+  const mockTeamNames = ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C']
+  for (const mockName of mockTeamNames) {
+    const mockDocs = await payload.find({
+      collection: 'team',
+      where: { name: { equals: mockName } },
+    })
+    for (const doc of mockDocs.docs) {
+      await payload.delete({
+        collection: 'team',
+        id: doc.id,
+      })
+      console.log(`Deleted mock team member: ${mockName} (ID: ${doc.id})`)
+    }
+  }
 
   for (const t of teamData) {
     let avatarId: string | number | undefined = undefined

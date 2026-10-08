@@ -87,36 +87,15 @@ export default function WhyUs({ data, teamMembers, currentLocale = 'vi' }: WhyUs
         },
       ]
 
-  const defaultAppraisers = [
-    {
-      name: isEn ? 'Nguyen Van A' : 'Nguyễn Văn A',
-      cardId: 'Thẻ TĐV-00123',
-      specialty: isEn ? 'Enterprise Valuation' : 'Thẩm định giá doanh nghiệp',
-      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      name: isEn ? 'Tran Thi B' : 'Trần Thị B',
-      cardId: 'Thẻ TĐV-00456',
-      specialty: isEn ? 'Real Estate Valuation' : 'Thẩm định giá bất động sản',
-      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
-    },
-    {
-      name: isEn ? 'Le Van C' : 'Lê Văn C',
-      cardId: 'Thẻ TĐV-00789',
-      specialty: isEn ? 'Machinery & Equipment' : 'Thẩm định động sản & máy thiết bị',
-      avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
-    },
-  ]
-
   const activeAppraisers =
-    teamMembers && teamMembers.length >= 3
+    Array.isArray(teamMembers) && teamMembers.length > 0
       ? teamMembers.slice(0, 3).map((m: any) => ({
           name: m.name,
-          cardId: m.cardId || 'Thẻ TĐV-00123',
-          specialty: m.position || (isEn ? 'Certified Appraiser' : 'Thẩm định viên'),
-          avatar: m.avatar?.url || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
+          cardId: m.cardId || (isEn ? 'Certified Appraiser' : 'Thẩm định viên về giá'),
+          specialty: m.position || (isEn ? 'Practicing Valuer' : 'Thẩm định viên hành nghề'),
+          avatar: m.avatar?.url || (typeof m.avatar === 'string' ? m.avatar : ''),
         }))
-      : defaultAppraisers
+      : []
 
   return (
     <section id="about" data-screen-label="Vì sao chọn MHD" style={{ background: '#fff', padding: 'clamp(5rem,9vw,8.5rem) 0' }}>
@@ -309,14 +288,35 @@ export default function WhyUs({ data, teamMembers, currentLocale = 'vi' }: WhyUs
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={appraiser.avatar}
-                alt={appraiser.name}
-                width={42}
-                height={42}
-                loading="lazy"
-                style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-              />
+              {appraiser.avatar ? (
+                <img
+                  src={appraiser.avatar}
+                  alt={appraiser.name}
+                  width={42}
+                  height={42}
+                  loading="lazy"
+                  style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+              ) : (
+                <div
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '50%',
+                    background: 'var(--c-accent-light, #fff5f0)',
+                    color: 'var(--c-accent, #d94f0b)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    flexShrink: 0,
+                    border: '1px solid rgba(217,79,11,0.2)',
+                  }}
+                >
+                  {appraiser.name?.charAt(0) || 'M'}
+                </div>
+              )}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: '.88rem', fontWeight: 700, lineHeight: 1.4 }}>
                   {appraiser.name} · <span style={{ whiteSpace: 'nowrap' }}>{appraiser.cardId}</span>
