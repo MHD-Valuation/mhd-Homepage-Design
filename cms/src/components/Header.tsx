@@ -21,6 +21,7 @@ export default function Header({
   const [scrolled, setScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [menuOpen, setMobileMenuOpen] = useState(false)
+  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null)
   const [mega, setMega] = useState<string | null>(null)
   const [lastMega, setLastMega] = useState<string>('about')
   const [vw, setVw] = useState(1400)
@@ -34,6 +35,9 @@ export default function Header({
       setVw(w)
       if (m) {
         setMega(null)
+      } else {
+        setMobileMenuOpen(false)
+        setExpandedMobileMenu(null)
       }
     }
     onResize()
@@ -43,6 +47,7 @@ export default function Header({
       if (e.key === 'Escape') {
         setMega(null)
         setMobileMenuOpen(false)
+        setExpandedMobileMenu(null)
       }
     }
     window.addEventListener('keydown', onKey)
@@ -109,7 +114,13 @@ export default function Header({
   }
 
   const toggleMenu = () => setMobileMenuOpen(!menuOpen)
-  const closeMenu = () => setMobileMenuOpen(false)
+  const closeMenu = () => {
+    setMobileMenuOpen(false)
+    setExpandedMobileMenu(null)
+  }
+  const toggleMobileSubmenu = (key: string) => {
+    setExpandedMobileMenu((prev) => (prev === key ? null : key))
+  }
 
   const isDesktop = !isMobile
   const showVerifyBtn = vw >= 640
@@ -160,12 +171,14 @@ export default function Header({
   const defaultAboutSubs = isEn
     ? [
       { title: 'About MHD', description: 'Operations, vision, and professional standards', href: '/about' },
+      { title: 'Valuation Team', description: 'Certified practicing valuers licensed by MOF', href: '/about/doi-ngu' },
       { title: 'Credentials & Profile', description: 'Legal standing, personnel, and credentials', href: '/about/phap-ly' },
       { title: 'Partners & Clients', description: 'Commercial banks, corporations, and institutions', href: '/about/doi-tac' },
       { title: 'Careers', description: 'Career opportunities at MHD Valuation', href: '/tuyen-dung' },
     ]
     : [
       { title: 'Giới thiệu MHD', description: 'Quá trình hoạt động, định hướng và nguyên tắc nghề nghiệp', href: '/about' },
+      { title: 'Đội ngũ chuyên môn', description: 'Danh bạ thẩm định viên về giá thẻ Bộ Tài chính', href: '/about/doi-ngu' },
       { title: 'Hồ sơ năng lực', description: 'Pháp lý, nhân sự và kinh nghiệm thực hiện', href: '/about/phap-ly' },
       { title: 'Đối tác & khách hàng', description: 'Ngân hàng, doanh nghiệp và cơ quan nhà nước', href: '/about/doi-tac' },
       { title: 'Tuyển dụng', description: 'Vị trí đang tuyển tại MHD', href: '/tuyen-dung' },
@@ -262,6 +275,45 @@ export default function Header({
   const insightSubs = sanitizeSubs(defaultInsightSubs)
   const legalSubs = sanitizeSubs(defaultLegalSubs)
   const contactSubs = sanitizeSubs(defaultContactSubs)
+
+  const mobileNavSections = [
+    {
+      id: 'about',
+      title: itemAbout.title,
+      href: '/about',
+      items: aboutSubs,
+    },
+    {
+      id: 'services',
+      title: itemServices.title,
+      href: '/services/Dich-vu-Doanh-nghiep',
+      items: servicesSubs,
+    },
+    {
+      id: 'projects',
+      title: itemProjects.title,
+      href: '/projects',
+      items: projectsSubs,
+    },
+    {
+      id: 'insight',
+      title: itemInsight.title,
+      href: '/insights',
+      items: insightSubs,
+    },
+    {
+      id: 'legal',
+      title: itemLegal.title,
+      href: '/about/phap-ly',
+      items: legalSubs,
+    },
+    {
+      id: 'contact',
+      title: itemContact.title,
+      href: '/contact',
+      items: contactSubs,
+    },
+  ]
 
   const verifyBtnLabel = data?.verifyButton?.label || data?.verifyCertBtn?.label || (isEn ? 'Verify Certificate' : 'Tra cứu chứng thư')
   const verifyBtnUrl = cleanNavHref(data?.verifyButton?.href || data?.verifyCertBtn?.url || '/phap-ly/tra-cuu')
@@ -611,6 +663,7 @@ export default function Header({
             {showVerifyBtn && (
               <Link
                 href={verifyBtnUrl}
+                className="mhd-header-desktop-only"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -688,6 +741,7 @@ export default function Header({
 
             <Link
               href={requestBtnUrl}
+              className="mhd-header-request-btn"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -710,7 +764,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={toggleMenu}
-                aria-label="Mở menu"
+                aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'}
                 style={{
                   width: '40px',
                   height: '40px',
@@ -720,12 +774,25 @@ export default function Header({
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '5px',
+                  gap: menuOpen ? '0' : '5px',
+                  background: menuOpen ? 'var(--c-page,#f6f5f2)' : '#fff',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  transition: 'all .2s ease',
                 }}
               >
-                <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
-                <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
-                <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
+                {menuOpen ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                ) : (
+                  <>
+                    <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
+                    <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
+                    <span style={{ display: 'block', width: '16px', height: '2px', background: 'var(--c-ink,#16181c)' }} />
+                  </>
+                )}
               </button>
             )}
           </div>
@@ -1052,18 +1119,57 @@ export default function Header({
                   <div style={{ animation: 'mhdMenuSide .6s cubic-bezier(.16,1,.3,1) .12s both', background: 'var(--c-ink,#16181c)', color: '#fff', borderRadius: '12px', padding: '1.5rem', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', right: '-50px', top: '-50px', width: '160px', height: '160px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(var(--c-accent-rgb,217,79,10),.4),transparent 70%)', pointerEvents: 'none' }} />
                     <span style={{ position: 'relative', display: 'block', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--c-accent-dark,#f0956a)', marginBottom: '.6rem' }}>
-                      {itemServices.ctaCard?.tag || (isEn ? 'INITIAL CONSULTATION' : 'TRAO ĐỔI BAN ĐẦU')}
+                      {isEn ? 'INITIAL CONSULTATION' : 'TRAO ĐỔI BAN ĐẦU'}
                     </span>
                     <h4 style={{ position: 'relative', fontFamily: "'Be Vietnam Pro',sans-serif", fontWeight: 600, fontSize: '1.3rem', lineHeight: 1.2, marginBottom: '.5rem', color: '#fff' }}>
-                      {itemServices.ctaCard?.title || (isEn ? 'Get Valuation Quotation' : 'Nhận báo giá thẩm định')}
+                      {isEn ? 'Get Valuation Quotation' : 'Nhận báo giá thẩm định'}
                     </h4>
                     <p style={{ position: 'relative', fontSize: '.82rem', color: 'var(--c-ondark-muted,#b9bcc3)', marginBottom: '1.2rem', textWrap: 'pretty' }}>
-                      {itemServices.ctaCard?.description || (isEn ? 'Submit asset information. MHD confirms engagement requirements within 24 working hours.' : 'Gửi thông tin tài sản. MHD xác nhận yêu cầu trong 24 giờ làm việc.')}
+                      {isEn ? 'Submit asset information. MHD confirms engagement requirements within 24 working hours.' : 'Gửi thông tin tài sản. MHD xác nhận yêu cầu trong 24 giờ làm việc.'}
                     </p>
                     <div style={{ position: 'relative' }}>
-                      <Link href={cleanNavHref(itemServices.ctaCard?.buttonHref || '/contact#yeu-cau')} data-cta-dark="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: 'var(--c-accent,#d94f0a)', color: '#fff', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s cubic-bezier(.16,1,.3,1)' }}>
-                        {itemServices.ctaCard?.buttonLabel ? itemServices.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Get quotation' : 'Nhận báo giá')} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                      <Link href="/contact#yeu-cau" data-cta-dark="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: 'var(--c-accent,#d94f0a)', color: '#fff', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s cubic-bezier(.16,1,.3,1)' }}>
+                        {isEn ? 'Get quotation' : 'Nhận báo giá'}{' '}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                       </Link>
+                      <a
+                        href={`tel:${(data?.phone || '028 3515 3516').replace(/\s+/g, '')}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '.7rem',
+                          marginTop: '1.1rem',
+                          paddingTop: '1.1rem',
+                          borderTop: '1px solid rgba(255,255,255,.12)',
+                          color: '#fff',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: '34px',
+                            height: '34px',
+                            borderRadius: '50%',
+                            background: 'rgba(var(--c-accent-rgb,217,79,10),.2)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                          }}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0956a" strokeWidth="2">
+                            <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
+                          </svg>
+                        </span>
+                        <span>
+                          <span style={{ display: 'block', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--c-faint,#9a9fa6)' }}>
+                            {isEn ? 'Consulting Hotline' : 'HOTLINE TƯ VẤN'}
+                          </span>
+                          <span style={{ display: 'block', fontWeight: 700, fontSize: '1rem' }}>
+                            {data?.phone || '028 3515 3516'}
+                          </span>
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1105,7 +1211,7 @@ export default function Header({
                     ))}
                   </div>
                   <div style={{ animation: 'mhdMenuSide .6s cubic-bezier(.16,1,.3,1) .12s both', display: 'flex', flexDirection: 'column', gap: '.9rem' }}>
-                    <Link href={cleanNavHref(itemProjects.ctaCard?.buttonHref || '/projects')}
+                    <Link href="/projects"
                       style={{
                         display: 'block',
                         background: '#fff',
@@ -1118,25 +1224,25 @@ export default function Header({
                     >
                       <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
                         <img
-                          src={itemProjects.ctaCard?.image?.url || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'}
-                          alt={itemProjects.ctaCard?.title || (isEn ? 'Featured Case Study' : 'Hồ sơ chuyên đề')}
+                          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+                          alt={isEn ? 'Featured Case Study' : 'Hồ sơ chuyên đề'}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
                       </div>
                       <div style={{ padding: '1rem 1.1rem 1.1rem' }}>
                         <span style={{ fontSize: '.68rem', fontWeight: 700, letterSpacing: '.07em', textTransform: 'uppercase', color: 'var(--c-accent,#d94f0a)' }}>
-                          {itemProjects.ctaCard?.tag || (isEn ? 'CASE STUDY' : 'HỒ SƠ CHUYÊN ĐỀ')}
+                          {isEn ? 'CASE STUDY' : 'HỒ SƠ CHUYÊN ĐỀ'}
                         </span>
                         <div style={{ fontWeight: 700, fontSize: '.95rem', lineHeight: 1.35, margin: '.35rem 0 .35rem', textWrap: 'balance' }}>
-                          {itemProjects.ctaCard?.title || (isEn ? 'Enterprise Valuation for Capital Restructuring' : 'Thẩm định giá doanh nghiệp phục vụ tái cấu trúc vốn')}
+                          {isEn ? 'Enterprise Valuation for Capital Restructuring' : 'Thẩm định giá doanh nghiệp phục vụ tái cấu trúc vốn'}
                         </div>
                         <div style={{ fontSize: '.76rem', color: 'var(--c-faint,#8a8f96)' }}>
-                          {itemProjects.ctaCard?.subtitle || (isEn ? 'Corporate · Case Study' : 'Doanh nghiệp · Hồ sơ chuyên đề')}
+                          {isEn ? 'Corporate · Case Study' : 'Doanh nghiệp · Hồ sơ chuyên đề'}
                         </div>
                       </div>
                     </Link>
-                    <Link href={cleanNavHref(itemProjects.ctaCard?.buttonHref || '/projects')}
+                    <Link href="/projects"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -1152,7 +1258,7 @@ export default function Header({
                         transition: 'all .2s',
                       }}
                     >
-                      {itemProjects.ctaCard?.buttonLabel ? itemProjects.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'View projects' : 'Xem dự án')}{' '}
+                      {isEn ? 'View projects' : 'Xem dự án'}{' '}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                       </svg>
@@ -1197,7 +1303,7 @@ export default function Header({
                     ))}
                   </div>
                   <div style={{ animation: 'mhdMenuSide .6s cubic-bezier(.16,1,.3,1) .12s both', display: 'flex', flexDirection: 'column', gap: '.9rem' }}>
-                    <Link href={cleanNavHref(itemInsight.ctaCard?.buttonHref || '/insights')}
+                    <Link href="/insights"
                       style={{
                         display: 'block',
                         background: '#fff',
@@ -1210,25 +1316,25 @@ export default function Header({
                     >
                       <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
                         <img
-                          src={itemInsight.ctaCard?.image?.url || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80'}
-                          alt={itemInsight.ctaCard?.title || (isEn ? 'Market News' : 'Tin thị trường')}
+                          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+                          alt={isEn ? 'Market News' : 'Tin thị trường'}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
                       </div>
                       <div style={{ padding: '1rem 1.1rem 1.1rem' }}>
                         <span style={{ fontSize: '.68rem', fontWeight: 700, letterSpacing: '.07em', textTransform: 'uppercase', color: 'var(--c-accent,#d94f0a)' }}>
-                          {itemInsight.ctaCard?.tag || (isEn ? 'MARKET NEWS' : 'TIN THỊ TRƯỜNG')}
+                          {isEn ? 'MARKET NEWS' : 'TIN THỊ TRƯỜNG'}
                         </span>
                         <div style={{ fontWeight: 700, fontSize: '.95rem', lineHeight: 1.35, margin: '.35rem 0 .35rem', textWrap: 'balance' }}>
-                          {itemInsight.ctaCard?.title || (isEn ? 'Central HCMC Real Estate Price Movements Q3' : 'Biến động giá bất động sản khu vực trung tâm TP.HCM quý 3')}
+                          {isEn ? 'Central HCMC Real Estate Price Movements Q3' : 'Biến động giá bất động sản khu vực trung tâm TP.HCM quý 3'}
                         </div>
                         <div style={{ fontSize: '.76rem', color: 'var(--c-faint,#8a8f96)' }}>
-                          {itemInsight.ctaCard?.date || (isEn ? 'September 05, 2026' : '05 Tháng 9, 2026')}
+                          {isEn ? 'September 05, 2026' : '05 Tháng 9, 2026'}
                         </div>
                       </div>
                     </Link>
-                    <Link href={cleanNavHref(itemInsight.ctaCard?.buttonHref || '/insights')}
+                    <Link href="/insights"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -1244,7 +1350,7 @@ export default function Header({
                         transition: 'all .2s',
                       }}
                     >
-                      {itemInsight.ctaCard?.buttonLabel ? itemInsight.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Download report' : 'Tải báo cáo')}{' '}
+                      {isEn ? 'Download report' : 'Tải báo cáo'}{' '}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                       </svg>
@@ -1293,16 +1399,16 @@ export default function Header({
                       <div style={{ position: 'absolute', left: 0, right: 0, height: '2px', background: '#fff', boxShadow: '0 0 10px #fff', animation: 'mhdScan 2.8s ease-in-out infinite' }} />
                     </div>
                     <span style={{ display: 'block', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#fff', marginBottom: '.6rem' }}>
-                      {itemLegal.ctaCard?.tag || (isEn ? 'ONLINE VERIFICATION' : 'TRA CỨU TRỰC TUYẾN')}
+                      {isEn ? 'ONLINE VERIFICATION' : 'TRA CỨU TRỰC TUYẾN'}
                     </span>
                     <h4 style={{ fontFamily: "'Be Vietnam Pro',sans-serif", fontWeight: 600, fontSize: '1.3rem', lineHeight: 1.2, marginBottom: '.5rem', color: '#fff', maxWidth: '12ch' }}>
-                      {itemLegal.ctaCard?.title || (isEn ? 'Verify Certificate Details' : 'Đối chiếu thông tin chứng thư')}
+                      {isEn ? 'Verify Certificate Details' : 'Đối chiếu thông tin chứng thư'}
                     </h4>
                     <p style={{ fontSize: '.82rem', color: '#fff', marginBottom: '1.2rem', textWrap: 'pretty' }}>
-                      {itemLegal.ctaCard?.description || (isEn ? 'Scan QR code or enter certificate number to verify issuance on the MHD system.' : 'Quét mã QR hoặc nhập số chứng thư để đối chiếu thông tin phát hành trên hệ thống MHD.')}
+                      {isEn ? 'Scan QR code or enter certificate number to verify issuance on the MHD system.' : 'Quét mã QR hoặc nhập số chứng thư để đối chiếu thông tin phát hành trên hệ thống MHD.'}
                     </p>
-                    <Link href={cleanNavHref(itemLegal.ctaCard?.buttonHref || '/phap-ly/tra-cuu')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: '#fff', color: 'var(--c-ink,#16181c)', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s' }}>
-                      {itemLegal.ctaCard?.buttonLabel ? itemLegal.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Verify certificate' : 'Tra cứu chứng thư')}{' '}
+                    <Link href="/phap-ly/tra-cuu" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: '#fff', color: 'var(--c-ink,#16181c)', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s' }}>
+                      {isEn ? 'Verify certificate' : 'Tra cứu chứng thư'}{' '}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                     </Link>
                   </div>
@@ -1347,19 +1453,57 @@ export default function Header({
                   <div style={{ animation: 'mhdMenuSide .6s cubic-bezier(.16,1,.3,1) .12s both', background: 'var(--c-ink,#16181c)', color: '#fff', borderRadius: '12px', padding: '1.5rem', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', right: '-50px', top: '-50px', width: '160px', height: '160px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(var(--c-accent-rgb,217,79,10),.4),transparent 70%)', pointerEvents: 'none' }} />
                     <span style={{ position: 'relative', display: 'block', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--c-accent-dark,#f0956a)', marginBottom: '.6rem' }}>
-                      {itemContact.ctaCard?.tag || (isEn ? 'INTAKE' : 'TIẾP NHẬN YÊU CẦU')}
+                      {isEn ? 'INTAKE' : 'TIẾP NHẬN YÊU CẦU'}
                     </span>
                     <h4 style={{ position: 'relative', fontFamily: "'Be Vietnam Pro',sans-serif", fontWeight: 600, fontSize: '1.3rem', lineHeight: 1.2, marginBottom: '.5rem', color: '#fff' }}>
-                      {itemContact.ctaCard?.title || (isEn ? 'Submit Valuation Request' : 'Gửi yêu cầu thẩm định')}
+                      {isEn ? 'Submit Valuation Request' : 'Gửi yêu cầu thẩm định'}
                     </h4>
                     <p style={{ position: 'relative', fontSize: '.82rem', color: 'var(--c-ondark-muted,#b9bcc3)', marginBottom: '1.2rem', textWrap: 'pretty' }}>
-                      {itemContact.ctaCard?.description || (isEn ? 'MHD will contact you to confirm details, dossier, and execution steps.' : 'MHD sẽ liên hệ để xác nhận thông tin, hồ sơ và các bước thực hiện.')}
+                      {isEn ? 'MHD will contact you to confirm details, dossier, and execution steps.' : 'MHD sẽ liên hệ để xác nhận thông tin, hồ sơ và các bước thực hiện.'}
                     </p>
                     <div style={{ position: 'relative' }}>
-                      <Link href={cleanNavHref(itemContact.ctaCard?.buttonHref || '/contact#yeu-cau')} data-cta-dark="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: 'var(--c-accent,#d94f0a)', color: '#fff', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s cubic-bezier(.16,1,.3,1)' }}>
-                        {itemContact.ctaCard?.buttonLabel ? itemContact.ctaCard.buttonLabel.replace('→', '').trim() : (isEn ? 'Submit request' : 'Gửi yêu cầu')}{' '}
+                      <Link href="/contact#yeu-cau" data-cta-dark="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem', background: 'var(--c-accent,#d94f0a)', color: '#fff', fontWeight: 700, fontSize: '.86rem', padding: '.8rem 1.2rem', borderRadius: '6px', transition: 'all .2s cubic-bezier(.16,1,.3,1)' }}>
+                        {isEn ? 'Submit request' : 'Gửi yêu cầu'}{' '}
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                       </Link>
+                      <a
+                        href={`tel:${(data?.phone || '028 3515 3516').replace(/\s+/g, '')}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '.7rem',
+                          marginTop: '1.1rem',
+                          paddingTop: '1.1rem',
+                          borderTop: '1px solid rgba(255,255,255,.12)',
+                          color: '#fff',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: '34px',
+                            height: '34px',
+                            borderRadius: '50%',
+                            background: 'rgba(var(--c-accent-rgb,217,79,10),.2)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                          }}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0956a" strokeWidth="2">
+                            <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z" />
+                          </svg>
+                        </span>
+                        <span>
+                          <span style={{ display: 'block', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--c-faint,#9a9fa6)' }}>
+                            {isEn ? 'Consulting Hotline' : 'HOTLINE TƯ VẤN'}
+                          </span>
+                          <span style={{ display: 'block', fontWeight: 700, fontSize: '1rem' }}>
+                            {data?.phone || '028 3515 3516'}
+                          </span>
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1373,10 +1517,15 @@ export default function Header({
                       <path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7z" />
                     </svg>
                     <span>
-                      {data?.licenseNotice || (isEn ? 'Certified for valuation business services · Code 000/GCN-BTC' : 'Được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá · Mã số 000/GCN-BTC')}
+                      {data?.licenseNotice || (isEn ? 'Certified for valuation business services · Code ' : 'Được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá · Mã số ')}
+                      <span style={{ whiteSpace: 'nowrap' }}>000/GCN-BTC</span>
                     </span>
                   </span>
-                  <a href={`tel:${(data?.phone || '028 3515 3516').replace(/\s+/g, '')}`} style={{ fontWeight: 700, color: 'var(--c-ink,#16181c)' }}>
+                  <a
+                    href={`tel:${(data?.phone || '028 3515 3516').replace(/\s+/g, '')}`}
+                    className="mhd-header-hotline-link"
+                    style={{ fontWeight: 700, color: 'var(--c-ink,#16181c)', textDecoration: 'none', transition: 'color .2s' }}
+                  >
                     Hotline: {data?.phone || '028 3515 3516'}
                   </a>
                 </div>
@@ -1399,24 +1548,148 @@ export default function Header({
               overflowY: 'auto',
             }}
           >
-            <a href="/about" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemAbout.title}</span>
-            </a>
-            <a href="/services/Dich-vu-Doanh-nghiep" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemServices.title}</span>
-            </a>
-            <a href="/projects" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemProjects.title}</span>
-            </a>
-            <a href="/insights" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemInsight.title}</span>
-            </a>
-            <a href="/about/phap-ly" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemLegal.title}</span>
-            </a>
-            <a href="/contact" onClick={closeMenu} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.9rem 0', borderBottom: '1px solid var(--c-subtle,#eeece7)', fontWeight: 700 }}>
-              <span>{itemContact.title}</span>
-            </a>
+            {mobileNavSections.map((sec) => {
+              const isExpanded = expandedMobileMenu === sec.id
+              return (
+                <div key={sec.id} style={{ borderBottom: '1px solid var(--c-subtle,#eeece7)' }}>
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSubmenu(sec.id)}
+                    aria-expanded={isExpanded}
+                    aria-controls={`mobile-sub-${sec.id}`}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '.9rem 0',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      fontWeight: 700,
+                      fontSize: '.98rem',
+                      color: isExpanded ? 'var(--c-accent,#d94f0a)' : 'var(--c-ink,#16181c)',
+                      transition: 'color .18s ease',
+                    }}
+                  >
+                    <span>{sec.title}</span>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '50%',
+                        background: isExpanded ? 'rgba(217,79,10,0.1)' : 'var(--c-page,#f6f5f2)',
+                        color: isExpanded ? 'var(--c-accent,#d94f0a)' : 'var(--c-muted2,#4a5058)',
+                        transition: 'all .2s ease',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{
+                          transition: 'transform .25s cubic-bezier(0.16, 1, 0.3, 1)',
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                        }}
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </span>
+                  </button>
+
+                  {/* Submenu Expansion Panel */}
+                  {isExpanded && (
+                    <div
+                      id={`mobile-sub-${sec.id}`}
+                      className="mhd-mobile-submenu"
+                      style={{
+                        padding: '.45rem .5rem .75rem',
+                        marginBottom: '.6rem',
+                        background: 'var(--c-page,#f6f5f2)',
+                        borderRadius: '10px',
+                        borderLeft: '3px solid var(--c-accent,#d94f0a)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '.4rem',
+                      }}
+                    >
+                      {sec.items.map((sub: any, idx: number) => (
+                        <Link
+                          key={sub.href || idx}
+                          href={sub.href}
+                          onClick={closeMenu}
+                          className="mhd-mobile-sublink"
+                          style={{
+                            display: 'block',
+                            padding: '.65rem .75rem',
+                            background: '#ffffff',
+                            borderRadius: '8px',
+                            textDecoration: 'none',
+                            border: '1px solid rgba(0,0,0,0.04)',
+                            boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              gap: '.5rem',
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontSize: '.88rem',
+                                fontWeight: 650,
+                                color: 'var(--c-ink,#16181c)',
+                                lineHeight: 1.35,
+                              }}
+                            >
+                              {sub.title}
+                            </span>
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="var(--c-accent,#d94f0a)"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              style={{ flexShrink: 0, opacity: 0.8 }}
+                            >
+                              <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                          </div>
+                          {sub.description && (
+                            <div
+                              style={{
+                                fontSize: '.76rem',
+                                color: 'var(--c-muted,#5f656d)',
+                                lineHeight: 1.35,
+                                marginTop: '.2rem',
+                              }}
+                            >
+                              {sub.description}
+                            </div>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.8rem', margin: '1rem 0 .5rem', padding: '.6rem', background: 'var(--c-page,#f6f5f2)', borderRadius: '8px' }}>
               <span style={{ fontSize: '.84rem', color: 'var(--c-muted,#5f656d)', fontWeight: 600 }}>{isEn ? 'Language:' : 'Ngôn ngữ:'}</span>
               <button

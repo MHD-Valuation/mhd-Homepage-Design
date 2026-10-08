@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,6 +19,26 @@ export const Media: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('media')
+        revalidateCacheTag('partners')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('media')
+        revalidateCacheTag('partners')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   upload: {
     staticDir: path.resolve(dirname, '../../media'),

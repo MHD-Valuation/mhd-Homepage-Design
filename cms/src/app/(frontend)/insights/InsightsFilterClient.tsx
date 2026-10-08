@@ -58,7 +58,11 @@ export default function InsightsFilterClient({ currentLocale = 'vi', initialPost
     slug: doc.slug,
     cat: typeof doc.category === 'object' && doc.category ? doc.category.slug : 'thi-truong',
     img: doc.coverImage?.url || doc.featuredImage?.url || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-    date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN') : '01/09/2026',
+    date: doc.publishedAt
+      ? new Date(doc.publishedAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN')
+      : doc.createdAt
+        ? new Date(doc.createdAt).toLocaleDateString(isEn ? 'en-US' : 'vi-VN')
+        : new Date().toLocaleDateString(isEn ? 'en-US' : 'vi-VN'),
     author: doc.author || (isEn ? 'MHD Research' : 'Phòng Nghiên cứu thị trường'),
     tags: doc.tags && Array.isArray(doc.tags) && doc.tags.length > 0 ? doc.tags : [isEn ? 'Valuation' : 'Thẩm định giá'],
     title: doc.title,
@@ -340,6 +344,7 @@ export default function InsightsFilterClient({ currentLocale = 'vi', initialPost
         }}
       >
         <div
+          className="mhd-insights-layout-grid"
           style={{
             maxWidth: '1240px',
             margin: '0 auto',

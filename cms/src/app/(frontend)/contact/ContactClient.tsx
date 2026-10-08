@@ -8,6 +8,10 @@ interface Props {
     phone?: string
     email?: string
     address?: string
+    companyName?: string
+    hoursWeekday?: string
+    hoursWeekend?: string
+    mapUrl?: string
   }
 }
 
@@ -20,8 +24,12 @@ function formatFileSize(bytes: number) {
 export default function ContactClient({ currentLocale = 'vi', contactInfo }: Props) {
   const isEn = currentLocale === 'en'
   const displayPhone = contactInfo?.phone || '028 3515 3516'
-  const displayEmail = contactInfo?.email || 'info@mhd.com.vn'
-  const displayAddress = contactInfo?.address || (isEn ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')
+  const displayEmail = contactInfo?.email || 'contact@mhd.com.vn'
+  const displayAddress = contactInfo?.address || (isEn ? 'Ho Chi Minh City, Vietnam' : 'Số 00 Đường ABC, Phường X, TP. Hồ Chí Minh')
+  const displayCompanyName = contactInfo?.companyName || (isEn ? 'MHD Valuation Co., Ltd.' : 'Công ty TNHH Thẩm định giá MHD')
+  const displayHoursWeekday = contactInfo?.hoursWeekday || (isEn ? 'Monday – Friday: 8:00 – 17:30' : 'Thứ 2 – Thứ 6: 8:00 – 17:30')
+  const displayHoursWeekend = contactInfo?.hoursWeekend || (isEn ? 'Saturday: 8:00 – 12:00' : 'Thứ 7: 8:00 – 12:00')
+  const displayMapUrl = contactInfo?.mapUrl || 'https://maps.google.com/?q=TP.+Ho+Chi+Minh'
 
   const [formType, setFormType] = useState<'tham-dinh' | 'bao-gia'>('tham-dinh')
   const [fullName, setFullName] = useState('')
@@ -1079,7 +1087,7 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
                   {isEn ? 'Headquarters' : 'Trụ sở chính'}
                 </span>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: 0 }}>
-                  {isEn ? 'MHD Valuation Co., Ltd.' : 'Công ty TNHH Thẩm định giá MHD'}
+                  {displayCompanyName}
                 </h3>
               </div>
 
@@ -1095,7 +1103,7 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
                     {isEn ? 'Address' : 'Địa chỉ'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.95rem', fontWeight: 600, marginTop: '.15rem', lineHeight: 1.5 }}>
-                    {isEn ? 'Ho Chi Minh City, Vietnam' : 'Số 00 Đường ABC, Phường X, TP. Hồ Chí Minh'}
+                    {displayAddress}
                   </span>
                 </span>
               </div>
@@ -1112,8 +1120,8 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
                     {isEn ? 'Operating Hours' : 'Giờ làm việc'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.95rem', fontWeight: 600, marginTop: '.15rem', lineHeight: 1.5 }}>
-                    {isEn ? 'Monday – Friday: 8:00 – 17:30' : 'Thứ 2 – Thứ 6: 8:00 – 17:30'}<br />
-                    {isEn ? 'Saturday: 8:00 – 12:00' : 'Thứ 7: 8:00 – 12:00'}
+                    {displayHoursWeekday}<br />
+                    {displayHoursWeekend}
                   </span>
                 </span>
               </div>
@@ -1153,7 +1161,7 @@ export default function ContactClient({ currentLocale = 'vi', contactInfo }: Pro
 
               <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap', marginTop: '.4rem' }}>
                 <a
-                  href="https://maps.google.com/?q=TP.+Ho+Chi+Minh"
+                  href={displayMapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

@@ -1,10 +1,27 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'name',
     group: 'Dữ liệu & Insight',
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('posts')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('posts')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   fields: [
     {

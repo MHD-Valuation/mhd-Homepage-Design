@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -9,6 +10,24 @@ export const Partners: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('partners')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('partners')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   fields: [
     {
@@ -37,8 +56,10 @@ export const Partners: CollectionConfig = {
       label: 'Phân loại đối tác',
       defaultValue: 'bank',
       options: [
-        { label: 'Ngân hàng & Tổ chức tín dụng', value: 'bank' },
-        { label: 'Tập đoàn & Doanh nghiệp', value: 'corporate' },
+        { label: 'Ngân hàng & tổ chức tín dụng', value: 'bank' },
+        { label: 'Doanh nghiệp', value: 'corporate' },
+        { label: 'Khu vực công', value: 'public' },
+        { label: 'Nhà đầu tư', value: 'investor' },
         { label: 'Tổ chức tài chính & Kiểm toán', value: 'audit' },
       ],
       required: true,

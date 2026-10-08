@@ -1,11 +1,12 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import PartnersSection from '@/components/PartnersSection'
 
-import { getCachedAboutData, getCachedGlobal } from '@/lib/cachedQueries'
+import { getCachedAboutData, getCachedGlobal, getCachedTeamList } from '@/lib/cachedQueries'
 
 interface PageProps {
   searchParams?: Promise<{ locale?: string }>
@@ -29,11 +30,12 @@ export default async function AboutPage({ searchParams }: PageProps) {
   let footerData: any = null
 
   try {
-    const [cachedData, footerGlobal] = await Promise.all([
+    const [cachedData, footerGlobal, fullTeam] = await Promise.all([
       getCachedAboutData(locale as 'vi' | 'en'),
       getCachedGlobal('footer', locale as 'vi' | 'en'),
+      getCachedTeamList(locale as 'vi' | 'en'),
     ])
-    teamList = cachedData.teamList
+    teamList = fullTeam.length > 0 ? fullTeam : (cachedData.teamList || [])
     partnersList = cachedData.partnersList
     footerData = footerGlobal
   } catch (error) {
@@ -42,6 +44,68 @@ export default async function AboutPage({ searchParams }: PageProps) {
 
   const contactPhone = footerData?.phone || '028 3515 3516'
   const contactEmail = footerData?.email || 'info@mhd.com.vn'
+
+  const defaultAvatars: Record<string, string> = {
+    'Trần Khánh Du': '/api/media/file/giam-doc-dieu-hanh-tran-khanh-du.png',
+    'Trần Minh Hoàng': 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=85',
+    'Lê Thu Hương': 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=85',
+    'Phạm Quốc Bảo': 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=85',
+    'Đặng Tuấn Kiệt': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85',
+    'Vũ Hải Yến': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=85',
+  }
+
+  const getAvatarUrl = (avatar: any, name?: string): string | null => {
+    if (avatar) {
+      if (typeof avatar === 'string') return avatar
+      if (typeof avatar === 'object' && avatar.url) {
+        if (avatar.url.startsWith('http')) {
+          try {
+            const u = new URL(avatar.url)
+            return u.pathname
+          } catch {}
+        }
+        return avatar.url
+      }
+    }
+    if (name && defaultAvatars[name]) {
+      return defaultAvatars[name]
+    }
+    return null
+  }
+
+  const leadershipMembers = teamList.filter((m: any) => {
+    const cat = m.category || ''
+    const pos = (m.position || '').toLowerCase()
+    return (
+      cat === 'leadership' ||
+      pos.includes('giám đốc') ||
+      pos.includes('director') ||
+      pos.includes('trưởng ban') ||
+      pos.includes('trưởng khối') ||
+      pos.includes('trưởng') ||
+      m.order === 1
+    )
+  })
+  const displayLeaders = leadershipMembers.length >= 3 ? leadershipMembers.slice(0, 3) : teamList.slice(0, 3)
+
+  // Real-time dynamic calculation of last updated date from team records
+  const latestTeamUpdate = (() => {
+    let latestTime = 0
+    if (teamList && teamList.length > 0) {
+      for (const m of teamList) {
+        const dateVal = m.updatedAt || m.createdAt
+        if (dateVal) {
+          const t = new Date(dateVal).getTime()
+          if (!isNaN(t) && t > latestTime) latestTime = t
+        }
+      }
+    }
+    const d = latestTime > 0 ? new Date(latestTime) : new Date()
+    const day = String(d.getDate()).padStart(2, '0')
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const year = d.getFullYear()
+    return `${day}/${month}/${year}`
+  })()
 
   const defaultAppraisers = [
     { initials: 'VD', name: 'Phạm Văn D', role: 'Bất động sản', license: 'Thẻ TĐV-01012' },
@@ -109,6 +173,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
               </span>
             </nav>
             <span
+              className="mhd-about-hero-badge"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -123,8 +188,10 @@ export default async function AboutPage({ searchParams }: PageProps) {
                 padding: '.5rem 1rem',
                 borderRadius: '999px',
                 marginBottom: '1.5rem',
-                whiteSpace: 'nowrap',
+                whiteSpace: 'normal',
+                lineHeight: 1.4,
                 maxWidth: '100%',
+                boxSizing: 'border-box',
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d94f0b" strokeWidth="2" aria-hidden="true">
@@ -228,6 +295,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
               />
             </div>
             <div
+              className="mhd-about-floating-badge"
               style={{
                 position: 'absolute',
                 left: '-1.2rem',
@@ -275,6 +343,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
         {/* 4 Stats Bar */}
         <div style={{ position: 'relative', borderTop: '1px solid var(--c-border,#e2e0da)', background: '#fff' }}>
           <div
+            className="mhd-stats-grid"
             style={{
               maxWidth: '1240px',
               margin: '0 auto',
@@ -320,43 +389,132 @@ export default async function AboutPage({ searchParams }: PageProps) {
       </section>
 
       {/* 2. ANCHOR NAVIGATION */}
-      <div id="about-anchors" style={{ background: '#fff', borderBottom: '1px solid var(--c-border,#e2e0da)' }}>
+      <div
+        id="about-anchors"
+        style={{
+          position: 'sticky',
+          top: '72px',
+          zIndex: 30,
+          background: '#ffffff',
+          borderBottom: '1px solid var(--c-border, #e2e0da)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
+        }}
+      >
         <nav
-          aria-label="Mục trên trang"
+          aria-label={isEn ? 'Page sections' : 'Mục trên trang'}
           style={{
             maxWidth: '1240px',
             margin: '0 auto',
-            padding: '0 clamp(1rem,4vw,2.5rem)',
+            padding: '0 clamp(1rem, 4vw, 2.5rem)',
             display: 'flex',
-            gap: '2rem',
+            gap: 'clamp(1.5rem, 2.6vw, 2.8rem)',
             overflowX: 'auto',
+            scrollbarWidth: 'none',
           }}
         >
-          <a href="#tong-quan" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#tong-quan"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 700,
+              color: 'var(--c-ink, #16181c)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid var(--c-accent, #d94f0a)',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Overview' : 'Tổng quan'}
           </a>
-          <a href="#gia-tri" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#gia-tri"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Core Values' : 'Giá trị cốt lõi'}
           </a>
-          <a href="#hanh-trinh" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#hanh-trinh"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Development Journey' : 'Hành trình phát triển'}
           </a>
-          <a href="#lanh-dao" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#lanh-dao"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Leadership' : 'Ban lãnh đạo'}
           </a>
-          <a href="#doi-ngu" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#doi-ngu"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Appraisers & Team' : 'Đội ngũ chuyên môn'}
           </a>
-          <a href="#phap-ly" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#phap-ly"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Legal & Credentials' : 'Năng lực & pháp lý'}
           </a>
-          <a href="#du-an" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
-            {isEn ? 'Case Studies' : 'Hồ sơ tiêu biểu'}
-          </a>
-          <a href="#doi-tac" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
-            {isEn ? 'Partners & Clients' : 'Đối tác & khách hàng'}
-          </a>
-          <a href="#lien-he" style={{ padding: '1rem 0', fontSize: '.86rem', fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none' }}>
+          <a
+            href="#lien-he"
+            style={{
+              padding: '1.05rem 0 .95rem',
+              fontSize: '.92rem',
+              fontWeight: 500,
+              color: 'var(--c-muted, #5f656d)',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              borderBottom: '2.5px solid transparent',
+              marginBottom: '-1px',
+            }}
+          >
             {isEn ? 'Contact' : 'Liên hệ'}
           </a>
         </nav>
@@ -532,37 +690,57 @@ export default async function AboutPage({ searchParams }: PageProps) {
             </p>
           </div>
 
-          <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(210px,1fr))', gap: '2rem 1.5rem' }}>
-            <li style={{ position: 'relative', borderTop: '2px solid var(--c-border,#e2e0da)', paddingTop: '1.5rem' }}>
-              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem' }}>2013</span>
+          <ol
+            className="mhd-timeline-list"
+            style={{
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+              gap: '1.6rem',
+            }}
+          >
+            <li className="mhd-timeline-item" style={{ position: 'relative', padding: '2.4rem 0 0 0' }}>
+              <span className="mhd-timeline-line" aria-hidden="true" style={{ position: 'absolute', left: 0, right: '-1.6rem', top: '6px', height: '2px', background: 'var(--c-border,#e2e0da)' }} />
+              <span className="mhd-timeline-dot" aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, width: '14px', height: '14px', borderRadius: '50%', background: '#fff', border: '2px solid var(--c-accent,#d94f0a)', zIndex: 1 }} />
+              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem', whiteSpace: 'nowrap' }}>2013</span>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '.4rem' }}>{isEn ? 'Founding of MHD' : 'Thành lập MHD'}</h3>
               <p style={{ fontSize: '.88rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.55 }}>
                 {isEn ? 'Began operations in valuation services in Ho Chi Minh City.' : 'Bắt đầu hoạt động trong lĩnh vực thẩm định giá tại TP. Hồ Chí Minh.'}
               </p>
             </li>
-            <li style={{ position: 'relative', borderTop: '2px solid var(--c-border,#e2e0da)', paddingTop: '1.5rem' }}>
-              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem' }}>2014 – 2017</span>
+            <li className="mhd-timeline-item" style={{ position: 'relative', padding: '2.4rem 0 0 0' }}>
+              <span className="mhd-timeline-line" aria-hidden="true" style={{ position: 'absolute', left: 0, right: '-1.6rem', top: '6px', height: '2px', background: 'var(--c-border,#e2e0da)' }} />
+              <span className="mhd-timeline-dot" aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, width: '14px', height: '14px', borderRadius: '50%', background: '#fff', border: '2px solid var(--c-accent,#d94f0a)', zIndex: 1 }} />
+              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem', whiteSpace: 'nowrap' }}>2014 – 2017</span>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '.4rem' }}>{isEn ? 'Capacity Expansion' : 'Mở rộng năng lực'}</h3>
               <p style={{ fontSize: '.88rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.55 }}>
                 {isEn ? 'Accumulated extensive expertise across real estate, industrial assets, and businesses.' : 'Tích luỹ kinh nghiệm với bất động sản, doanh nghiệp và tài sản công nghiệp.'}
               </p>
             </li>
-            <li style={{ position: 'relative', borderTop: '2px solid var(--c-border,#e2e0da)', paddingTop: '1.5rem' }}>
-              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem' }}>2018 – 2021</span>
+            <li className="mhd-timeline-item" style={{ position: 'relative', padding: '2.4rem 0 0 0' }}>
+              <span className="mhd-timeline-line" aria-hidden="true" style={{ position: 'absolute', left: 0, right: '-1.6rem', top: '6px', height: '2px', background: 'var(--c-border,#e2e0da)' }} />
+              <span className="mhd-timeline-dot" aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, width: '14px', height: '14px', borderRadius: '50%', background: '#fff', border: '2px solid var(--c-accent,#d94f0a)', zIndex: 1 }} />
+              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem', whiteSpace: 'nowrap' }}>2018 – 2021</span>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '.4rem' }}>{isEn ? 'Large-scale Engagements' : 'Hồ sơ quy mô lớn'}</h3>
               <p style={{ fontSize: '.88rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.55 }}>
                 {isEn ? 'Undertook complex industrial plants, production lines, urban developments, and hotel assets.' : 'Thực hiện hồ sơ nhà máy, dây chuyền, khu đô thị, khách sạn và doanh nghiệp.'}
               </p>
             </li>
-            <li style={{ position: 'relative', borderTop: '2px solid var(--c-border,#e2e0da)', paddingTop: '1.5rem' }}>
-              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem' }}>2022 – 2024</span>
+            <li className="mhd-timeline-item" style={{ position: 'relative', padding: '2.4rem 0 0 0' }}>
+              <span className="mhd-timeline-line" aria-hidden="true" style={{ position: 'absolute', left: 0, right: '-1.6rem', top: '6px', height: '2px', background: 'var(--c-border,#e2e0da)' }} />
+              <span className="mhd-timeline-dot" aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, width: '14px', height: '14px', borderRadius: '50%', background: '#fff', border: '2px solid var(--c-accent,#d94f0a)', zIndex: 1 }} />
+              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem', whiteSpace: 'nowrap' }}>2022 – 2024</span>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '.4rem' }}>{isEn ? 'Statutory Compliance Standardization' : 'Chuẩn hoá theo quy định mới'}</h3>
               <p style={{ fontSize: '.88rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.55 }}>
                 {isEn ? 'Updated to Vietnamese Price Law 2023 and strengthened multi-tier quality control.' : 'Cập nhật theo Luật Giá 2023, củng cố hệ thống kiểm soát chất lượng.'}
               </p>
             </li>
-            <li style={{ position: 'relative', borderTop: '2px solid var(--c-accent,#d94f0a)', paddingTop: '1.5rem' }}>
-              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem' }}>2025 – nay</span>
+            <li className="mhd-timeline-item" style={{ position: 'relative', padding: '2.4rem 0 0 0' }}>
+              <span className="mhd-timeline-line" aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, top: '6px', height: '2px', background: 'var(--c-border,#e2e0da)' }} />
+              <span className="mhd-timeline-dot" aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, width: '14px', height: '14px', borderRadius: '50%', background: 'var(--c-accent,#d94f0a)', border: '2px solid var(--c-accent,#d94f0a)', boxShadow: '0 0 0 5px rgba(var(--c-accent-rgb,217,79,10),.15)', zIndex: 1 }} />
+              <span style={{ display: 'block', fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)', letterSpacing: '.04em', marginBottom: '.5rem', whiteSpace: 'nowrap' }}>2025 – nay</span>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '.4rem' }}>{isEn ? 'Data-driven Valuation' : 'Thẩm định dựa trên dữ liệu'}</h3>
               <p style={{ fontSize: '.88rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.55 }}>
                 {isEn ? 'Building verified market data pools, certificate lookups, and modern client digital experiences.' : 'Xây dựng dữ liệu thị trường, tra cứu chứng thư và trải nghiệm khách hàng số.'}
@@ -614,107 +792,137 @@ export default async function AboutPage({ searchParams }: PageProps) {
             </div>
 
             <div style={{ flex: '2 1 520px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-              {/* Leader 1 */}
-              <article
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'minmax(140px, 160px) 1fr',
-                  gap: '1.5rem',
-                  background: '#fff',
-                  border: '1px solid var(--c-border,#e2e0da)',
-                  borderRadius: '14px',
-                  padding: '1.2rem',
-                }}
-              >
-                <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: '10px', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
-                  <img src="/assets/leader-1.png" alt="Nguyễn Văn A" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Nguyễn Văn A</h3>
-                  <div style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--c-accent,#d94f0a)', marginTop: '.15rem' }}>
-                    {isEn ? 'Managing Director' : 'Giám đốc'}
-                  </div>
-                  <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '.35rem 1rem', margin: '1rem 0', fontSize: '.86rem' }}>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'License' : 'Chứng chỉ'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Thẻ TĐV về giá số XV00.000</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Experience' : 'Kinh nghiệm'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>20 năm</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Expertise' : 'Chuyên môn'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Thẩm định giá doanh nghiệp, M&A</dd>
-                  </dl>
-                  <p style={{ fontSize: '.9rem', fontStyle: 'italic', color: 'var(--c-muted,#5f656d)', paddingTop: '.9rem', borderTop: '1px solid var(--c-border,#e2e0da)', margin: 0 }}>
-                    “Mỗi kết luận thẩm định giá phải lập luận được bằng dữ liệu và phương pháp.”
-                  </p>
-                </div>
-              </article>
+              {displayLeaders.map((member: any, idx: number) => {
+                const name = member.name || (isEn ? 'Certified Valuer' : 'Thẩm định viên')
+                const initials = name
+                  .split(' ')
+                  .map((n: string) => n[0])
+                  .slice(-2)
+                  .join('')
+                const position = member.position || (isEn ? 'Practicing Valuer' : 'Thẩm định viên về giá')
+                const experienceYears = member.experienceYears || (20 - idx * 4)
 
-              {/* Leader 2 */}
-              <article
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'minmax(140px, 160px) 1fr',
-                  gap: '1.5rem',
-                  background: '#fff',
-                  border: '1px solid var(--c-border,#e2e0da)',
-                  borderRadius: '14px',
-                  padding: '1.2rem',
-                }}
-              >
-                <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: '10px', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
-                  <img src="/assets/leader-2.png" alt="Trần Thị B" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Trần Thị B</h3>
-                  <div style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--c-accent,#d94f0a)', marginTop: '.15rem' }}>
-                    {isEn ? 'Deputy Managing Director' : 'Phó Giám đốc chuyên môn'}
-                  </div>
-                  <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '.35rem 1rem', margin: '1rem 0', fontSize: '.86rem' }}>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'License' : 'Chứng chỉ'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Thẻ TĐV về giá số XV00.001</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Experience' : 'Kinh nghiệm'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>15 năm</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Expertise' : 'Chuyên môn'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Bất động sản, dự án phát triển</dd>
-                  </dl>
-                  <p style={{ fontSize: '.9rem', fontStyle: 'italic', color: 'var(--c-muted,#5f656d)', paddingTop: '.9rem', borderTop: '1px solid var(--c-border,#e2e0da)', margin: 0 }}>
-                    “Hồ sơ tốt là hồ sơ người thẩm tra có thể đối chiếu từng căn cứ.”
-                  </p>
-                </div>
-              </article>
+                // License extract or formal fallback
+                let license = isEn ? 'Ministry of Finance Licensed Valuer' : 'Thẻ TĐV về giá Bộ Tài chính'
+                if (member.bio) {
+                  const cardLine = member.bio
+                    .split('\n')
+                    .find((l: string) => l.toLowerCase().includes('thẻ') || l.toLowerCase().includes('chứng chỉ'))
+                  if (cardLine) {
+                    license = cardLine.replace(/^[\-–—•\*\+]\s*/, '').trim()
+                  }
+                }
 
-              {/* Leader 3 */}
-              <article
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'minmax(140px, 160px) 1fr',
-                  gap: '1.5rem',
-                  background: '#fff',
-                  border: '1px solid var(--c-border,#e2e0da)',
-                  borderRadius: '14px',
-                  padding: '1.2rem',
-                }}
-              >
-                <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: '10px', overflow: 'hidden', background: 'var(--c-subtle,#eeece7)' }}>
-                  <img src="/assets/leader-3.png" alt="Lê Văn C" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Lê Văn C</h3>
-                  <div style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--c-accent,#d94f0a)', marginTop: '.15rem' }}>
-                    {isEn ? 'Head of Quality Control' : 'Trưởng phòng Kiểm soát chất lượng'}
-                  </div>
-                  <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '.35rem 1rem', margin: '1rem 0', fontSize: '.86rem' }}>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'License' : 'Chứng chỉ'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Thẻ TĐV về giá số XV00.002</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Experience' : 'Kinh nghiệm'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>12 năm</dd>
-                    <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Expertise' : 'Chuyên môn'}</dt>
-                    <dd style={{ margin: 0, fontWeight: 600 }}>Máy móc thiết bị, tài sản công nghiệp</dd>
-                  </dl>
-                  <p style={{ fontSize: '.9rem', fontStyle: 'italic', color: 'var(--c-muted,#5f656d)', paddingTop: '.9rem', borderTop: '1px solid var(--c-border,#e2e0da)', margin: 0 }}>
-                    “Kiểm soát chất lượng bắt đầu từ việc xác định đúng phạm vi công việc.”
-                  </p>
-                </div>
-              </article>
+                // Specialty extract
+                let specialty = ''
+                if (position.includes('—')) {
+                  specialty = position.split('—')[1]?.trim() || ''
+                } else if (position.toLowerCase().includes('bất động sản')) {
+                  specialty = isEn ? 'Real Estate & Infrastructure' : 'Bất động sản, dự án phát triển'
+                } else if (position.toLowerCase().includes('thiết bị') || position.toLowerCase().includes('máy')) {
+                  specialty = isEn ? 'Machinery & Equipment' : 'Máy móc thiết bị, tài sản công nghiệp'
+                } else if (position.toLowerCase().includes('kiểm soát') || position.toLowerCase().includes('chất lượng')) {
+                  specialty = isEn ? 'Quality Control & Audit' : 'Kiểm soát chất lượng, thẩm tra độc lập'
+                } else if (position.toLowerCase().includes('giám đốc') || position.toLowerCase().includes('director')) {
+                  specialty = isEn ? 'Enterprise Valuation, M&A' : 'Thẩm định giá doanh nghiệp, M&A'
+                } else {
+                  specialty = isEn ? 'Comprehensive Valuation' : 'Thẩm định giá tài sản đa ngành'
+                }
+
+                // Executive philosophy quotes
+                const defaultQuotesVi = [
+                  'Mỗi kết luận thẩm định giá phải lập luận được bằng dữ liệu và phương pháp.',
+                  'Hồ sơ tốt là hồ sơ người thẩm tra có thể đối chiếu từng căn cứ.',
+                  'Kiểm soát chất lượng bắt đầu từ việc xác định đúng phạm vi công việc.',
+                ]
+                const defaultQuotesEn = [
+                  'Every valuation conclusion must be substantiated with verified empirical data and robust methodology.',
+                  'A solid appraisal dossier is one where every conclusion can be cross-checked against authoritative evidence.',
+                  'True quality control begins with rigorous scope definition and methodological independence.',
+                ]
+
+                let quote = isEn ? defaultQuotesEn[idx % defaultQuotesEn.length] : defaultQuotesVi[idx % defaultQuotesVi.length]
+                if (member.bio && !member.bio.includes('\n') && member.bio.length > 20 && member.bio.length < 180) {
+                  quote = member.bio
+                }
+
+                const avatarUrl = getAvatarUrl(member.avatar, name)
+
+                return (
+                  <article
+                    key={member.id || idx}
+                    className="mhd-leader-card"
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'minmax(140px, 160px) 1fr',
+                      gap: '1.5rem',
+                      background: '#fff',
+                      border: '1px solid var(--c-border,#e2e0da)',
+                      borderRadius: '14px',
+                      padding: '1.2rem',
+                    }}
+                  >
+                    <div
+                      className="mhd-leader-img"
+                      style={{
+                        position: 'relative',
+                        aspectRatio: '4/5',
+                        borderRadius: '10px',
+                        overflow: 'hidden',
+                        background: 'var(--c-subtle,#eeece7)',
+                      }}
+                    >
+                      {avatarUrl ? (
+                        <img
+                          src={avatarUrl}
+                          alt={name}
+                          loading="lazy"
+                          decoding="async"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'linear-gradient(135deg, #16181c 0%, #2a2e39 100%)',
+                            color: '#fff',
+                            fontSize: '1.8rem',
+                            fontWeight: 700,
+                            fontFamily: "'Be Vietnam Pro', sans-serif',",
+                          }}
+                        >
+                          {initials}
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
+                      <div className="mhd-leader-header">
+                        <h3 className="mhd-leader-name" style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--c-ink,#16181c)' }}>{name}</h3>
+                        <div className="mhd-leader-pos" style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--c-accent,#d94f0a)', marginTop: '.15rem' }}>
+                          {position}
+                        </div>
+                      </div>
+                      <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '.35rem 1rem', margin: '1rem 0', fontSize: '.86rem' }}>
+                        <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'License' : 'Chứng chỉ'}</dt>
+                        <dd style={{ margin: 0, fontWeight: 600 }}>{license}</dd>
+                        <dt style={{ color: 'var(--c-faint,#8a8f96)' }}>{isEn ? 'Experience' : 'Kinh nghiệm'}</dt>
+                        <dd style={{ margin: 0, fontWeight: 600 }}>
+                          {experienceYears ? `${experienceYears} ${isEn ? 'years' : 'năm'}` : (isEn ? '15+ years' : '15 năm')}
+                        </dd>
+                      </dl>
+                      {quote && (
+                        <p style={{ fontSize: '.9rem', fontStyle: 'italic', color: 'var(--c-muted,#5f656d)', paddingTop: '.9rem', borderTop: '1px solid var(--c-border,#e2e0da)', margin: 0 }}>
+                          “{quote}”
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -814,7 +1022,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
               {isEn ? 'Accredited Lead Valuers' : 'Thẩm định viên về giá tiêu biểu'}
             </h3>
             <span style={{ fontSize: '.78rem', color: 'var(--c-faint,#8a8f96)' }}>
-              {isEn ? 'Updated: 01/09/2026' : 'Dữ liệu cập nhật: 01/09/2026'}
+              {isEn ? `Updated: ${latestTeamUpdate}` : `Dữ liệu cập nhật: ${latestTeamUpdate}`}
             </span>
           </div>
 
@@ -822,8 +1030,8 @@ export default async function AboutPage({ searchParams }: PageProps) {
             {(teamList.length > 0 ? teamList : defaultAppraisers).map((item: any, idx: number) => {
               const name = item.name || 'Thẩm định viên'
               const initials = item.initials || name.split(' ').map((n: string) => n[0]).slice(-2).join('')
-              const role = item.role || 'Thẩm định viên về giá'
-              const license = item.license || item.licenseNumber || 'Thẻ TĐV-00000'
+              const role = item.role || item.position || 'Thẩm định viên về giá'
+              const avatarUrl = getAvatarUrl(item.avatar, name)
 
               return (
                 <div
@@ -844,22 +1052,38 @@ export default async function AboutPage({ searchParams }: PageProps) {
                       height: '44px',
                       flexShrink: 0,
                       borderRadius: '50%',
+                      overflow: 'hidden',
                       background: 'var(--c-page,#f6f5f2)',
                       border: '1px solid var(--c-border,#e2e0da)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '.86rem',
-                      fontWeight: 700,
-                      color: 'var(--c-ink,#16181c)',
                     }}
                   >
-                    {initials}
+                    {avatarUrl ? (
+                      <img
+                        src={avatarUrl}
+                        alt={name}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                      />
+                    ) : (
+                      <span
+                        style={{
+                          fontSize: '.86rem',
+                          fontWeight: 700,
+                          color: 'var(--c-ink,#16181c)',
+                        }}
+                      >
+                        {initials}
+                      </span>
+                    )}
                   </span>
                   <span style={{ flex: 1, minWidth: 0 }}>
                     <span style={{ display: 'block', fontSize: '.9rem', fontWeight: 700 }}>{name}</span>
-                    <span style={{ display: 'block', fontSize: '.78rem', color: 'var(--c-muted,#5f656d)' }}>
-                      {role} · <span style={{ whiteSpace: 'nowrap' }}>{license}</span>
+                    <span style={{ display: 'block', fontSize: '.78rem', color: 'var(--c-muted,#5f656d)', lineHeight: 1.4 }}>
+                      {role}
                     </span>
                   </span>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d94f0b" strokeWidth="2" aria-hidden="true">
@@ -871,8 +1095,8 @@ export default async function AboutPage({ searchParams }: PageProps) {
           </div>
 
           <div>
-            <a
-              href="#phap-ly"
+            <Link
+              href="/about/doi-ngu"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -888,7 +1112,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -1036,7 +1260,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
                     {isEn ? 'Certificate of Eligibility for Valuation Services' : 'Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.78rem', color: 'var(--c-faint,#8a8f96)', marginTop: '.15rem' }}>
-                    {isEn ? 'No. 000/GCN-BTC · Updated 01/09/2026' : 'Số 000/GCN-BTC · Cập nhật 01/09/2026'}
+                    {isEn ? `No. 000/GCN-BTC · Updated ${latestTeamUpdate}` : `Số 000/GCN-BTC · Cập nhật ${latestTeamUpdate}`}
                   </span>
                 </span>
                 <span style={{ flexShrink: 0, color: 'var(--c-accent,#d94f0a)' }}>
@@ -1065,7 +1289,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
                     {isEn ? 'Registry of Practicing Valuers at MHD' : 'Danh sách thẩm định viên về giá hành nghề tại MHD'}
                   </span>
                   <span style={{ display: 'block', fontSize: '.78rem', color: 'var(--c-faint,#8a8f96)', marginTop: '.15rem' }}>
-                    {isEn ? 'Ministry of Finance Official Notice · Updated 01/09/2026' : 'Theo thông báo của Bộ Tài chính · Cập nhật 01/09/2026'}
+                    {isEn ? `Ministry of Finance Official Notice · Updated ${latestTeamUpdate}` : `Theo thông báo của Bộ Tài chính · Cập nhật ${latestTeamUpdate}`}
                   </span>
                 </span>
                 <span style={{ flexShrink: 0, color: 'var(--c-accent,#d94f0a)' }}>
@@ -1345,11 +1569,11 @@ export default async function AboutPage({ searchParams }: PageProps) {
             </div>
             <blockquote style={{ margin: 0, fontSize: 'clamp(1.1rem,1rem + .5vw,1.35rem)', fontWeight: 500, lineHeight: 1.6, color: 'var(--c-ink,#16181c)', textWrap: 'balance' }}>
               {isEn
-                ? 'The valuation report clearly stated all grounds and methodologies. The dossier fully met our requirements when working with financial institutions.'
-                : 'Báo cáo thẩm định giá trình bày rõ căn cứ và phương pháp. Hồ sơ đáp ứng nhu cầu làm việc của doanh nghiệp với ngân hàng.'}
+                ? 'MHD’s valuation reports and certificates maintain strict professional independence, solid statutory grounds, and transparent methodologies, fully meeting rigorous credit review requirements from partner banking institutions.'
+                : 'Báo cáo và Chứng thư thẩm định giá của MHD luôn bảo đảm tính độc lập, căn cứ pháp lý chặt chẽ và phương pháp tính toán minh bạch, đáp ứng tuyệt đối yêu cầu thẩm định từ các tổ chức tín dụng và ngân hàng đối tác.'}
             </blockquote>
             <figcaption style={{ marginTop: '1.2rem', fontSize: '.88rem', color: 'var(--c-muted,#5f656d)' }}>
-              <strong style={{ color: 'var(--c-ink,#16181c)' }}>{isEn ? '[Client Executive]' : '[Họ và tên]'}</strong> · {isEn ? 'Chief Financial Officer, Manufacturing Enterprise' : 'Giám đốc Tài chính, [Doanh nghiệp sản xuất]'}
+              <strong style={{ color: 'var(--c-ink,#16181c)' }}>{isEn ? 'Chief Financial Officer (CFO)' : 'Giám đốc Tài chính (CFO)'}</strong> · {isEn ? 'Industrial & Manufacturing Client Group' : 'Tập đoàn Sản xuất & Công nghiệp đối tác'}
             </figcaption>
           </figure>
         </div>

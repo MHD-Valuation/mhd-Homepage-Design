@@ -153,6 +153,11 @@ button {
   50% { transform: rotate(5deg); }
 }
 
+@keyframes mhdPin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 @keyframes mhdMagnify {
   0%, 100% { transform: translate(0, 0); }
   25% { transform: translate(-6px, -4px); }
@@ -382,3 +387,362 @@ html.mhd-teal [data-cta-dark]:hover { background: #fff !important; color: #12343
     filter: none !important;
   }
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN & MOBILE / TABLET VIEWPORT SYSTEM
+   Tailored for luxury typography, compact blocks, silky scrolling
+   ============================================================ */
+
+/* Global horizontal overflow lockdown */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Base smooth touch handling */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ------------------------------------------------------------
+   1. TABLET VIEWPORT (max-width: 1024px)
+   ------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  /* Scale down massive display titles */
+  h1 {
+    font-size: clamp(2rem, 4vw + 1rem, 2.8rem) !important;
+    line-height: 1.22 !important;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 2.5vw + 1rem, 2.2rem) !important;
+    line-height: 1.28 !important;
+  }
+  
+  /* Sections: reduce excessive desktop padding */
+  section[style*="padding: clamp(5rem"],
+  section[style*="padding: clamp(6rem"],
+  section[style*="padding: 'clamp(5rem"],
+  section[style*="padding: 'clamp(6rem"] {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  /* Compact header buttons */
+  .mhd-header-desktop-only {
+    display: none !important;
+  }
+
+  /* Insights page layout: sidebar stacks or tightens */
+  .mhd-insights-layout-grid {
+    grid-template-columns: minmax(0, 1fr) 240px !important;
+    gap: 2rem !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   2. MEDIUM TABLET / MOBILE LANDSCAPE (max-width: 899px)
+   ------------------------------------------------------------ */
+@media (max-width: 899px) {
+  /* Timeline responsive: converts to clear vertical timeline */
+  .mhd-timeline-list {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .mhd-timeline-item {
+    padding: 0 0 2rem 2.4rem !important;
+    border-top: none !important;
+  }
+  .mhd-timeline-line {
+    left: 6px !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 2px !important;
+    height: auto !important;
+    right: auto !important;
+  }
+  .mhd-timeline-dot {
+    left: 0 !important;
+    top: 2px !important;
+  }
+
+  /* Stats grid responsive */
+  .mhd-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .mhd-stats-grid > div:nth-child(2n+1) {
+    border-left: none !important;
+  }
+
+  /* Insights page layout: full-width listing with sidebar underneath */
+  .mhd-insights-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Article detail responsive layout (Hình 1) */
+  .mhd-article-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.2rem !important;
+  }
+  .mhd-article-body-col {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .mhd-article-detail-sidebar {
+    position: static !important;
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   3. MOBILE PHONES (max-width: 767px)
+   - Thu gọn cỡ chữ
+   - Thu gọn các khối block
+   - Tối ưu chạm và cảm giác lướt mượt mà
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  /* Typography Scaling */
+  h1 {
+    font-size: clamp(1.65rem, 5.5vw, 2.15rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.02em !important;
+  }
+  h2 {
+    font-size: clamp(1.35rem, 4.2vw, 1.7rem) !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.015em !important;
+  }
+  h3 {
+    font-size: clamp(1.05rem, 3.2vw, 1.25rem) !important;
+    line-height: 1.35 !important;
+  }
+  p {
+    font-size: 0.92rem !important;
+    line-height: 1.58 !important;
+  }
+
+  /* Thu gọn các khối block: giảm padding các section lớn */
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Specific padding overrides for inline styles with huge clamp */
+  [style*="padding: clamp(5rem"],
+  [style*="padding: clamp(6rem"],
+  [style*="padding: clamp(4.5rem"],
+  [style*="padding: 'clamp(5rem"],
+  [style*="padding: 'clamp(6rem"],
+  [style*="padding: 'clamp(4.5rem"] {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .mhd-section-pad {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Thu gọn khoảng cách các container và lề viền */
+  [style*="padding: 0 clamp(1rem, 4vw, 2.5rem)"],
+  [style*="padding: '0 clamp(1rem, 4vw, 2.5rem)'"],
+  [style*="padding: 0 clamp(1rem,4vw,2.5rem)"],
+  [style*="padding: '0 clamp(1rem,4vw,2.5rem)'"] {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+
+  /* Thu gọn thẻ card: giảm padding nội bộ để tiết kiệm diện tích */
+  .mhd-corporate-team-card {
+    border-radius: 14px !important;
+  }
+  .mhd-team-card-body {
+    padding: 1.25rem 1.15rem 1.35rem !important;
+  }
+  .mhd-team-portrait-box {
+    height: 300px !important;
+  }
+
+  /* Hero adjustments */
+  .mhd-hero-badge {
+    white-space: normal !important;
+    font-size: 0.66rem !important;
+    padding: 0.4rem 0.8rem !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.3 !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .mhd-hero-title-line2 {
+    white-space: normal !important;
+  }
+  .mhd-hero-stats-inner-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  .mhd-hero-stats-inner-grid > a {
+    grid-column: span 2 !important;
+    margin-top: 0.4rem !important;
+  }
+
+  /* About page floating badge: don't pull out of container on mobile */
+  .mhd-about-floating-badge {
+    left: 0.5rem !important;
+    bottom: 0.5rem !important;
+    max-width: calc(100% - 1rem) !important;
+    padding: 0.75rem 0.9rem !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12) !important;
+  }
+
+  /* About hero pill badge (Hình 2): prevent overflow cut-off */
+  .mhd-about-hero-badge {
+    white-space: normal !important;
+    line-height: 1.4 !important;
+    text-wrap: balance !important;
+    word-break: break-word !important;
+    font-size: 0.67rem !important;
+    padding: 0.45rem 0.85rem !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Single column form controls for easy touch typing */
+  .mhd-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4 Values grid on mobile */
+  .mhd-values-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobile tables wrapper */
+  .mhd-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  /* Leaders cards stack vertically on small screens: center photo, name, position (Hình 3) */
+  .mhd-leader-card {
+    grid-template-columns: 1fr !important;
+    gap: 1.1rem !important;
+    padding: 1.3rem 1.15rem !important;
+  }
+  .mhd-leader-img {
+    max-width: 170px !important;
+    margin: 0 auto !important;
+  }
+  .mhd-leader-header {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0.2rem auto 0 !important;
+  }
+  .mhd-leader-name {
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .mhd-leader-pos {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* Full width buttons on mobile */
+  .mhd-btn-full-mobile {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Articles listing: stack image on top on mobile */
+  .insight-listing-item {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1.25rem 0 !important;
+  }
+
+  /* Touch-friendly inputs: prevent iOS auto zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Smooth horizontal scroll bars for navigation chips */
+  nav {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ------------------------------------------------------------
+   4. EXTRA SMALL PHONES (max-width: 480px)
+   ------------------------------------------------------------ */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.7rem !important;
+  }
+  h2 {
+    font-size: 1.35rem !important;
+  }
+
+  /* Thu gọn padding cực kỳ gọn gàng */
+  section {
+    padding-top: 2.4rem !important;
+    padding-bottom: 2.4rem !important;
+  }
+
+  /* Hide desktop header buttons completely, leaving clean Hamburger */
+  .mhd-header-request-btn {
+    display: none !important;
+  }
+
+  /* Stats grid stacks */
+  .mhd-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .mhd-stats-grid > div {
+    border-left: none !important;
+    border-top: 1px solid var(--c-border, #e2e0da) !important;
+    padding: 1.1rem 0 !important;
+  }
+  .mhd-stats-grid > div:first-child {
+    border-top: none !important;
+  }
+
+  /* Team portrait height compact */
+  .mhd-team-portrait-box {
+    height: 270px !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   5. MOBILE SUBMENU ACCORDION
+   ------------------------------------------------------------ */
+@keyframes mhdSubmenuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mhd-mobile-submenu {
+  animation: mhdSubmenuSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mhd-mobile-sublink {
+  transition: all 0.15s ease;
+}
+.mhd-mobile-sublink:active {
+  background: var(--c-subtle, #eeece7) !important;
+  transform: scale(0.99);
+}
+

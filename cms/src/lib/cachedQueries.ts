@@ -110,7 +110,7 @@ export async function getCachedAboutData(locale: 'vi' | 'en') {
             collection: 'partners',
             where: { active: { equals: true } },
             sort: 'order',
-            limit: 30,
+            limit: 100,
           }).catch(() => ({ docs: [] })),
         ])
 
@@ -203,7 +203,7 @@ export async function getCachedPartnersList(locale: 'vi' | 'en') {
           collection: 'partners',
           where: { active: { equals: true } },
           sort: 'order',
-          limit: 50,
+          limit: 100,
         }).catch(() => ({ docs: [] }))
         return res.docs || []
       } catch (err) {
@@ -231,7 +231,7 @@ export async function getCachedTeamList(locale: 'vi' | 'en') {
           collection: 'team',
           sort: 'order',
           locale,
-          limit: 20,
+          limit: 50,
         }).catch(() => ({ docs: [] }))
         return res.docs || []
       } catch (err) {

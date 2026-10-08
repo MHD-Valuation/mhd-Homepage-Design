@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -6,6 +7,22 @@ export const Services: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'order', 'updatedAt'],
     group: 'Dịch vụ & Dự án',
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('services')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('services')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   fields: [
     {

@@ -235,6 +235,7 @@ export default function Hero({ data, currentLocale = 'vi' }: HeroProps) {
         >
           <div style={{ flex: '1.2 1 520px', minWidth: 0, containerType: 'inline-size' }}>
             <span
+              className="mhd-hero-badge"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -275,7 +276,7 @@ export default function Hero({ data, currentLocale = 'vi' }: HeroProps) {
               }}
             >
               <span style={{ display: 'block' }}>{titleLine1}</span>
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>{titleLine2}</span>
+              <span className="mhd-hero-title-line2" style={{ display: 'block', whiteSpace: 'nowrap' }}>{titleLine2}</span>
             </h1>
             <div
               style={{
@@ -404,6 +405,7 @@ export default function Hero({ data, currentLocale = 'vi' }: HeroProps) {
               {statsTitle}
             </h3>
             <div
+              className="mhd-hero-stats-inner-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'auto auto minmax(0,1fr)',

@@ -1,11 +1,30 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 export const Team: CollectionConfig = {
   slug: 'team',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'position', 'cardId', 'order'],
+    defaultColumns: ['name', 'position', 'category', 'experienceYears', 'order'],
     group: 'Về MHD',
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('team')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('team')
+        revalidateCacheTag('about')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   fields: [
     {
@@ -17,20 +36,26 @@ export const Team: CollectionConfig = {
     {
       name: 'position',
       type: 'text',
-      label: 'Chức danh / Vị trí',
+      label: 'Chức vụ',
       localized: true,
       required: true,
-    },
-    {
-      name: 'cardId',
-      type: 'text',
-      label: 'Mã số thẻ thẩm định viên về giá (do Bộ Tài chính cấp)',
     },
     {
       name: 'experienceYears',
       type: 'number',
       label: 'Số năm kinh nghiệm',
       defaultValue: 10,
+    },
+    {
+      name: 'category',
+      type: 'select',
+      label: 'Phân nhóm nhân sự',
+      defaultValue: 'valuer',
+      options: [
+        { label: 'Ban lãnh đạo', value: 'leadership' },
+        { label: 'Thẩm định viên', value: 'valuer' },
+      ],
+      required: true,
     },
     {
       name: 'order',
@@ -42,13 +67,16 @@ export const Team: CollectionConfig = {
       name: 'avatar',
       type: 'upload',
       relationTo: 'media',
-      label: 'Ảnh chân dung',
+      label: 'Ảnh đại diện (tuỳ chọn)',
     },
     {
       name: 'bio',
       type: 'textarea',
-      label: 'Tiểu sử tóm tắt',
+      label: 'Mô tả nhân sự / Bằng cấp & Chuyên môn',
       localized: true,
+      admin: {
+        description: 'Mô tả quá trình công tác, bằng cấp, năng lực chuyên môn của nhân sự',
+      },
     },
   ],
 }

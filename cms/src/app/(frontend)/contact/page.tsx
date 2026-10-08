@@ -40,14 +40,26 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     getCachedGlobal('site-settings', currentLocale as 'vi' | 'en'),
   ])
 
-  const phone = (footerData as any)?.phone || (siteSettings as any)?.hotline || '028 3515 3516'
-  const email = (footerData as any)?.email || 'info@mhd.com.vn'
-  const address = (footerData as any)?.address || (currentLocale === 'en' ? 'Ho Chi Minh City, Vietnam' : 'TP. Hồ Chí Minh, Việt Nam')
+  const phone = (siteSettings as any)?.officePhone || (footerData as any)?.phone || (siteSettings as any)?.hotline || '028 3515 3516'
+  const email = (siteSettings as any)?.officeEmail || (footerData as any)?.email || 'contact@mhd.com.vn'
+  const companyName = (siteSettings as any)?.officeCompany || (footerData as any)?.companyName || (currentLocale === 'en' ? 'MHD Valuation Co., Ltd.' : 'Công ty TNHH Thẩm định giá MHD')
+  const address = (siteSettings as any)?.officeAddress || (footerData as any)?.address || (currentLocale === 'en' ? 'Ho Chi Minh City, Vietnam' : 'Số 00 Đường ABC, Phường X, TP. Hồ Chí Minh')
+  const hoursWeekday = (siteSettings as any)?.officeHoursWeekday || (footerData as any)?.workingHours || (currentLocale === 'en' ? 'Monday – Friday: 8:00 – 17:30' : 'Thứ 2 – Thứ 6: 8:00 – 17:30')
+  const hoursWeekend = (siteSettings as any)?.officeHoursWeekend || (currentLocale === 'en' ? 'Saturday: 8:00 – 12:00' : 'Thứ 7: 8:00 – 12:00')
+  const mapUrl = (siteSettings as any)?.officeMapUrl || 'https://maps.google.com/?q=TP.+Ho+Chi+Minh'
 
   return (
     <ContactClient
       currentLocale={currentLocale}
-      contactInfo={{ phone, email, address }}
+      contactInfo={{
+        phone,
+        email,
+        companyName,
+        address,
+        hoursWeekday,
+        hoursWeekend,
+        mapUrl,
+      }}
     />
   )
 }

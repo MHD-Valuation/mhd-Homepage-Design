@@ -86,10 +86,21 @@ export default function ArticleDetailClient({
       </header>
 
       {/* Main 2-column content & sidebar */}
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,2.5rem) clamp(4rem,7vw,6rem)', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 320px', gap: 'clamp(2.5rem,5vw,5rem)', alignItems: 'start' }}>
+      <div
+        className="mhd-article-detail-grid"
+        style={{
+          maxWidth: 1240,
+          margin: '0 auto',
+          padding: 'clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,2.5rem) clamp(4rem,7vw,6rem)',
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0,1fr) 320px',
+          gap: 'clamp(2.5rem,5vw,5rem)',
+          alignItems: 'start',
+        }}
+      >
         
         {/* Left Column: Article Blocks */}
-        <div style={{ minWidth: 0, maxWidth: '72ch' }}>
+        <div className="mhd-article-body-col" style={{ minWidth: 0, maxWidth: '72ch' }}>
           {post.body && post.body.map((b: any, bIdx: number) => {
             const type = b[0]
             const content = b[1]
@@ -179,7 +190,7 @@ export default function ArticleDetailClient({
         </div>
 
         {/* Right Sticky Sidebar */}
-        <aside style={{ position: 'sticky', top: 96, display: 'flex', flexDirection: 'column', gap: '1.6rem', minWidth: 0 }}>
+        <aside className="mhd-article-detail-sidebar" style={{ position: 'sticky', top: 96, display: 'flex', flexDirection: 'column', gap: '1.6rem', minWidth: 0 }}>
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', paddingBottom: '.8rem', borderBottom: '1px solid var(--c-border,#e2e0da)' }}>
               <span style={{ fontSize: '.74rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--c-ink,#16181c)' }}>

@@ -564,10 +564,13 @@ export interface Team {
   id: number;
   name: string;
   position: string;
-  cardId?: string | null;
   experienceYears?: number | null;
+  category: 'leadership' | 'valuer';
   order?: number | null;
   avatar?: (number | null) | Media;
+  /**
+   * Mô tả quá trình công tác, bằng cấp, năng lực chuyên môn của nhân sự
+   */
   bio?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -584,7 +587,7 @@ export interface Partner {
    * Dùng nếu chưa tải file lên Media library (VD: /assets/partners/vcb.svg)
    */
   logoSvg?: string | null;
-  category: 'bank' | 'corporate' | 'audit';
+  category: 'bank' | 'corporate' | 'public' | 'investor' | 'audit';
   website?: string | null;
   order?: number | null;
   active?: boolean | null;
@@ -1100,8 +1103,8 @@ export interface DocumentsSelect<T extends boolean = true> {
 export interface TeamSelect<T extends boolean = true> {
   name?: T;
   position?: T;
-  cardId?: T;
   experienceYears?: T;
+  category?: T;
   order?: T;
   avatar?: T;
   bio?: T;
@@ -1362,6 +1365,13 @@ export interface SiteSetting {
   quickContactTitle?: string | null;
   phoneTitle?: string | null;
   zaloTitle?: string | null;
+  officeCompany?: string | null;
+  officeAddress?: string | null;
+  officeHoursWeekday?: string | null;
+  officeHoursWeekend?: string | null;
+  officePhone?: string | null;
+  officeEmail?: string | null;
+  officeMapUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1468,6 +1478,13 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   quickContactTitle?: T;
   phoneTitle?: T;
   zaloTitle?: T;
+  officeCompany?: T;
+  officeAddress?: T;
+  officeHoursWeekday?: T;
+  officeHoursWeekend?: T;
+  officePhone?: T;
+  officeEmail?: T;
+  officeMapUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

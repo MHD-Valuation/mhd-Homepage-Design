@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCacheTag } from '../lib/revalidate'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -9,6 +10,22 @@ export const Posts: CollectionConfig = {
   },
   versions: {
     drafts: true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateCacheTag('posts')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateCacheTag('posts')
+        revalidateCacheTag('homepage')
+        return doc
+      },
+    ],
   },
   fields: [
     {

@@ -104,11 +104,11 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Quy trình',
-        title: 'Bốn bước chuẩn hoá',
-        description: 'Mọi hồ sơ đều được soát xét độc lập trước khi phát hành chứng thư.',
-        buttonLabel: 'Xem quy trình →',
-        buttonHref: '/phap-ly/quy-trinh',
+        tag: 'Trao đổi ban đầu',
+        title: 'Nhận báo giá thẩm định',
+        description: 'Gửi thông tin tài sản. MHD xác nhận yêu cầu trong 24 giờ làm việc.',
+        buttonLabel: 'Nhận báo giá →',
+        buttonHref: '/contact#yeu-cau',
       },
     },
     {
@@ -133,10 +133,13 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Kinh nghiệm',
-        title: '5.000+ hồ sơ hoàn thành',
-        description: 'Được các tổ chức tín dụng và kiểm toán chấp thuận.',
-        buttonLabel: 'Xem danh sách →',
+        tag: 'Hồ sơ chuyên đề',
+        title: 'Thẩm định giá doanh nghiệp phục vụ tái cấu trúc vốn',
+        subtitle: 'Doanh nghiệp · Hồ sơ chuyên đề',
+        image: {
+          url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+        },
+        buttonLabel: 'Xem dự án →',
         buttonHref: '/projects',
       },
     },
@@ -162,10 +165,13 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Báo cáo',
-        title: 'Báo cáo tổng quan quý',
-        description: 'Tải miễn phí báo cáo phân tích chuyên sâu từ MHD.',
-        buttonLabel: 'Đọc ngay →',
+        tag: 'Tin thị trường',
+        title: 'Biến động giá bất động sản khu vực trung tâm TP.HCM quý 3',
+        date: '05 Tháng 9, 2026',
+        image: {
+          url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+        },
+        buttonLabel: 'Tải báo cáo →',
         buttonHref: '/insights',
       },
     },
@@ -191,11 +197,11 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Bảo mật',
-        title: 'Chính sách độc lập',
-        description: 'Cam kết độc lập, khách quan và bảo mật dữ liệu tuyệt đối.',
-        buttonLabel: 'Xem chính sách →',
-        buttonHref: '/about/phap-ly',
+        tag: 'Tra cứu trực tuyến',
+        title: 'Đối chiếu thông tin chứng thư',
+        description: 'Quét mã QR hoặc nhập số chứng thư để đối chiếu thông tin phát hành trên hệ thống MHD.',
+        buttonLabel: 'Tra cứu chứng thư →',
+        buttonHref: '/phap-ly/tra-cuu',
       },
     },
     {
@@ -291,11 +297,11 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Workflow',
-        title: '4-Step Quality Process',
-        description: 'Every dossier undergoes independent review before certificate issuance.',
-        buttonLabel: 'View Process →',
-        buttonHref: '/phap-ly/quy-trinh',
+        tag: 'Initial Consultation',
+        title: 'Get Valuation Quotation',
+        description: 'Submit asset information. MHD confirms engagement requirements within 24 working hours.',
+        buttonLabel: 'Get Quotation →',
+        buttonHref: '/contact#yeu-cau',
       },
     },
     {
@@ -320,9 +326,12 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Track Record',
-        title: '5,000+ Completed Valuations',
-        description: 'Accepted by all major financial institutions and audit firms.',
+        tag: 'Case Study',
+        title: 'Enterprise Valuation for Capital Restructuring',
+        subtitle: 'Corporate · Case Study',
+        image: {
+          url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+        },
         buttonLabel: 'View Projects →',
         buttonHref: '/projects',
       },
@@ -349,10 +358,13 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Quarterly Report',
-        title: 'Quarterly Valuation Review',
-        description: 'Free download of in-depth market reports from MHD.',
-        buttonLabel: 'Read Now →',
+        tag: 'Market News',
+        title: 'Central HCMC Real Estate Price Movements Q3',
+        date: 'September 05, 2026',
+        image: {
+          url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+        },
+        buttonLabel: 'Download Report →',
         buttonHref: '/insights',
       },
     },
@@ -378,11 +390,11 @@ async function seed() {
         },
       ],
       ctaCard: {
-        tag: 'Confidentiality',
-        title: 'Independence Policy',
-        description: 'Strict adherence to objectivity and data confidentiality.',
-        buttonLabel: 'View Policy →',
-        buttonHref: '/about/phap-ly',
+        tag: 'Online Verification',
+        title: 'Verify Certificate Details',
+        description: 'Scan QR code or enter certificate number to verify issuance on the MHD system.',
+        buttonLabel: 'Verify Certificate →',
+        buttonHref: '/phap-ly/tra-cuu',
       },
     },
     {
@@ -749,7 +761,7 @@ async function seed() {
   for (const t of teamData) {
     const existing = await payload.find({
       collection: 'team',
-      where: { cardId: { equals: t.cardId } },
+      where: { name: { equals: t.name } },
     })
 
     if (existing.totalDocs === 0) {
@@ -758,8 +770,8 @@ async function seed() {
         locale: 'vi',
         data: {
           name: t.name,
-          cardId: t.cardId,
           position: t.positionVi,
+          category: 'valuer',
           order: t.order,
         },
       })
