@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { getPayload } from 'payload'
 import { pushDevSchema } from '@payloadcms/drizzle'
 import config from '../payload.config'
@@ -573,7 +575,7 @@ async function seed() {
       companyName: 'Công ty TNHH Thẩm định giá MHD',
       tagline: 'Giá trị tài sản, giá trị cốt lõi.',
       qualificationNotice: 'Doanh nghiệp được cấp Giấy chứng nhận đủ điều kiện kinh doanh dịch vụ thẩm định giá theo quy định pháp luật.',
-      address: 'TP. Hồ Chí Minh, Việt Nam',
+      address: '52 Trần Bình Trọng, Bình Lợi Trung, Hồ Chí Minh, Việt Nam',
       phone: '028 3515 3516',
       email: 'contact@mhd.com.vn',
       workingHours: 'Thứ Hai – Thứ Sáu: 8:00 – 17:30',
@@ -590,7 +592,7 @@ async function seed() {
       companyName: 'MHD Valuation Co., Ltd.',
       tagline: 'Asset Value, Core Value.',
       qualificationNotice: 'Qualified enterprise licensed to practice professional valuation services under Vietnamese law.',
-      address: 'Ho Chi Minh City, Vietnam',
+      address: '52 Tran Binh Trong, Binh Loi Trung, Ho Chi Minh City, Vietnam',
       phone: '028 3515 3516',
       email: 'contact@mhd.com.vn',
       workingHours: 'Monday – Friday: 8:00 – 17:30',
@@ -615,6 +617,13 @@ async function seed() {
       quickContactTitle: 'LIÊN HỆ MHD',
       phoneTitle: 'Gọi Hotline',
       zaloTitle: 'Chat Zalo',
+      officeCompany: 'Công ty TNHH Thẩm định giá MHD',
+      officeAddress: '52 Trần Bình Trọng, Bình Lợi Trung, Hồ Chí Minh, Việt Nam',
+      officeHoursWeekday: 'Thứ 2 – Thứ 6: 8:00 – 17:30',
+      officeHoursWeekend: 'Thứ 7: 8:00 – 12:00',
+      officePhone: '028 3515 3516',
+      officeEmail: 'info@mhd.com.vn',
+      officeMapUrl: 'https://www.google.com/maps/place/C%C3%B4ng+Ty+TNHH+Th%E1%BA%A9m+%C4%90%E1%BB%8Bnh+Gi%C3%A1+MHD/@10.8129232,106.6852583,17z/data=!3m1!4b1!4m6!3m5!1s0x317528e7e0914539:0x93ec01fe3afa8e09!8m2!3d10.8129179!4d106.6878332!16s%2Fg%2F11bzwmg433?entry=ttu&g_ep=EgoyMDI2MTAwNS4wIKXMDSoASAFQAw%3D%3D',
     },
   })
 
@@ -631,6 +640,13 @@ async function seed() {
       quickContactTitle: 'CONTACT MHD',
       phoneTitle: 'Call Hotline',
       zaloTitle: 'Chat Zalo',
+      officeCompany: 'MHD Valuation Co., Ltd.',
+      officeAddress: '52 Tran Binh Trong, Binh Loi Trung, Ho Chi Minh City, Vietnam',
+      officeHoursWeekday: 'Monday – Friday: 8:00 – 17:30',
+      officeHoursWeekend: 'Saturday: 8:00 – 12:00',
+      officePhone: '028 3515 3516',
+      officeEmail: 'info@mhd.com.vn',
+      officeMapUrl: 'https://www.google.com/maps/place/C%C3%B4ng+Ty+TNHH+Th%E1%BA%A9m+%C4%90%E1%BB%8Bnh+Gi%C3%A1+MHD/@10.8129232,106.6852583,17z/data=!3m1!4b1!4m6!3m5!1s0x317528e7e0914539:0x93ec01fe3afa8e09!8m2!3d10.8129179!4d106.6878332!16s%2Fg%2F11bzwmg433?entry=ttu&g_ep=EgoyMDI2MTAwNS4wIKXMDSoASAFQAw%3D%3D',
     },
   })
 
@@ -772,44 +788,129 @@ async function seed() {
   console.log('Seeding Certified Appraisers (Team)...')
   const teamData = [
     {
+      name: 'Trần Khánh Du',
+      positionVi: 'Giám Đốc',
+      positionEn: 'Managing Director',
+      category: 'leadership',
+      experienceYears: 20,
+      order: 1,
+      avatarFilename: 'giam-doc-dieu-hanh-tran-khanh-du.png',
+      bio: '– Cử nhân kinh tế, chuyên ngành thẩm định giá, trường Đại học Kinh tế TP.HCM\n– Thẻ thẩm định viên về giá – Bộ Tài chính\n– Chứng chỉ định giá Bất động sản – Sở xây dựng\n– Chứng chỉ đấu giá viên – Bộ Tư Pháp',
+    },
+    {
+      name: 'Nguyễn Lê Hà',
+      positionVi: 'Phó Giám Đốc',
+      positionEn: 'Deputy Director',
+      category: 'leadership',
+      experienceYears: 10,
+      order: 2,
+      avatarFilename: 'pho-giam-doc-nguyen-le-ha.png',
+      bio: '– Cử nhân kinh tế, chuyên ngành thẩm định giá, trường Đại học Kinh tế TP.HCM\n– Cử nhân kinh tế, chuyên ngành tài chính ngân hàng, trường Đại học Kinh tế TP.HCM\n– Thẻ thẩm định viên về giá – Bộ Tài chính\n– Chứng chỉ định giá Bất động sản – Sở xây dựng\n– Chứng chỉ kế toán tài chính – Trường ĐH Kinh tế TP.HCM.\n– Hội viên Hiệp hội Thẩm định giá việt Nam',
+    },
+    {
+      name: 'Lê Ngọc Ánh',
+      positionVi: 'Thẩm định viên - Trưởng phòng thẩm định',
+      positionEn: 'Practicing Valuer - Head of Valuation Department',
+      category: 'valuer',
+      experienceYears: 10,
+      order: 3,
+      avatarFilename: 'tham-dinh-vien-truong-phong-tham-dinh-le-ngoc-anh.png',
+      bio: '– Cử nhân kinh tế, chuyên ngành thẩm định giá, trường ĐH Tài Chính Marketing TP.HCM\n– Chứng chỉ định giá BĐS – Sở Xây dựng;\n– Chứng chỉ môi giới và quản lý sàn BĐS – Sở xây dựng',
+    },
+    {
+      name: 'Bùi Quỳnh',
+      positionVi: 'Thẩm định viên  — Giám đốc Chi nhánh Bình Định',
+      positionEn: 'Practicing Valuer - Binh Dinh Branch Director',
+      category: 'valuer',
+      experienceYears: 11,
+      order: 4,
+      avatarFilename: 'Quynh-e1690357951804-256x300.jpg',
+      bio: '– Thẩm định viên về giá của Bộ Tài Chính\n– Định giá viên Bất động sản của Sở Xây dựng\n– Chuyên viên cao cấp môi giới, quản lý và điều hành sàn Bất động sản',
+    },
+    {
+      name: 'Phan Nguyên Uyên Hạ',
+      positionVi: 'Thẩm định viên – trưởng bộ phận kiểm soát',
+      positionEn: 'Practicing Valuer - Head of Internal Quality Control',
+      category: 'valuer',
+      experienceYears: 7,
+      order: 5,
+      avatarFilename: 'tham-dinh-vien-truong-bo-phan-kiem-soat-phan-nguyen-uyen-ha.png',
+      bio: '– Thẩm định viên về giá của Bộ Tài Chính\n– Thạc sĩ chuyên ngành quản lý đất đai\n– Định giá viên Bất động sản của Sở Xây dựng',
+    },
+    {
       name: 'Nguyễn Văn A',
-      cardId: 'Thẻ TĐV-00123',
       positionVi: 'Thẩm định giá doanh nghiệp',
       positionEn: 'Business Valuation Specialist',
-      order: 1,
+      category: 'valuer',
+      experienceYears: 10,
+      order: 6,
     },
     {
       name: 'Trần Thị B',
-      cardId: 'Thẻ TĐV-00456',
       positionVi: 'Thẩm định giá bất động sản',
       positionEn: 'Real Estate Valuation Specialist',
-      order: 2,
+      category: 'valuer',
+      experienceYears: 10,
+      order: 7,
     },
     {
       name: 'Lê Văn C',
-      cardId: 'Thẻ TĐV-00789',
       positionVi: 'Thẩm định động sản & máy thiết bị',
       positionEn: 'Machinery & Equipment Appraiser',
-      order: 3,
+      category: 'valuer',
+      experienceYears: 10,
+      order: 8,
     },
   ]
 
   for (const t of teamData) {
+    let avatarId: string | number | undefined = undefined
+    if (t.avatarFilename) {
+      const existingMedia = await payload.find({
+        collection: 'media',
+        where: { filename: { equals: t.avatarFilename } },
+      })
+      if (existingMedia.totalDocs > 0) {
+        avatarId = existingMedia.docs[0].id
+      } else {
+        const mediaFilePath = path.resolve(process.cwd(), 'media', t.avatarFilename)
+        if (fs.existsSync(mediaFilePath)) {
+          try {
+            const uploaded = await payload.create({
+              collection: 'media',
+              filePath: mediaFilePath,
+              data: {
+                alt: t.name,
+              },
+            })
+            avatarId = uploaded.id
+          } catch (err) {
+            // ignore
+          }
+        }
+      }
+    }
+
     const existing = await payload.find({
       collection: 'team',
       where: { name: { equals: t.name } },
     })
 
+    const teamPayloadDataVi: any = {
+      name: t.name,
+      position: t.positionVi,
+      category: t.category,
+      experienceYears: t.experienceYears,
+      order: t.order,
+    }
+    if (t.bio) teamPayloadDataVi.bio = t.bio
+    if (avatarId) teamPayloadDataVi.avatar = avatarId
+
     if (existing.totalDocs === 0) {
       const doc = await payload.create({
         collection: 'team',
         locale: 'vi',
-        data: {
-          name: t.name,
-          position: t.positionVi,
-          category: 'valuer',
-          order: t.order,
-        },
+        data: teamPayloadDataVi,
       })
       await payload.update({
         collection: 'team',
@@ -824,11 +925,7 @@ async function seed() {
         collection: 'team',
         id: existing.docs[0].id,
         locale: 'vi',
-        data: {
-          name: t.name,
-          position: t.positionVi,
-          order: t.order,
-        },
+        data: teamPayloadDataVi,
       })
       await payload.update({
         collection: 'team',
