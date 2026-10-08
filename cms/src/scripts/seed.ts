@@ -1464,6 +1464,102 @@ async function seed() {
     },
   })
 
+  // 8. Seed 36 Official Partners & Clients with Logo Media
+  console.log('Seeding 36 Official Partners with Logos...')
+  const partnersData = [
+    { name: 'Vietcombank', category: 'bank', website: 'https://vietcombank.com.vn', order: 1, logoFilename: 'images-2.jpg' },
+    { name: 'Agribank', category: 'bank', website: 'https://agribank.com.vn', order: 2, logoFilename: 'images-4.png' },
+    { name: 'BIDV', category: 'bank', website: 'https://bidv.com.vn', order: 3, logoFilename: 'logo-bidv-20220426071253.jpg' },
+    { name: 'MB Bank', category: 'bank', website: 'https://mbbank.com.vn', order: 4, logoFilename: 'Logo_MB_new.png' },
+    { name: 'ACB', category: 'bank', website: 'https://acb.com.vn', order: 5, logoFilename: 'notFound.webp' },
+    { name: 'SHB', category: 'bank', website: 'https://shb.com.vn', order: 6, logoFilename: 'Logo-SHB-VN.png' },
+    { name: 'Sacombank', category: 'bank', website: 'https://sacombank.com.vn', order: 7, logoFilename: 'images-5.png' },
+    { name: 'HDBank', category: 'bank', website: 'https://hdbank.com.vn', order: 8, logoFilename: 'Logo-HDBank.webp' },
+    { name: 'KienlongBank', category: 'bank', website: 'https://kienlongbank.com', order: 9, logoFilename: 'logo-kienlongbank-klb-dinh-vi-thuong-hieu-10-1.png' },
+    { name: 'VBSP', category: 'bank', website: 'https://vbsp.org.vn', order: 10, logoFilename: 'images-6.png' },
+    { name: 'Hưng Thịnh Corporation', category: 'corporate', website: 'https://hungthinhcorp.com.vn', order: 11, logoFilename: 'Logo-Hung-Thinh-Co-V.png' },
+    { name: 'Vạn Phúc Group', category: 'corporate', website: 'https://vanphuc.vn', order: 12, logoFilename: 'images-12.png' },
+    { name: 'T&T Group', category: 'corporate', website: 'https://ttgroup.com.vn', order: 13, logoFilename: 'Logo_của_Tập_đoàn_T&T_Group.png' },
+    { name: 'KITA Group', category: 'corporate', website: 'https://kitagroup.com.vn', order: 14, logoFilename: '6a3a546c4eb2d1782207596.jpg' },
+    { name: 'GOTEC LAND', category: 'corporate', website: 'https://gotecland.vn', order: 15, logoFilename: 'logo-gotec-land.png' },
+    { name: 'GOTECH', category: 'corporate', website: 'https://gotech.vn', order: 16, logoFilename: 'images-3.jpg' },
+    { name: 'Saigontourist', category: 'corporate', website: 'https://saigontourist.com.vn', order: 17, logoFilename: '643e5d174f5b6-1681808663.png' },
+    { name: 'Gạch Men Ý Mỹ', category: 'corporate', website: 'https://ymyceramic.com.vn', order: 18, logoFilename: 'LOGO-Y-MY-CHUAN_large.webp' },
+    { name: 'The Sailing Bay Beach Resort', category: 'corporate', website: 'https://thesailingbay.com', order: 19, logoFilename: 'images-4.jpg' },
+    { name: 'DICcons', category: 'corporate', website: 'https://diccons.com.vn', order: 20, logoFilename: 'logo_new.png' },
+    { name: 'Sơn Oseven', category: 'corporate', website: 'https://osevenpaint.com', order: 21, logoFilename: 'images-7.png' },
+    { name: 'Sơn Sonata', category: 'corporate', website: 'https://sonata.vn', order: 22, logoFilename: 'images-5.jpg' },
+    { name: 'Thiên An Corp', category: 'corporate', website: 'https://thienancorp.vn', order: 23, logoFilename: 'logo-thienan-new.jpg' },
+    { name: 'Catherine Denoual Maison', category: 'corporate', website: 'https://catherinedenoual.com', order: 24, logoFilename: 'Catherine+Denoual+Maison.webp' },
+    { name: 'Rectorseal', category: 'corporate', website: 'https://rectorseal.com', order: 25, logoFilename: 'images-8.png' },
+    { name: 'Shimez Engineering', category: 'corporate', website: null, order: 26, logoFilename: '1620095116135-Logo Shimez Chính thức - Copy.png' },
+    { name: 'Wasol', category: 'corporate', website: 'https://wasol-vn.com', order: 27, logoFilename: 'logo-slogan-1.png' },
+    { name: 'Nhất Thống', category: 'corporate', website: 'https://nhatthong.com.vn', order: 28, logoFilename: 'images-9.png' },
+    { name: 'Bình Minh Én', category: 'corporate', website: null, order: 29, logoFilename: 'unnamed.png' },
+    { name: 'Đại Phúc Lộc Thọ', category: 'corporate', website: null, order: 30, logoFilename: 'IEy1uqyVRg5qDW1rp0erWcHTdQWhnLeR_1711517714____83d1b6aa8b3619bbe520fae8e98f5e45.webp' },
+    { name: 'Yeebo', category: 'corporate', website: 'https://yeebo.com.vn', order: 31, logoFilename: 'yeebo-logo.png' },
+    { name: 'PV GAS', category: 'public', website: 'https://pvgas.com.vn', order: 32, logoFilename: 'images-10.png' },
+    { name: 'Petrolimex', category: 'public', website: 'https://petrolimex.com.vn', order: 33, logoFilename: 'images-11.png' },
+    { name: 'Viet Capital Securities', category: 'investor', website: 'https://vietcap.com.vn', order: 34, logoFilename: '1682251336594.png' },
+    { name: 'Savills', category: 'investor', website: 'https://savills.com.vn', order: 35, logoFilename: 'images-6.jpg' },
+    { name: 'JLL', category: 'investor', website: 'https://jll.com.vn', order: 36, logoFilename: 'images-7.jpg' },
+  ]
+
+  for (const p of partnersData) {
+    let logoId: string | number | undefined = undefined
+    if (p.logoFilename) {
+      const existingMedia = await payload.find({
+        collection: 'media',
+        where: { filename: { equals: p.logoFilename } },
+      })
+      if (existingMedia.totalDocs > 0) {
+        logoId = existingMedia.docs[0].id
+      } else {
+        const mediaFilePath = path.resolve(process.cwd(), 'media', p.logoFilename)
+        if (fs.existsSync(mediaFilePath)) {
+          try {
+            const uploaded = await payload.create({
+              collection: 'media',
+              filePath: mediaFilePath,
+              data: { alt: p.name },
+            })
+            logoId = uploaded.id
+          } catch (err) {
+            // ignore
+          }
+        }
+      }
+    }
+
+    const existing = await payload.find({
+      collection: 'partners',
+      where: { name: { equals: p.name } },
+    })
+
+    const partnerData: any = {
+      name: p.name,
+      category: p.category as any,
+      website: p.website || null,
+      order: p.order,
+      active: true,
+      featured: true,
+    }
+    if (logoId) partnerData.logo = logoId
+
+    if (existing.totalDocs === 0) {
+      await payload.create({
+        collection: 'partners',
+        data: partnerData,
+      })
+    } else {
+      await payload.update({
+        collection: 'partners',
+        id: existing.docs[0].id,
+        data: partnerData,
+      })
+    }
+  }
+
   console.log('--- SEED COMPLETED SUCCESSFULLY! (VI & EN Populated) ---')
   process.exit(0)
 }

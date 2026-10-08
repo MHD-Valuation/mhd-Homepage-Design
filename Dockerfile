@@ -14,6 +14,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY cms ./
+RUN mkdir -p /app/media /app/public /app/private-uploads
 
 # Ensure dummy env vars during next build to satisfy static type checks
 ENV NODE_ENV=production
