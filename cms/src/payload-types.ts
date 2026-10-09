@@ -601,6 +601,9 @@ export interface Partner {
  */
 export interface Inquiry {
   id: number;
+  /**
+   * Tự động tạo theo chuẩn thời gian thực (VD: HS-2026-123456) khi lưu nếu để trống.
+   */
   ticketNumber?: string | null;
   dossierType?: ('request' | 'quote' | 'recruitment' | 'general') | null;
   fullName: string;

@@ -61,6 +61,13 @@ export default buildConfig({
     meta: {
       titleSuffix: ' | MHD Valuation CMS',
       description: 'Hệ thống quản lý nội dung MHD Valuation',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          url: '/icon.png',
+        },
+      ],
     },
   },
   localization: {
