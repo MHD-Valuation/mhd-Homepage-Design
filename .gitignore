@@ -18,50 +18,7 @@ cms/private-uploads/
 cms/public/uploads/
 cms/public/media/
 uploads/
-
-# Ignore all media files and uploads by default
-cms/media/*
-
-# Whitelist ONLY essential public seed assets (5 avatars & 36 partner logos)
-!cms/media/giam-doc-dieu-hanh-tran-khanh-du.png
-!cms/media/pho-giam-doc-nguyen-le-ha.png
-!cms/media/tham-dinh-vien-truong-phong-tham-dinh-le-ngoc-anh.png
-!cms/media/Quynh-e1690357951804-256x300.jpg
-!cms/media/tham-dinh-vien-truong-bo-phan-kiem-soat-phan-nguyen-uyen-ha.png
-!cms/media/notFound.webp
-!cms/media/logo-slogan-1.png
-!cms/media/logo_new.png
-!cms/media/logo-bidv-*.jpg
-!cms/media/logo-vietinbank-*.jpg
-!cms/media/Logo-HDBank.webp
-!cms/media/Logo_MB_new.png
-!cms/media/Logo-SHB-VN.png
-!cms/media/VPB.png
-!cms/media/techcombank-*.webp
-!cms/media/logo-kienlongbank-*.png
-!cms/media/logo-gotec-land.png
-!cms/media/logo-sungroup-*.jpg
-!cms/media/logo-vingroup.png
-!cms/media/logo-vanphuc.png
-!cms/media/logo-thienan-new.jpg
-!cms/media/Logo-Hung-Thinh-*.png
-!cms/media/Logo_của_Tập_đoàn_T&T_Group.png
-!cms/media/LOGO-Y-MY-CHUAN_large.webp
-!cms/media/Catherine+Denoual+Maison.webp
-!cms/media/yeebo-logo.png
-!cms/media/1620095116135-Logo Shimez Chính thức - Copy.png
-!cms/media/1682251336594.png
-!cms/media/643e5d174f5b6-1681808663.png
-!cms/media/6a3a546c4eb2d1782207596.jpg
-!cms/media/IEy1uqyVRg5qDW1rp0erWcHTdQWhnLeR_*.webp
-!cms/media/unnamed.png
-!cms/media/images-*.jpg
-!cms/media/images-*.png
-
-# Exclude all auto-generated resized thumbnails
-cms/media/*-320x240.*
-cms/media/*-640x480.*
-cms/media/*-1920x1080.*
+cms/media/
 
 # Local cache & temporary files
 .claude/
