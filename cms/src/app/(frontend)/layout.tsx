@@ -15,8 +15,10 @@ const beVietnamPro = Be_Vietnam_Pro({
   variable: '--font-be-vietnam-pro',
 })
 
+const serverUrl = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3005').replace(/\/$/, '')
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://mhd.com.vn'),
+  metadataBase: new URL(serverUrl),
   title: {
     default: 'MHD — Thẩm định giá theo Chuẩn mực Việt Nam',
     template: '%s | MHD Valuation',
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
-    url: 'https://mhd.com.vn',
+    url: '/',
     siteName: 'MHD Thẩm định giá — Vietnam Valuation Standards',
     title: 'MHD — Thẩm định giá theo Chuẩn mực Việt Nam',
     description:

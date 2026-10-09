@@ -3,7 +3,7 @@ import { SERVICES_CATALOG } from '@/lib/services-data'
 import { INSIGHT_POSTS } from '@/app/(frontend)/insights/defaultInsights'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://mhd.com.vn'
+  const baseUrl = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3005').replace(/\/$/, '')
   const currentDate = new Date().toISOString()
 
   // 1. Static Core Pages
