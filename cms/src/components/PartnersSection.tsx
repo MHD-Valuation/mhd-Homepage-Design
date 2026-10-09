@@ -193,6 +193,7 @@ export default function PartnersSection({
 
         {/* Category Underline Filter Tabs (Exact Match with Target Design) */}
         <div
+          className="mhd-partner-filter-tabs"
           style={{
             display: 'flex',
             justifyContent: 'center',

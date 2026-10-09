@@ -1736,11 +1736,53 @@ export default function Header({
                 English (EN)
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '.6rem', marginTop: '.5rem' }}>
-              <Link href={verifyBtnUrl} onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1.5px solid var(--c-border3,#d9d6cf)', color: 'var(--c-ink,#16181c)', fontSize: '.84rem', fontWeight: 700, padding: '.8rem', borderRadius: '6px', textAlign: 'center' }}>
+            <div
+              className="mhd-mobile-drawer-cta-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '.6rem',
+                marginTop: '.6rem',
+              }}
+            >
+              <Link
+                href={verifyBtnUrl}
+                onClick={closeMenu}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1.5px solid var(--c-border3,#d9d6cf)',
+                  color: 'var(--c-ink,#16181c)',
+                  fontSize: '.82rem',
+                  fontWeight: 700,
+                  padding: '.75rem .6rem',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                  lineHeight: 1.3,
+                  transition: 'background .15s ease',
+                }}
+              >
                 {verifyBtnLabel}
               </Link>
-              <Link href={requestBtnUrl} onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--c-ink,#16181c)', color: '#fff', fontSize: '.84rem', fontWeight: 700, padding: '.8rem', borderRadius: '6px', textAlign: 'center' }}>
+              <Link
+                href={requestBtnUrl}
+                onClick={closeMenu}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: 'var(--c-ink,#16181c)',
+                  color: '#fff',
+                  fontSize: '.82rem',
+                  fontWeight: 700,
+                  padding: '.75rem .6rem',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                  lineHeight: 1.3,
+                  transition: 'background .15s ease',
+                }}
+              >
                 {requestBtnLabel}
               </Link>
             </div>

@@ -38,7 +38,7 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
   ]
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--c-page, #f6f5f2)', color: 'var(--c-ink, #16181c)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--c-page, #f6f5f2)', color: 'var(--c-ink, #16181c)', overflowX: 'hidden' }}>
       {/* Hero Section */}
       <section
         style={{
@@ -46,7 +46,7 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
           overflow: 'hidden',
           background: 'var(--c-page, #f6f5f2)',
           borderBottom: '1px solid var(--c-border, #e2e0da)',
-          padding: 'clamp(3.5rem, 7vw, 6rem) clamp(1rem, 4vw, 2.5rem) clamp(3rem, 6vw, 4.5rem)',
+          padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem) clamp(2.2rem, 4.5vw, 4rem)',
         }}
       >
         <div
@@ -56,7 +56,7 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
             inset: 0,
             pointerEvents: 'none',
             backgroundImage:
-              'linear-gradient(rgba(22,24,28,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(22,24,28,.05) 1px, transparent 1px)',
+              'linear-gradient(rgba(22,24,28,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(22,24,28,.04) 1px, transparent 1px)',
             backgroundSize: '56px 56px',
             maskImage: 'linear-gradient(100deg, transparent 0%, #000 50%, #000 75%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(100deg, transparent 0%, #000 50%, #000 75%, transparent 100%)',
@@ -72,28 +72,28 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
             height: 620,
             borderRadius: '50%',
             pointerEvents: 'none',
-            background: 'radial-gradient(circle, rgba(217,79,10,.12), transparent 65%)',
+            background: 'radial-gradient(circle, rgba(217,79,10,.1), transparent 65%)',
           }}
         />
 
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1240, margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1240, margin: '0 auto', width: '100%' }}>
           <nav
             aria-label="Breadcrumb"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '.5rem',
+              gap: '.45rem',
               flexWrap: 'wrap',
-              fontSize: '.82rem',
+              fontSize: 'clamp(0.74rem, 0.7rem + 0.15vw, 0.82rem)',
               color: 'var(--c-faint, #8a8f96)',
-              marginBottom: '1.6rem',
+              marginBottom: '1.2rem',
             }}
           >
-            <Link href="/" style={{ color: 'var(--c-faint, #8a8f96)' }}>
+            <Link href="/" style={{ color: 'var(--c-faint, #8a8f96)', textDecoration: 'none' }}>
               {isEn ? 'Home' : 'Trang chủ'}
             </Link>
             <span aria-hidden="true">/</span>
-            <Link href="/about/phap-ly" style={{ color: 'var(--c-faint, #8a8f96)' }}>
+            <Link href="/about" style={{ color: 'var(--c-faint, #8a8f96)', textDecoration: 'none' }}>
               {isEn ? 'Legal & Standards' : 'Pháp lý'}
             </Link>
             <span aria-hidden="true">/</span>
@@ -105,12 +105,12 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
           <span
             style={{
               display: 'inline-block',
-              fontSize: '.76rem',
+              fontSize: 'clamp(0.7rem, 0.66rem + 0.1vw, 0.76rem)',
               fontWeight: 700,
               letterSpacing: '.08em',
               textTransform: 'uppercase',
               color: 'var(--c-accent, #d94f0a)',
-              marginBottom: '.8rem',
+              marginBottom: '.6rem',
             }}
           >
             {isEn ? 'Operating Principles' : 'Nguyên tắc vận hành'}
@@ -118,21 +118,23 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
           <h1
             style={{
               fontFamily: "'Be Vietnam Pro', sans-serif",
-              fontWeight: 600,
-              fontSize: 'clamp(2.3rem, 1.5rem + 2.9vw, 3.8rem)',
-              lineHeight: 1.15,
+              fontWeight: 700,
+              fontSize: 'clamp(1.75rem, 1.35rem + 1.5vw, 3.2rem)',
+              lineHeight: 1.18,
               letterSpacing: '-.02em',
-              marginBottom: '1.1rem',
+              marginBottom: '.85rem',
+              color: 'var(--c-ink, #16181c)',
             }}
           >
             {isEn ? 'Policies & Governance' : 'Chính sách'}
           </h1>
           <p
             style={{
-              fontSize: 'clamp(1rem, .95rem + .3vw, 1.15rem)',
+              fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 1.05rem)',
               color: 'var(--c-muted, #5f656d)',
               maxWidth: '62ch',
-              lineHeight: 1.6,
+              lineHeight: 1.55,
+              margin: 0,
             }}
           >
             {isEn
@@ -142,41 +144,56 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
         </div>
       </section>
 
+      {/* Responsive Styles */}
+      <style>{`
+        .mhd-process-content-grid {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 clamp(1rem, 4vw, 2.5rem);
+          display: grid;
+          grid-template-columns: 220px minmax(0, 1fr);
+          gap: clamp(3rem, 6vw, 6rem);
+          align-items: start;
+          width: 100%;
+          min-width: 0;
+        }
+        @media (max-width: 1023px) {
+          .mhd-process-section-body {
+            padding-top: 0 !important;
+          }
+          .mhd-process-content-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.8rem !important;
+            overflow-x: hidden !important;
+          }
+        }
+      `}</style>
+
       {/* Main Content with Sticky TOC Navigation */}
-      <section style={{ background: '#fff', padding: 'clamp(3rem, 5vw, 4.5rem) 0 clamp(4rem, 6vw, 6rem)' }}>
-        <div
-          style={{
-            maxWidth: 1240,
-            margin: '0 auto',
-            padding: '0 clamp(1rem, 4vw, 2.5rem)',
-            display: 'grid',
-            gridTemplateColumns: '220px minmax(0, 1fr)',
-            gap: 'clamp(3rem, 6vw, 6rem)',
-            alignItems: 'start',
-          }}
-        >
+      <section className="mhd-process-section-body" style={{ background: '#fff', padding: 'clamp(2.5rem, 5vw, 4.5rem) 0 clamp(3.5rem, 6vw, 6rem)' }}>
+        <div className="mhd-process-content-grid">
           {/* Left Sticky Sidebar (MỤC LỤC) with Active indicator bar & scroll spy */}
           <ProcessToc items={tocItems} title={isEn ? 'TABLE OF CONTENTS' : 'MỤC LỤC'} />
 
           {/* Detailed Content */}
-          <div style={{ minWidth: 0, display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+          <div style={{ minWidth: 0, width: '100%', display: 'flex', flexDirection: 'column', gap: 'clamp(2rem, 3.5vw, 3rem)' }}>
             {/* 01: Chính sách bảo mật */}
             <section
               id="bao-mat"
-              style={{ scrollMarginTop: 100, padding: '0 0 2.4rem', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
+              style={{ scrollMarginTop: 110, padding: '0 0 clamp(1.4rem, 2.5vw, 2.2rem)', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
             >
-              <span style={{ display: 'block', fontSize: '.78rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.5rem' }}>
+              <span style={{ display: 'block', fontSize: '.74rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.35rem' }}>
                 01
               </span>
-              <h2 style={{ fontSize: 'clamp(1.3rem, 1.15rem + .5vw, 1.6rem)', fontWeight: 700, lineHeight: 1.3, marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.1rem, 1.02rem + 0.3vw, 1.45rem)', fontWeight: 700, lineHeight: 1.35, marginBottom: '.75rem', color: 'var(--c-ink, #16181c)' }}>
                 {isEn ? 'Client Confidentiality Policy' : 'Chính sách bảo mật thông tin'}
               </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--c-muted2, #3f444b)', marginBottom: '1rem' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', marginBottom: '.75rem' }}>
                 {isEn
                   ? 'All financial statements, asset documents, contracts, and internal information provided by clients are maintained under strict confidentiality per professional codes of ethics and contractual Non-Disclosure Agreements (NDAs).'
                   : 'Mọi thông tin tài chính, hồ sơ tài sản, hợp đồng và dữ liệu nội bộ do khách hàng cung cấp đều được bảo mật tuyệt đối theo Quy tắc đạo đức nghề nghiệp thẩm định giá và thỏa thuận bảo mật (NDA).'}
               </p>
-              <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--c-muted2, #3f444b)' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', margin: 0 }}>
                 {isEn
                   ? 'Information is only provided to competent state authorities when officially mandated by law.'
                   : 'MHD chỉ cung cấp thông tin cho cơ quan quản lý nhà nước có thẩm quyền khi có yêu cầu bằng văn bản theo đúng quy định của pháp luật.'}
@@ -186,15 +203,15 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
             {/* 02: Tính độc lập & khách quan */}
             <section
               id="doc-lap"
-              style={{ scrollMarginTop: 100, padding: '2.4rem 0', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
+              style={{ scrollMarginTop: 110, padding: '0 0 clamp(1.4rem, 2.5vw, 2.2rem)', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
             >
-              <span style={{ display: 'block', fontSize: '.78rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.5rem' }}>
+              <span style={{ display: 'block', fontSize: '.74rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.35rem' }}>
                 02
               </span>
-              <h2 style={{ fontSize: 'clamp(1.3rem, 1.15rem + .5vw, 1.6rem)', fontWeight: 700, lineHeight: 1.3, marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.1rem, 1.02rem + 0.3vw, 1.45rem)', fontWeight: 700, lineHeight: 1.35, marginBottom: '.75rem', color: 'var(--c-ink, #16181c)' }}>
                 {isEn ? 'Independence & Objectivity Principles' : 'Tính độc lập & khách quan'}
               </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--c-muted2, #3f444b)', marginBottom: '1rem' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', margin: 0 }}>
                 {isEn
                   ? 'MHD operates as an independent valuation entity. Appraisers are prohibited from having personal economic interests or family ties with the evaluated assets or clients.'
                   : 'MHD hoạt động hoàn toàn độc lập với các bên tham gia giao dịch. Thẩm định viên không được có lợi ích kinh tế hoặc quan hệ gia đình trực tiếp với tài sản hoặc chủ sở hữu tài sản được thẩm định.'}
@@ -204,15 +221,15 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
             {/* 03: Kiểm soát xung đột lợi ích */}
             <section
               id="xung-dot"
-              style={{ scrollMarginTop: 100, padding: '2.4rem 0', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
+              style={{ scrollMarginTop: 110, padding: '0 0 clamp(1.4rem, 2.5vw, 2.2rem)', borderBottom: '1px solid var(--c-border, #e2e0da)' }}
             >
-              <span style={{ display: 'block', fontSize: '.78rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.5rem' }}>
+              <span style={{ display: 'block', fontSize: '.74rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.35rem' }}>
                 03
               </span>
-              <h2 style={{ fontSize: 'clamp(1.3rem, 1.15rem + .5vw, 1.6rem)', fontWeight: 700, lineHeight: 1.3, marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.1rem, 1.02rem + 0.3vw, 1.45rem)', fontWeight: 700, lineHeight: 1.35, marginBottom: '.75rem', color: 'var(--c-ink, #16181c)' }}>
                 {isEn ? 'Conflict of Interest Control' : 'Kiểm soát xung đột lợi ích'}
               </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--c-muted2, #3f444b)', marginBottom: '1rem' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', margin: 0 }}>
                 {isEn
                   ? 'Prior to accepting any engagement, MHD appraisers execute an internal conflict-of-interest disclosure to ensure zero bias.'
                   : 'Trước khi tiếp nhận hồ sơ, thẩm định viên phụ trách phải ký cam kết không có xung đột lợi ích. Nếu phát hiện xung đột phát sinh, MHD sẽ ngay lập tức thay đổi nhân sự phụ trách.'}
@@ -222,15 +239,15 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
             {/* 04: Xử lý phản ánh & khiếu nại */}
             <section
               id="khieu-nai"
-              style={{ scrollMarginTop: 100, padding: '2.4rem 0' }}
+              style={{ scrollMarginTop: 110, padding: '0 0 clamp(1.4rem, 2.5vw, 2.2rem)' }}
             >
-              <span style={{ display: 'block', fontSize: '.78rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.5rem' }}>
+              <span style={{ display: 'block', fontSize: '.74rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)', marginBottom: '.35rem' }}>
                 04
               </span>
-              <h2 style={{ fontSize: 'clamp(1.3rem, 1.15rem + .5vw, 1.6rem)', fontWeight: 700, lineHeight: 1.3, marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.1rem, 1.02rem + 0.3vw, 1.45rem)', fontWeight: 700, lineHeight: 1.35, marginBottom: '.75rem', color: 'var(--c-ink, #16181c)' }}>
                 {isEn ? 'Handling Inquiries & Complaints' : 'Xử lý phản ánh & khiếu nại'}
               </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.8, color: 'var(--c-muted2, #3f444b)', marginBottom: '1rem' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', marginBottom: '.75rem' }}>
                 {isEn ? (
                   <>
                     Clients and partners may submit feedback regarding service quality or appraiser conduct directly to{' '}
@@ -255,7 +272,7 @@ export default async function ChinhSachPage({ searchParams }: PageProps) {
                   </>
                 )}
               </p>
-              <p style={{ fontSize: '1rem', lineHeight: 1.8, color: 'var(--c-muted2, #3f444b)' }}>
+              <p style={{ fontSize: 'clamp(0.86rem, 0.82rem + 0.15vw, 0.95rem)', lineHeight: 1.65, color: 'var(--c-muted2, #3f444b)', margin: 0 }}>
                 {isEn
                   ? 'All inquiries are logged, independently reviewed, and responded to in writing within 5 business days.'
                   : 'Mọi phản ánh được ghi nhận, xác minh độc lập và phản hồi bằng văn bản trong vòng 5 ngày làm việc.'}

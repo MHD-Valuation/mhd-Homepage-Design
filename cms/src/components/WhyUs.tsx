@@ -222,7 +222,7 @@ export default function WhyUs({ data, teamMembers, currentLocale = 'vi' }: WhyUs
               background: 'linear-gradient(90deg,var(--c-accent,#d94f0a),var(--c-gold,#7d7d7d))',
             }}
           ></div>
-          <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '.4rem', marginBottom: '1.5rem', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginBottom: '1.5rem' }}>
             <span
               style={{
                 fontSize: '.64rem',

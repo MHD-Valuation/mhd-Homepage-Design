@@ -895,10 +895,8 @@ async function seed() {
       experienceYears: t.experienceYears,
       order: t.order,
     }
-    if (t.bio) teamPayloadDataVi.bio = t.bio
-    if (avatarId) teamPayloadDataVi.avatar = avatarId
-
     if (existing.totalDocs === 0) {
+      if (avatarId) teamPayloadDataVi.avatar = avatarId
       const doc = await payload.create({
         collection: 'team',
         locale: 'vi',
@@ -913,6 +911,12 @@ async function seed() {
         },
       })
     } else {
+      const existingAvatar = (existing.docs[0] as any).avatar
+      if (existingAvatar) {
+        teamPayloadDataVi.avatar = typeof existingAvatar === 'object' ? existingAvatar.id : existingAvatar
+      } else if (avatarId) {
+        teamPayloadDataVi.avatar = avatarId
+      }
       await payload.update({
         collection: 'team',
         id: existing.docs[0].id,
@@ -1544,14 +1548,19 @@ async function seed() {
       active: true,
       featured: true,
     }
-    if (logoId) partnerData.logo = logoId
-
     if (existing.totalDocs === 0) {
+      if (logoId) partnerData.logo = logoId
       await payload.create({
         collection: 'partners',
         data: partnerData,
       })
     } else {
+      const existingLogo = (existing.docs[0] as any).logo
+      if (existingLogo) {
+        partnerData.logo = typeof existingLogo === 'object' ? existingLogo.id : existingLogo
+      } else if (logoId) {
+        partnerData.logo = logoId
+      }
       await payload.update({
         collection: 'partners',
         id: existing.docs[0].id,

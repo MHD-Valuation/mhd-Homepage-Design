@@ -426,18 +426,38 @@ export default function ProjectsClient({
           background: none;
           border: none;
           cursor: pointer;
-          padding: 1.05rem 0 .95rem;
-          font-size: .92rem;
-          white-space: nowrap;
+          padding: 0.92rem 0.35rem 0.82rem;
+          font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.88rem);
+          white-space: nowrap !important;
+          text-wrap: nowrap !important;
           margin-bottom: -1px;
           transition: color 0.18s ease, border-color 0.18s ease;
           font-family: inherit;
           display: inline-flex;
           align-items: center;
-          gap: .45rem;
+          gap: .4rem;
+          flex-shrink: 0 !important;
+          line-height: 1.35;
         }
         .mhd-projects-subnav-btn:hover {
           color: var(--c-ink, #16181c) !important;
+        }
+        .mhd-projects-subnav-scroll {
+          display: flex;
+          align-items: center;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          ms-overflow-style: none;
+          gap: clamp(1rem, 2vw, 2.4rem);
+        }
+        .mhd-projects-subnav-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        @media (min-width: 1024px) {
+          .mhd-projects-subnav-scroll {
+            justify-content: space-between;
+          }
         }
       `}</style>
       <div
@@ -453,14 +473,11 @@ export default function ProjectsClient({
       >
         <nav
           aria-label={isEn ? 'Asset class categories' : 'Phân loại nhóm tài sản'}
+          className="mhd-projects-subnav-scroll"
           style={{
             maxWidth: '1240px',
             margin: '0 auto',
             padding: '0 clamp(1rem, 4vw, 2.5rem)',
-            display: 'flex',
-            gap: 'clamp(1.4rem, 2.5vw, 2.8rem)',
-            overflowX: 'auto',
-            scrollbarWidth: 'none',
           }}
         >
           {categories.map((cat) => {
@@ -477,19 +494,29 @@ export default function ProjectsClient({
                   borderBottom: active
                     ? '2.5px solid var(--c-accent, #d94f0a)'
                     : '2.5px solid transparent',
+                  whiteSpace: 'nowrap',
+                  textWrap: 'nowrap',
+                  flexShrink: 0,
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
               >
-                <span>{cat.label}</span>
+                <span style={{ whiteSpace: 'nowrap', textWrap: 'nowrap' }}>{cat.label}</span>
                 {cat.key === 'all' ? (
                   <span
                     style={{
-                      fontSize: '.74rem',
+                      fontSize: '.72rem',
                       fontWeight: 600,
-                      padding: '.12rem .48rem',
+                      padding: '.1rem .44rem',
                       borderRadius: '999px',
                       background: active ? 'rgba(217, 79, 10, 0.1)' : 'var(--c-subtle, #f0eee9)',
                       color: active ? 'var(--c-accent, #d94f0a)' : 'var(--c-faint, #8a8f96)',
                       transition: 'all 0.18s ease',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      lineHeight: 1.25,
+                      flexShrink: 0,
                     }}
                   >
                     5

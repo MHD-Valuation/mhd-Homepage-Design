@@ -164,7 +164,7 @@ export default function InsightsSection({ data, posts = [], currentLocale = 'vi'
             marginBottom: '2rem',
           }}
         >
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.6rem 2rem' }}>
+          <div className="mhd-insight-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: '.6rem 1.8rem' }}>
             {categoryChips.map((chip: any, i: number) => (
               <a
                 key={i}

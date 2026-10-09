@@ -212,10 +212,11 @@ export default function TeamClient({
           >
             {/* 3 Categories Underline Tabs */}
             <nav
+              className="mhd-team-filter-tabs"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '2.5rem',
+                gap: 'clamp(1.2rem, 3.2vw, 2.5rem)',
                 overflowX: 'auto',
                 scrollbarWidth: 'none',
               }}

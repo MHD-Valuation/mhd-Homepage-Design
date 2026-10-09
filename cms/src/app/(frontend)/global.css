@@ -525,24 +525,30 @@ html, body {
 
   /* Thu gọn các khối block: giảm padding các section lớn */
   section {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 2.8rem !important;
+    padding-bottom: 2.8rem !important;
   }
 
   /* Specific padding overrides for inline styles with huge clamp */
   [style*="padding: clamp(5rem"],
   [style*="padding: clamp(6rem"],
+  [style*="padding: clamp(7rem"],
+  [style*="padding: clamp(8rem"],
+  [style*="padding: clamp(9rem"],
   [style*="padding: clamp(4.5rem"],
   [style*="padding: 'clamp(5rem"],
   [style*="padding: 'clamp(6rem"],
+  [style*="padding: 'clamp(7rem"],
+  [style*="padding: 'clamp(8rem"],
+  [style*="padding: 'clamp(9rem"],
   [style*="padding: 'clamp(4.5rem"] {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 2.8rem !important;
+    padding-bottom: 2.8rem !important;
   }
 
   .mhd-section-pad {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 2.8rem !important;
+    padding-bottom: 2.8rem !important;
   }
 
   /* Thu gọn khoảng cách các container và lề viền */
@@ -565,6 +571,59 @@ html, body {
     height: 300px !important;
   }
 
+  /* Partner filter tabs on mobile: smooth horizontal scrolling bar */
+  .mhd-partner-filter-tabs {
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 1.25rem !important;
+    padding-bottom: 0.4rem !important;
+    margin-bottom: 1.8rem !important;
+    width: 100% !important;
+  }
+  .mhd-partner-filter-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .partner-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Team filter tabs on mobile */
+  .mhd-team-filter-tabs {
+    gap: 1.25rem !important;
+    padding-bottom: 0.3rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .mhd-team-filter-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .mhd-team-filter-tabs button {
+    flex-shrink: 0 !important;
+    font-size: 0.88rem !important;
+    padding: 0.65rem 0 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Insight category chips */
+  .mhd-insight-chips {
+    gap: 0.5rem 1rem !important;
+  }
+  .mhd-insight-chips a {
+    font-size: 0.84rem !important;
+  }
+
+  /* Mobile drawer bottom CTA grid */
+  @media (max-width: 440px) {
+    .mhd-mobile-drawer-cta-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
   /* Hero adjustments */
   .mhd-hero-badge {
     white-space: normal !important;
@@ -584,7 +643,15 @@ html, body {
   }
   .mhd-hero-stats-inner-grid > a {
     grid-column: span 2 !important;
-    margin-top: 0.4rem !important;
+    border-left: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    padding-left: 0 !important;
+    padding-top: 0.75rem !important;
+    margin-top: 0.2rem !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.75rem !important;
   }
 
   /* About page floating badge: don't pull out of container on mobile */
@@ -666,6 +733,74 @@ html, body {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
     padding: 1.25rem 0 !important;
+  }
+
+  /* Process / Legal page responsive layout (Image 1 fix) */
+  .mhd-process-section-body {
+    padding-top: 0 !important;
+  }
+  .mhd-process-content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.8rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+  .mhd-process-toc-aside {
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  .mhd-process-toc-nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    ms-overflow-style: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain !important;
+  }
+  .mhd-process-toc-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+  .mhd-process-toc-link {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    text-wrap: nowrap !important;
+    font-size: 0.8rem !important;
+  }
+  .mhd-legal-table-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+    padding: 0.85rem 0 !important;
+  }
+
+  /* Projects subnav toolbar: strictly single-line horizontal with touch scroll (Image 2 fix) */
+  .mhd-projects-subnav-scroll {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+  }
+  .mhd-projects-subnav-scroll::-webkit-scrollbar {
+    display: none !important;
+  }
+  .mhd-projects-subnav-btn {
+    white-space: nowrap !important;
+    text-wrap: nowrap !important;
+    flex-shrink: 0 !important;
+    font-size: 0.84rem !important;
+  }
+  .mhd-projects-subnav-btn span {
+    white-space: nowrap !important;
+    text-wrap: nowrap !important;
   }
 
   /* Touch-friendly inputs: prevent iOS auto zoom */
