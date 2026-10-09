@@ -59,6 +59,9 @@ media/*-320x240.*
 media/*-640x480.*
 media/*-1920x1080.*
 
+# Local scripts & utilities (not for git)
+src/scripts/
+
 # Logs & OS noise
 npm-debug.log*
 *.log
