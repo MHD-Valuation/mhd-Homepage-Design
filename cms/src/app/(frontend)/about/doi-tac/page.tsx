@@ -133,7 +133,7 @@ export default async function PartnersPage({ searchParams }: PageProps) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
               gap: '1.5rem',
               paddingTop: '2rem',
               borderTop: '1px solid var(--c-border, #e2e0da)',
@@ -182,7 +182,7 @@ export default async function PartnersPage({ searchParams }: PageProps) {
           {isEn ? 'Why Leading Institutions Trust MHD' : 'Cơ sở tín nhiệm của các Định chế lớn với MHD'}
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
           <div style={{ background: '#fff', padding: '2rem', borderRadius: '14px', border: '1px solid var(--c-border, #e2e0da)' }}>
             <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--c-accent, #d94f0a)' }}>01</span>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '.6rem 0' }}>

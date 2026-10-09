@@ -1,7 +1,21 @@
 import type { CollectionConfig } from 'payload'
 import fs from 'fs'
+import { randomInt } from 'crypto'
 
 import { resolvePrivateFile } from '../lib/privateUploads'
+
+const getRealtimeYear = (): number => {
+  try {
+    const vnYear = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+    }).format(new Date())
+    const parsed = parseInt(vnYear, 10)
+    return isNaN(parsed) ? new Date().getFullYear() : parsed
+  } catch {
+    return new Date().getFullYear()
+  }
+}
 
 export const Inquiries: CollectionConfig = {
   slug: 'inquiries',
@@ -19,6 +33,21 @@ export const Inquiries: CollectionConfig = {
     delete: ({ req: { user } }) => Boolean(user),
   },
   hooks: {
+    beforeChange: [
+      async ({ data, operation }) => {
+        // Tự động sinh mã hồ sơ / mã biên nhận theo thời gian thực nếu chưa có (dù tạo từ API hay tạo trực tiếp từ Payload Admin BE)
+        if (
+          operation === 'create' &&
+          (!data?.ticketNumber || typeof data.ticketNumber !== 'string' || !data.ticketNumber.trim())
+        ) {
+          const prefix = data?.dossierType === 'recruitment' ? 'TD' : 'HS'
+          const year = getRealtimeYear()
+          const randomCode = randomInt(100000, 1000000)
+          data.ticketNumber = `${prefix}-${year}-${randomCode}`
+        }
+        return data
+      },
+    ],
     afterDelete: [
       async ({ doc }) => {
         // Remove the private attachment so personal data isn't orphaned on disk
@@ -35,7 +64,8 @@ export const Inquiries: CollectionConfig = {
       type: 'text',
       label: 'Mã hồ sơ / Mã biên nhận',
       admin: {
-        readOnly: true,
+        description: `Tự động tạo theo chuẩn thời gian thực (VD: HS-${getRealtimeYear()}-123456) khi lưu nếu để trống.`,
+        placeholder: `Tự động tạo khi lưu (VD: HS-${getRealtimeYear()}-123456)`,
       },
     },
     {

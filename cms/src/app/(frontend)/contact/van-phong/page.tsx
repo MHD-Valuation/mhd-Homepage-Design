@@ -175,7 +175,7 @@ export default async function OfficeNetworkPage({ searchParams }: PageProps) {
 
       {/* 2. OFFICES DIRECTORY */}
       <section style={{ maxWidth: '1240px', margin: '0 auto', padding: 'clamp(3.5rem, 6vw, 5.5rem) clamp(1rem, 4vw, 2.5rem)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '2rem' }}>
           {offices.map((office, idx) => (
             <div
               key={idx}

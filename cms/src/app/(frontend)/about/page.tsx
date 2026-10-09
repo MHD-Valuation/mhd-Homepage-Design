@@ -401,6 +401,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
         }}
       >
         <nav
+          className="mhd-about-subnav-nav"
           aria-label={isEn ? 'Page sections' : 'Mục trên trang'}
           style={{
             maxWidth: '1240px',
@@ -614,7 +615,7 @@ export default async function AboutPage({ searchParams }: PageProps) {
           </div>
 
           {/* 4 Values */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: '0 clamp(1.5rem,3vw,2.5rem)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,240px),1fr))', gap: '0 clamp(1.5rem,3vw,2.5rem)' }}>
             <div style={{ padding: '2rem 0', borderTop: '1px solid var(--c-border,#e2e0da)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '.7rem', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--c-accent,#d94f0a)' }}>01</span>

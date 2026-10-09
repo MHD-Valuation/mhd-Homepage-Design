@@ -300,7 +300,7 @@ export default async function LegalCredentialsPage({ searchParams }: PageProps) 
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
           {coreLicenses.map((lic, i) => (
             <div
               key={i}
@@ -363,7 +363,7 @@ export default async function LegalCredentialsPage({ searchParams }: PageProps) 
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.5rem' }}>
             {standardDocs.length > 0 ? (
               standardDocs.map((doc, idx) => (
                 <div
@@ -472,7 +472,7 @@ export default async function LegalCredentialsPage({ searchParams }: PageProps) 
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
           {quickNav.map((card, i) => (
             <div
               key={i}

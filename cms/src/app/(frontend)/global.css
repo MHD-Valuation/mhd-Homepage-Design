@@ -853,6 +853,27 @@ html, body {
   .mhd-team-portrait-box {
     height: 270px !important;
   }
+
+  /* About page subnav & floating badge mobile */
+  .mhd-about-subnav-nav {
+    gap: 1.25rem !important;
+  }
+  .mhd-about-subnav-nav a {
+    font-size: 0.84rem !important;
+    padding: 0.85rem 0 0.75rem !important;
+    flex-shrink: 0 !important;
+  }
+  .mhd-about-floating-badge {
+    left: 0.5rem !important;
+    bottom: -1rem !important;
+  }
+}
+
+/* About page subnav touch momentum scroll */
+.mhd-about-subnav-nav {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 /* ------------------------------------------------------------

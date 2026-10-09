@@ -42,9 +42,22 @@ function pick<T extends string>(value: unknown, allowed: readonly T[], fallback:
   return allowed.includes(value as T) ? (value as T) : fallback
 }
 
+function getRealtimeYear(): number {
+  try {
+    const vnYear = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      year: 'numeric',
+    }).format(new Date())
+    const parsed = parseInt(vnYear, 10)
+    return isNaN(parsed) ? new Date().getFullYear() : parsed
+  } catch {
+    return new Date().getFullYear()
+  }
+}
+
 function generateTicket(type: DossierType): string {
   const prefix = type === 'recruitment' ? 'TD' : 'HS'
-  return `${prefix}-${new Date().getFullYear()}-${randomInt(100000, 1000000)}`
+  return `${prefix}-${getRealtimeYear()}-${randomInt(100000, 1000000)}`
 }
 
 function formatBytes(bytes: number): string {
