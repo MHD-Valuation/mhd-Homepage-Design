@@ -84,9 +84,9 @@ cp .env.example .env
 ```
 Mở file `cms/.env` và điền cấu hình cơ bản:
 ```env
-POSTGRES_PASSWORD=mhd_cms_password_2026
-DATABASE_URI=postgresql://postgres:mhd_cms_password_2026@localhost:5434/mhd_payload
-PAYLOAD_SECRET=your_super_secret_payload_key_min_32_characters_12345
+POSTGRES_PASSWORD=<mat-khau-database-cua-ban>
+DATABASE_URI=postgresql://postgres:<mat-khau-database-cua-ban>@localhost:5434/mhd_payload
+PAYLOAD_SECRET=<chuoi-ngau-nhien-toi-thieu-32-ky-tu>
 NEXT_PUBLIC_SERVER_URL=http://localhost:3005
 PORT=3005
 ```
